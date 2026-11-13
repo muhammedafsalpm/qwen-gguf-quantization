@@ -11,6 +11,7 @@ tests thinking, tool calling and vision, and publishes the results to Hugging Fa
 ## Contents
 
 - [Features](#features)
+- [Quantization explained](#quantization-explained)
 - [Quantization types](#quantization-types)
 - [Pipeline](#pipeline)
 - [Requirements](#requirements)
@@ -19,6 +20,7 @@ tests thinking, tool calling and vision, and publishes the results to Hugging Fa
 - [Configuration](#configuration)
 - [Methodology](#methodology)
 - [Project structure](#project-structure)
+- [FAQ](#faq)
 - [License](#license)
 - [Acknowledgements](#acknowledgements)
 
@@ -34,6 +36,174 @@ tests thinking, tool calling and vision, and publishes the results to Hugging Fa
 - **Vision support:** the multimodal projector (`mmproj`) is exported alongside the text model.
 - **Resumable:** every step skips work that is already complete, so an interrupted run continues where it stopped.
 - **Single configuration file:** all settings live in [`config.yaml`](config.yaml).
+
+## Quantization explained
+
+This section is for readers who are new to quantization.
+
+### What is a model?
+
+A language model is a very large collection of numbers called **weights**. Qwen3.8-27B has about
+**27 billion** of them. Running the model means doing arithmetic with all of these numbers, so how
+precisely each number is stored decides how large the model file is and how much GPU memory it needs.
+
+### What is quantization?
+
+Quantization stores each weight with **fewer bits**. Think of storing the number 3.14159265:
+
+| Precision | Stored as | Comparable to |
+|---|---|---|
+| 16 bits (BF16) | 3.1416 | The original photo |
+| 8 bits | 3.14 | A high-quality JPEG: no visible difference |
+| 4 bits | 3.1 | A smaller JPEG: small differences when you zoom in |
+| 2 bits | 3 | A heavily compressed JPEG: visible blur |
+
+Fewer bits give a **smaller file**, **less GPU memory** and **faster generation**, at the cost of a small
+loss in accuracy. Good quantization keeps that loss as small as possible.
+
+### The original model: BF16 and safetensors
+
+Qwen releases the model in **BF16** ("Brain Float 16"): 16 bits, or 2 bytes, per weight.
+27 billion weights × 2 bytes ≈ **54 GB**. This full-precision version is the master copy that every
+quantized version is made from.
+
+The weights are stored as **safetensors** files, the standard format on Hugging Face, split into
+18 parts for easier downloading. Safetensors is used by Python libraries such as PyTorch and
+Transformers. Running it requires a GPU with more than 54 GB of memory.
+
+### The formats this pipeline produces: GGUF and mmproj
+
+**GGUF** is the file format of [llama.cpp](https://github.com/ggml-org/llama.cpp), used by Ollama,
+LM Studio and most local AI applications. A GGUF file contains everything needed to run the model
+in a single file: the weights, the model settings, the tokenizer and the chat template. It supports
+quantized weights and runs without Python, on GPU or CPU.
+
+**mmproj** (multimodal projector) is a small, separate GGUF file that contains the **vision** part of
+the model. It turns an image into tokens that the language model can read:
+
+```
+Image ──► mmproj (vision encoder) ──► image tokens ─┐
+                                                    ├──► language model ──► answer
+Text  ──────────────────────────────► text tokens ──┘
+```
+
+One mmproj file works with every quantized version. It is kept at 16-bit precision because it is small
+and image understanding is sensitive to precision. It is only needed for image input; text-only use
+does not require it.
+
+| | Safetensors (original) | GGUF model | mmproj GGUF |
+|---|---|---|---|
+| Contains | Weights only, in 18 files | Language model, tokenizer and settings, in 1 file | Vision encoder, in 1 file |
+| Size | ~54 GB | 54 GB (BF16) down to ~12.5 GB (quantized) | ~0.9 GB |
+| Used by | PyTorch, Transformers | llama.cpp, Ollama, LM Studio | The same apps, for image input |
+| Quantized | No | Yes | No (kept at F16) |
+
+### What changes, and what does not
+
+Quantization compresses **almost the entire model**, but not every part equally:
+
+| Part of the model | Treatment | Reason |
+|---|---|---|
+| Large weight matrices (attention and feed-forward blocks in every layer) | Compressed | They hold over 99% of the weights, so this is where the size reduction comes from |
+| Small normalization tensors (`attn_norm`, `q_norm`, `post_attention_norm`, ...) | Kept at full precision | They are tiny but sensitive; compressing them saves nothing and can hurt quality |
+| Model structure (layers, architecture, vocabulary, chat template, thinking mode) | Unchanged | Only the way numbers are stored changes |
+
+A useful picture: quantization is like reprinting a large book in a smaller font. Every page is still
+there, in the same order, telling the same story. Only the way the letters are printed changes, and
+the most important headings keep their original size.
+
+### Reading the quantization names
+
+A name such as **`Q4_K_M`** has three parts:
+
+```
+ Q4   _   K   _   M
+ │        │       │
+ │        │       └── mix size: S (small), M (medium) or L (large)
+ │        └────────── method: K = "k-quant"
+ └─────────────────── approximate bits per weight
+```
+
+- **The number (Q8, Q6, Q5, Q4, Q3):** the approximate number of bits per weight. A higher number means
+  a larger file and higher accuracy.
+- **`_0`:** the original, simple method. Every weight in a block is treated the same way. At 8 bits this
+  is still the best choice, because 8 bits is already precise enough.
+- **`_K` (k-quants):** a smarter method. Weights are grouped into blocks, and blocks into super-blocks,
+  so the scaling information is stored efficiently. More sensitive tensors (for example `attn_v`,
+  `ffn_down` and the output layer) receive more bits than less sensitive ones. `Q4_K_M` is therefore
+  about 4.8 bits on average, not 4 bits everywhere.
+- **`_S`, `_M`, `_L`:** how many sensitive tensors are given extra bits. `M` (medium) is the usual
+  balance between size and accuracy.
+- **`IQ` (i-quants):** the newest method. Instead of storing each value directly, it stores references to
+  a table of common value patterns (a codebook), similar to how a ZIP file replaces repeated text with
+  short codes. This gives better quality at low bit rates (2–4 bits). I-quants depend on an importance
+  matrix to work well. Sizes are named `XS` (extra small), `S` and `M`.
+
+**Why Q8_0 is 8.5 bits per weight, not 8:** weights are stored in blocks of 32, and each block also stores
+one scale value that says how large the numbers in that block are. That extra value adds about 0.5 bits
+per weight.
+
+### The importance matrix (imatrix)
+
+Before summarizing a textbook, you might highlight the most important sentences so you know what to keep
+in full detail. The importance matrix does the same for the model:
+
+1. The model reads a varied calibration text (chat, code, math, reasoning, many languages).
+2. It records which weights have the most influence on the output.
+3. During quantization, those weights are rounded more carefully.
+
+The result is better accuracy at the same file size, especially at 4 bits and below.
+
+### How the versions are made
+
+Every quantized version is made **directly from the BF16 original**. The Q8_0 file is never used as a
+source for the smaller versions:
+
+```
+                    ┌──► Q8_0  (made first)
+                    │
+BF16 (original) ────┼──► Q6_K
+  ~54 GB            ├──► Q5_K_M
+                    ├──► Q4_K_M
+                    ├──► IQ4_XS
+                    ├──► Q3_K_M
+                    └──► IQ3_M
+
+Q8_0 ──► importance matrix ──► used as a guide when making Q6_K … IQ3_M from BF16
+```
+
+Each compression loses a little detail. Compressing an already-compressed file would add a second loss,
+like saving a JPEG, reopening it and saving it again at lower quality. Starting from the original every
+time means each version loses detail only once.
+
+Q8_0 has one extra job: it is the model that reads the calibration text to build the importance matrix.
+It fits entirely in a 48 GB GPU (BF16 does not) and is practically identical to BF16, so the importance
+matrix stays accurate.
+
+```bash
+llama-quantize --imatrix Qwen3.8-27B.imatrix.gguf  Qwen3.8-27B-BF16.gguf  Qwen3.8-27B-Q6_K.gguf  Q6_K
+#                        (guide)                    (source: original)     (output)
+```
+
+### Expected size and accuracy
+
+| Version | Bits per weight | Size | Typical accuracy vs. original | Suitable for |
+|---|---|---|---|---|
+| BF16 (original) | 16 | ~54 GB | 100% | Master copy (not published) |
+| Q8_0 | 8.5 | ~29 GB | ~99.9% | 32 GB+ GPUs, maximum quality |
+| Q6_K | ~6.6 | ~22 GB | ~99.5% | 24–32 GB GPUs |
+| Q5_K_M | ~5.7 | ~19.5 GB | ~99% | 24 GB GPUs |
+| Q4_K_M | ~4.8 | ~16.5 GB | ~97–98% | 20–24 GB GPUs; the most popular choice |
+| IQ4_XS | ~4.3 | ~14.5 GB | ~97% | 16 GB GPUs |
+| Q3_K_M | ~3.9 | ~13 GB | ~94% | 16 GB GPUs with longer context |
+| IQ3_M | ~3.7 | ~12.5 GB | ~93% | 12–16 GB GPUs |
+
+The accuracy column shows typical values for these formats. The **measured** perplexity and
+KL divergence for each file are published in the
+[model card](https://huggingface.co/muhammed-afsal-p-m/Qwen3.8-27B-GGUF).
+
+**Rule of thumb:** choose the largest version that fits in your GPU memory while leaving 2–4 GB free for
+the conversation context.
 
 ## Quantization types
 
@@ -222,6 +392,58 @@ perplexity, mean / 99.9th percentile / maximum KL divergence, RMS Δp and same-t
 ```
 
 Model weights, GGUF files, datasets, logs and third-party tools are excluded by `.gitignore`.
+
+### Folders created when you run the pipeline
+
+```
+.
+├── models/Qwen3.8-27B/    Original model from Hugging Face (safetensors, ~54 GB). Read only, never modified
+├── out/                   All GGUF files: BF16, every quantized version, mmproj and the importance matrix
+├── data/                  Calibration text and evaluation text
+├── results/               Calibration statistics, source manifest, evaluation results and checksums
+├── logs/                  One log file per step
+├── release/               Exactly the files that are uploaded to Hugging Face (created by step 07)
+└── tools/                 llama.cpp source and binaries
+```
+
+**The original model folder** (`models/Qwen3.8-27B/`):
+
+| File | Contents |
+|---|---|
+| `model-00001-of-00018.safetensors` … `model-00018-of-00018.safetensors` | The weights, split into 18 parts |
+| `model.safetensors.index.json` | Which weight is stored in which part |
+| `config.json` | Model design: layers, sizes, architecture |
+| `tokenizer.json`, `vocab.json`, `merges.txt`, `tokenizer_config.json` | How text is split into tokens |
+| `chat_template.jinja` | Chat format, including thinking mode |
+| `preprocessor_config.json`, `video_preprocessor_config.json` | Image and video input settings |
+| `generation_config.json` | Default sampling settings (temperature, top-p) |
+| `LICENSE`, `README.md` | Apache 2.0 license and the original model card |
+
+**What is published to Hugging Face:** only the contents of `release/`: the seven quantized GGUF files,
+the mmproj file, the importance matrix, `SHA256SUMS.txt` and the model card. The original weights and
+the BF16 GGUF stay local.
+
+## FAQ
+
+**Why is the importance matrix computed on Q8_0 and not on BF16?**
+The BF16 file (~54 GB) does not fit in a 48 GB GPU. Q8_0 (~29 GB) fits entirely and is practically
+identical to BF16, so the importance matrix is just as accurate and much faster to compute.
+
+**What are the "model has unused tensor blk.64 ..." warnings during the imatrix step?**
+Layer 64 is an extra next-token-prediction layer (`nextn`) used only for speculative decoding.
+Normal inference does not use it, so the importance matrix skips it. The layer is still kept in every
+quantized file. The warnings are harmless.
+
+**Why does a file end in `.partial.gguf`?**
+The file is still being written. When a step finishes, the file is renamed to its final name, so an
+interrupted run never leaves a broken file with a valid-looking name. Re-running the pipeline rebuilds it.
+
+**Why do file sizes differ between the terminal and the file explorer?**
+llama.cpp reports sizes in GB (1 GB = 1,000,000,000 bytes), while Windows Explorer and VS Code use GiB
+(1 GiB = 1,073,741,824 bytes). For example, the Q8_0 file is 29.05 GB, which is 27.05 GiB.
+
+**Can I stop the pipeline and continue later?**
+Yes. Every step skips work that is already complete. Run `python run_all.py --from <step>` to continue.
 
 ## License
 
