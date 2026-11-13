@@ -1,0 +1,42 @@
+{
+  "total_tokens": 163541,
+  "seed": 42,
+  "sources": {
+    "general": {
+      "repo": "Salesforce/wikitext",
+      "samples": 55,
+      "tokens": 32012,
+      "with_think": 0
+    },
+    "chat": {
+      "repo": "HuggingFaceH4/ultrachat_200k",
+      "samples": 25,
+      "tokens": 32181,
+      "with_think": 0
+    },
+    "math": {
+      "repo": "openai/gsm8k",
+      "samples": 127,
+      "tokens": 24253,
+      "with_think": 0
+    },
+    "code": {
+      "repo": "iamtarun/python_code_instructions_18k_alpaca",
+      "samples": 131,
+      "tokens": 24431,
+      "with_think": 0
+    },
+    "reasoning": {
+      "repo": "nvidia/OpenCodeReasoning",
+      "samples": 13,
+      "tokens": 33040,
+      "with_think": 13
+    },
+    "multilingual": {
+      "repo": "CohereLabs/aya_dataset",
+      "samples": 73,
+      "tokens": 17624,
+      "with_think": 0
+    }
+  }
+}

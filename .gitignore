@@ -1,0 +1,22 @@
+# Large files: never commit (models live on Hugging Face)
+models/
+out/
+release/
+data/
+*.gguf
+*.safetensors
+*.bin
+
+# Third-party tools (re-download with the steps in README.md)
+tools/llama.cpp/
+tools/llama-bin/
+tools/dl/
+
+# Logs and secrets
+logs/
+.env
+*.token
+
+# Python
+__pycache__/
+*.pyc

@@ -1,0 +1,101 @@
+# Single source of truth for the quantization pipeline.
+# Every script in pipeline/ reads this file; change settings here, not in code.
+
+model:
+  repo_id: Qwen/Qwen3.8-27B        # original BF16 weights on Hugging Face
+  revision: main                   # step 01 records the exact commit SHA used
+  local_dir: models/Qwen3.8-27B
+  name: Qwen3.8-27B                # used in output file names
+  license: apache-2.0
+
+llama_cpp:
+  src: tools/llama.cpp             # source checkout (conversion scripts)
+  bin: tools/llama-bin             # prebuilt CUDA binaries
+  build: b12345                    # recorded in the model card
+
+paths:
+  out: out                         # GGUF files
+  data: data                       # calibration + evaluation text
+  logs: logs
+  results: results                 # JSON/Markdown results (small, kept in git)
+  release: release                 # exactly what gets uploaded to Hugging Face
+
+convert:
+  outtype: bf16                    # lossless source for every quant
+  mmproj_outtype: f16              # vision projector
+
+quantize:
+  reference: Q8_0                  # made first; used for imatrix and as a near-lossless option
+  types: [Q8_0, Q6_K, Q5_K_M, Q4_K_M, IQ4_XS, Q3_K_M, IQ3_M]
+  no_imatrix: [Q8_0]               # 8-bit gains nothing from an imatrix
+
+calibration:
+  seed: 42
+  target_tokens: 160000            # ~312 chunks of 512 tokens
+  max_chars_per_sample: 8000       # stop one long sample from dominating
+  # share = fraction of target_tokens drawn from each source
+  sources:
+    - name: general
+      repo: Salesforce/wikitext
+      file: wikitext-2-raw-v1/train-00000-of-00001.parquet
+      kind: plain
+      text: text
+      share: 0.20
+    - name: chat
+      repo: HuggingFaceH4/ultrachat_200k
+      file: data/test_sft-00000-of-00001-f7dfac4afe5b93f4.parquet
+      kind: messages
+      messages: messages
+      share: 0.20
+    - name: math
+      repo: openai/gsm8k
+      file: main/train-00000-of-00001.parquet
+      kind: qa
+      prompt: question
+      response: answer
+      share: 0.15
+    - name: code
+      repo: iamtarun/python_code_instructions_18k_alpaca
+      file: data/train-00000-of-00001-8b6e212f3e1ece96.parquet
+      kind: qa
+      prompt: instruction
+      response: output
+      share: 0.15
+    - name: reasoning                # contains <think> traces -> protects thinking mode
+      repo: nvidia/OpenCodeReasoning
+      file: split_0/train-00000-of-00030.parquet
+      kind: qa
+      prompt: input
+      response: output
+      max_chars: 6000                # shorter clips -> more distinct problems
+      share: 0.20
+    - name: multilingual
+      repo: CohereLabs/aya_dataset
+      file: data/train-00000-of-00001.parquet
+      kind: qa
+      prompt: inputs
+      response: targets
+      share: 0.10
+
+imatrix:
+  ctx: 512
+  ngl: 99                          # Q8_0 (~29 GB) fits fully in 48 GB VRAM
+  chunks: -1                       # -1 = all calibration chunks
+
+eval:
+  # Held-out text: wikitext-2 TEST split (calibration uses the TRAIN split)
+  repo: Salesforce/wikitext
+  file: wikitext-2-raw-v1/test-00000-of-00001.parquet
+  ctx: 512
+  chunks: 150
+  base_ngl: 52                     # BF16 (~54 GB) does not fit in VRAM; offload most layers
+  ngl: 99
+  server_port: 8089
+  server_ctx: 16384
+
+hf:
+  username: muhammed-afsal-p-m
+  repo_id: muhammed-afsal-p-m/Qwen3.8-27B-GGUF
+  private: false
+  collection_title: Qwen3.8 Quants
+  github_url: https://github.com/muhammedafsalpm/qwen3.8-27b-gguf-quantization  # linked from the model card

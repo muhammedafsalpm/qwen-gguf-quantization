@@ -1,0 +1,10 @@
+# Python 3.11 (conda env "mycuda"). Install llama.cpp's own conversion requirements too:
+#   pip install -r tools/llama.cpp/requirements/requirements-convert_hf_to_gguf.txt
+huggingface_hub[cli,hf_xet]>=0.36,<1.0   # transformers 4.57 requires <1.0
+transformers==4.57.6
+gguf==0.19.0
+torch==2.11.0                            # CPU build is enough (conversion only)
+safetensors
+sentencepiece
+pyarrow
+pyyaml
