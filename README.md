@@ -13,6 +13,7 @@ tests thinking, tool calling and vision, and publishes the results to Hugging Fa
 - [Features](#features)
 - [Quantization explained](#quantization-explained)
 - [Quantization types](#quantization-types)
+- [Results](#results)
 - [Pipeline](#pipeline)
 - [Requirements](#requirements)
 - [Setup](#setup)
@@ -198,27 +199,56 @@ llama-quantize --imatrix Qwen3.8-27B.imatrix.gguf  Qwen3.8-27B-BF16.gguf  Qwen3.
 | Q3_K_M | ~3.9 | ~13 GB | ~94% | 16 GB GPUs with longer context |
 | IQ3_M | ~3.7 | ~12.5 GB | ~93% | 12–16 GB GPUs |
 
-The accuracy column shows typical values for these formats. The **measured** perplexity and
-KL divergence for each file are published in the
-[model card](https://huggingface.co/muhammed-afsal-p-m/Qwen3.8-27B-GGUF).
+The accuracy column shows typical values for these formats. The **measured** results for this model
+are in the [Results](#results) section.
 
 **Rule of thumb:** choose the largest version that fits in your GPU memory while leaving 2–4 GB free for
 the conversation context.
 
 ## Quantization types
 
-| Type | Approx. size | Use case |
+| Type | Size | Use case |
 |---|---|---|
-| Q8_0 | ~29 GB | Near-lossless reference |
-| Q6_K | ~22 GB | Excellent quality, 24–32 GB GPUs |
-| Q5_K_M | ~19.5 GB | Very high quality, 24 GB GPUs |
-| Q4_K_M | ~16.5 GB | Recommended default |
-| IQ4_XS | ~14.5 GB | 16 GB GPUs |
-| Q3_K_M | ~13 GB | 16 GB GPUs with longer context |
-| IQ3_M | ~12.5 GB | 12–16 GB GPUs |
+| Q8_0 | 29.1 GB | Near-lossless, 32 GB+ GPUs |
+| Q6_K | 22.4 GB | Excellent quality, 24–32 GB GPUs |
+| Q5_K_M | 19.6 GB | Very high quality, 24 GB GPUs |
+| Q4_K_M | 17.0 GB | Recommended default |
+| IQ4_XS | 15.5 GB | 16 GB GPUs |
+| Q3_K_M | 13.7 GB | 16 GB GPUs with longer context |
+| IQ3_M | 13.0 GB | 12–16 GB GPUs |
 
-Measured perplexity, KL divergence and test results for each file are published in the
-[model card](https://huggingface.co/muhammed-afsal-p-m/Qwen3.8-27B-GGUF).
+The vision projector `mmproj-Qwen3.8-27B-F16.gguf` (0.9 GB) works with every type.
+
+## Results
+
+Measured with llama.cpp `b12345` on an NVIDIA RTX 6000 Ada. Accuracy is compared with the original BF16
+model (perplexity **6.4334 ± 0.08**) on the held-out wikitext-2 test split (150 chunks × 512 tokens).
+Full data: [`results/eval.json`](results/eval.json).
+
+| Type | Bits/weight | Perplexity ↓ | Mean KLD ↓ | 99.9% KLD ↓ | Same top token ↑ | Speed (tok/s) |
+|---|---|---|---|---|---|---|
+| Q8_0 | 8.50 | 6.4399 | 0.0007 | 0.031 | 98.86% | 27.7 |
+| Q6_K | 6.57 | 6.4312 | 0.0020 | 0.069 | 97.91% | 35.5 |
+| Q5_K_M | 5.75 | 6.4544 | 0.0041 | 0.168 | 97.10% | 39.6 |
+| Q4_K_M | 4.98 | 6.4644 | 0.0121 | 0.396 | 95.09% | 43.7 |
+| IQ4_XS | 4.55 | 6.5045 | 0.0164 | 0.601 | 94.66% | 46.9 |
+| Q3_K_M | 4.01 | 6.6493 | 0.0468 | 1.661 | 90.81% | 48.6 |
+| IQ3_M | 3.80 | 6.7204 | 0.0563 | 1.651 | 90.33% | 50.2 |
+
+**All seven types passed all four functional tests** (thinking on, thinking off, tool calling and vision).
+
+How to read the table:
+- **Mean KLD** (KL divergence) measures how far the quant's next-token probabilities are from the original's.
+  0 means identical. It is the most reliable accuracy measure.
+- **99.9% KLD** shows the worst cases: the 1-in-1000 tokens where the quant differs most.
+- **Same top token** is how often the quant picks the same most likely next token as the original.
+- **Perplexity** differences smaller than the measurement uncertainty (±0.08) are noise; this is why Q6_K
+  can score slightly below BF16.
+- **Speed** is single-request generation speed with the vision projector loaded.
+
+Summary: Q8_0, Q6_K and Q5_K_M are practically indistinguishable from the original. Q4_K_M stays very close
+at less than a third of the original size. The 3-bit types show a measurable but moderate loss and remain
+fully functional.
 
 ## Pipeline
 

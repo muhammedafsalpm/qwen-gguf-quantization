@@ -6,11 +6,10 @@ Review release/README.md before running step 08.
 
     python pipeline/07_model_card.py
 """
-import json
 import os
 import shutil
 
-from common import (CFG, IMATRIX, MMPROJ, MODEL_DIR, NAME, OUT, RELEASE, RESULTS, gb, gguf,
+from common import (BF16, CFG, IMATRIX, MMPROJ, NAME, OUT, RELEASE, RESULTS, gb, gguf,
                     load_json, log, require)
 
 qc, hf, mc = CFG["quantize"], CFG["hf"], CFG["model"]
@@ -34,8 +33,9 @@ for f in files:
         shutil.copy2(f, dst)
 
 # ---- numbers for the table ----
-index = json.loads((MODEL_DIR / "model.safetensors.index.json").read_text(encoding="utf-8"))
-n_params = index.get("metadata", {}).get("total_size", 0) / 2  # BF16 = 2 bytes per parameter
+# Text-model parameter count from the BF16 GGUF (16 bits each). The safetensors total
+# would also include the vision encoder, which lives in the separate mmproj file.
+n_params = BF16.stat().st_size * 8 / 16 if BF16.exists() else 0
 mmproj_gb = gb(MMPROJ.stat().st_size)
 
 NOTES = {
@@ -48,6 +48,9 @@ NOTES = {
     "IQ3_M": "12–16 GB GPUs",
     "IQ2_M": "Low VRAM; noticeable quality loss",
 }
+
+
+LICENSE_NAMES = {"apache-2.0": "Apache 2.0", "mit": "MIT"}
 
 
 def fmt(v, nd=4):
@@ -114,11 +117,15 @@ vision (image input) and tool calling**. Every quant was **measured against the 
 
 \\*VRAM is approximate: model + vision projector + ~8K context. Longer context needs more.
 
-BF16 reference perplexity: **{fmt(base_ppl)}**. Lower KLD and higher "same top token" mean closer to the original.
+**How to read the accuracy columns** (all measured against the original BF16 model, perplexity **{fmt(base_ppl)}**):
+- **Mean KLD** (KL divergence): how far the quant's word probabilities are from the original's. Lower is better; 0 means identical. This is the most reliable measure.
+- **Same top token:** how often the quant picks the same most-likely next word as the original.
+- **PPL** (perplexity): how well the model predicts held-out text. Lower is better. The measurement
+  uncertainty is about ±{fmt(ev['base'].get('ppl_err'), 2)}, so differences smaller than that (for example Q6_K vs BF16) are noise.
 
 ## Which file should I use?
 
-- **48 GB+ GPU:** Q8_0 (practically identical to the original)
+- **32 GB+ GPU:** Q8_0 (practically identical to the original)
 - **24–32 GB GPU (RTX 3090/4090/5090):** Q6_K or Q5_K_M
 - **20–24 GB:** Q4_K_M (the usual default)
 - **16 GB:** IQ4_XS or Q3_K_M
@@ -147,7 +154,7 @@ OpenAI-compatible API:
 
 Run through `llama-server` with the vision projector loaded (temperature 0):
 
-| Quant | Thinking on | Thinking off | Tool call | Vision | Speed (tok/s, RTX 6000 Ada) |
+| Quant | Thinking on | Thinking off | Tool call | Vision | Generation speed (tok/s, RTX 6000 Ada) |
 |---|---|---|---|---|---|
 {chr(10).join(func_rows) if func_rows else "| — | | | | | |"}
 
@@ -170,7 +177,7 @@ Checksums: [`SHA256SUMS.txt`](./SHA256SUMS.txt).
 
 ## License and credits
 
-The model weights are licensed under **{mc['license']}**, the same as the original
+The model weights are licensed under **{LICENSE_NAMES.get(mc['license'], mc['license'])}**, the same as the original
 [{mc['repo_id']}](https://huggingface.co/{mc['repo_id']}). All credit for the model goes to the Qwen team.
 Quantized with [llama.cpp](https://github.com/ggml-org/llama.cpp).
 """

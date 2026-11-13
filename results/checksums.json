@@ -1,0 +1,47 @@
+{
+  "Qwen3.8-27B-Q8_0.gguf": {
+    "size": 29047079136,
+    "mtime": 1794560507,
+    "sha256": "01e0689b3a039a244b9ebb7eccef41029f577faf6de967748cf92ce88cdad270"
+  },
+  "Qwen3.8-27B-Q6_K.gguf": {
+    "size": 22430994880,
+    "mtime": 1794561401,
+    "sha256": "7415002879f084751f06f935a335b7593678b9656e2fbe3c98689c3b000995c3"
+  },
+  "Qwen3.8-27B-Q5_K_M.gguf": {
+    "size": 19635966400,
+    "mtime": 1794561697,
+    "sha256": "0fa1ca339b2766ace016dfd04e48709fec8b3958f1ab4edaff0ee44bf5c0c50d"
+  },
+  "Qwen3.8-27B-Q4_K_M.gguf": {
+    "size": 17005351360,
+    "mtime": 1794561992,
+    "sha256": "8740e09d1028f43aabec693d5a70d4882bcedd5058e137f9f110843eca46c209"
+  },
+  "Qwen3.8-27B-IQ4_XS.gguf": {
+    "size": 15544963520,
+    "mtime": 1794562211,
+    "sha256": "684de650c8deb0bf466243c7e0eaa22342612e790642fa362684d28369e3f9fe"
+  },
+  "Qwen3.8-27B-Q3_K_M.gguf": {
+    "size": 13709136320,
+    "mtime": 1794562475,
+    "sha256": "909755c0ab811249d9c1b36be62ab15945fe1e48224e944578f977923636efdc"
+  },
+  "Qwen3.8-27B-IQ3_M.gguf": {
+    "size": 12968866240,
+    "mtime": 1794562945,
+    "sha256": "fbb2151b902225ea79b5a6dab7f0d0eeed18fc54cfd5d18c714aaf9ce92b1004"
+  },
+  "mmproj-Qwen3.8-27B-F16.gguf": {
+    "size": 927607008,
+    "mtime": 1794560010,
+    "sha256": "cb0a71fe9b84af2552fc6260acf8e9773a29d115c683aba01c72a7ac537b212b"
+  },
+  "Qwen3.8-27B.imatrix.gguf": {
+    "size": 23337184,
+    "mtime": 1794561214,
+    "sha256": "1a1d67399b9c250f7f50358907217f929e5674a8ef0ee3c268b42f2d3cafa0c0"
+  }
+}

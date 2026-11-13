@@ -1,0 +1,275 @@
+{
+  "base": {
+    "type": "BF16",
+    "ppl": 6.4334,
+    "ppl_err": 0.07955
+  },
+  "quants": {
+    "Q8_0": {
+      "ppl": 6.439897,
+      "ppl_err": 0.079651,
+      "kld_mean": 0.000723,
+      "kld_mean_err": 2.5e-05,
+      "kld_max": 0.590088,
+      "kld_p999": 0.030682,
+      "kld_p99": 0.006463,
+      "rms_dp": 0.757,
+      "rms_dp_err": 0.022,
+      "same_top": 98.863,
+      "same_top_err": 0.054,
+      "functional": {
+        "thinking_on": {
+          "pass": true,
+          "reasoning_chars": 164,
+          "answer": "The ball costs **$0.05** (5 cents)."
+        },
+        "tokens_per_sec": 27.7,
+        "thinking_off": {
+          "pass": true,
+          "answer": "391"
+        },
+        "tool_call": {
+          "pass": true,
+          "calls": [
+            {
+              "name": "get_weather",
+              "arguments": "{\"city\":\"Paris\"}"
+            }
+          ]
+        },
+        "vision": {
+          "pass": true,
+          "answer": "Red"
+        }
+      }
+    },
+    "Q6_K": {
+      "ppl": 6.431205,
+      "ppl_err": 0.079485,
+      "kld_mean": 0.002012,
+      "kld_mean_err": 4.5e-05,
+      "kld_max": 0.962571,
+      "kld_p999": 0.068629,
+      "kld_p99": 0.018495,
+      "rms_dp": 1.296,
+      "rms_dp_err": 0.045,
+      "same_top": 97.914,
+      "same_top_err": 0.073,
+      "functional": {
+        "thinking_on": {
+          "pass": true,
+          "reasoning_chars": 164,
+          "answer": "The ball costs **$0.05** (5 cents)."
+        },
+        "tokens_per_sec": 35.5,
+        "thinking_off": {
+          "pass": true,
+          "answer": "391"
+        },
+        "tool_call": {
+          "pass": true,
+          "calls": [
+            {
+              "name": "get_weather",
+              "arguments": "{\"city\":\"Paris\"}"
+            }
+          ]
+        },
+        "vision": {
+          "pass": true,
+          "answer": "Red"
+        }
+      }
+    },
+    "Q5_K_M": {
+      "ppl": 6.454377,
+      "ppl_err": 0.079836,
+      "kld_mean": 0.004098,
+      "kld_mean_err": 6.2e-05,
+      "kld_max": 0.767878,
+      "kld_p999": 0.168062,
+      "kld_p99": 0.037947,
+      "rms_dp": 1.85,
+      "rms_dp_err": 0.038,
+      "same_top": 97.101,
+      "same_top_err": 0.086,
+      "functional": {
+        "thinking_on": {
+          "pass": true,
+          "reasoning_chars": 164,
+          "answer": "The ball costs **$0.05** (5 cents)."
+        },
+        "tokens_per_sec": 39.6,
+        "thinking_off": {
+          "pass": true,
+          "answer": "391"
+        },
+        "tool_call": {
+          "pass": true,
+          "calls": [
+            {
+              "name": "get_weather",
+              "arguments": "{\"city\":\"Paris\"}"
+            }
+          ]
+        },
+        "vision": {
+          "pass": true,
+          "answer": "Red"
+        }
+      }
+    },
+    "Q4_K_M": {
+      "ppl": 6.464412,
+      "ppl_err": 0.080104,
+      "kld_mean": 0.012063,
+      "kld_mean_err": 0.000193,
+      "kld_max": 3.859475,
+      "kld_p999": 0.395994,
+      "kld_p99": 0.114621,
+      "rms_dp": 3.127,
+      "rms_dp_err": 0.059,
+      "same_top": 95.09,
+      "same_top_err": 0.11,
+      "functional": {
+        "thinking_on": {
+          "pass": true,
+          "reasoning_chars": 171,
+          "answer": "The ball costs **$0.05** (5 cents).\n\nIf the ball is $0.05, the bat is $1.05, and together they cost $1.10."
+        },
+        "tokens_per_sec": 43.7,
+        "thinking_off": {
+          "pass": true,
+          "answer": "391"
+        },
+        "tool_call": {
+          "pass": true,
+          "calls": [
+            {
+              "name": "get_weather",
+              "arguments": "{\"city\":\"Paris\"}"
+            }
+          ]
+        },
+        "vision": {
+          "pass": true,
+          "answer": "red"
+        }
+      }
+    },
+    "IQ4_XS": {
+      "ppl": 6.50447,
+      "ppl_err": 0.080648,
+      "kld_mean": 0.016372,
+      "kld_mean_err": 0.000269,
+      "kld_max": 3.781668,
+      "kld_p999": 0.600707,
+      "kld_p99": 0.159242,
+      "rms_dp": 3.713,
+      "rms_dp_err": 0.076,
+      "same_top": 94.656,
+      "same_top_err": 0.115,
+      "functional": {
+        "thinking_on": {
+          "pass": true,
+          "reasoning_chars": 171,
+          "answer": "The ball costs **$0.05** (5 cents)."
+        },
+        "tokens_per_sec": 46.9,
+        "thinking_off": {
+          "pass": true,
+          "answer": "391"
+        },
+        "tool_call": {
+          "pass": true,
+          "calls": [
+            {
+              "name": "get_weather",
+              "arguments": "{\"city\":\"Paris\"}"
+            }
+          ]
+        },
+        "vision": {
+          "pass": true,
+          "answer": "Red"
+        }
+      }
+    },
+    "Q3_K_M": {
+      "ppl": 6.649263,
+      "ppl_err": 0.083874,
+      "kld_mean": 0.046774,
+      "kld_mean_err": 0.000655,
+      "kld_max": 6.779353,
+      "kld_p999": 1.661363,
+      "kld_p99": 0.467277,
+      "rms_dp": 6.084,
+      "rms_dp_err": 0.092,
+      "same_top": 90.81,
+      "same_top_err": 0.148,
+      "functional": {
+        "thinking_on": {
+          "pass": true,
+          "reasoning_chars": 178,
+          "answer": "The ball costs **$0.05** (5 cents)."
+        },
+        "tokens_per_sec": 48.6,
+        "thinking_off": {
+          "pass": true,
+          "answer": "391"
+        },
+        "tool_call": {
+          "pass": true,
+          "calls": [
+            {
+              "name": "get_weather",
+              "arguments": "{\"city\":\"Paris\"}"
+            }
+          ]
+        },
+        "vision": {
+          "pass": true,
+          "answer": "Red"
+        }
+      }
+    },
+    "IQ3_M": {
+      "ppl": 6.720382,
+      "ppl_err": 0.081633,
+      "kld_mean": 0.056336,
+      "kld_mean_err": 0.000673,
+      "kld_max": 5.364914,
+      "kld_p999": 1.651324,
+      "kld_p99": 0.554037,
+      "rms_dp": 7.079,
+      "rms_dp_err": 0.093,
+      "same_top": 90.332,
+      "same_top_err": 0.151,
+      "functional": {
+        "thinking_on": {
+          "pass": true,
+          "reasoning_chars": 156,
+          "answer": "The ball costs **$0.05** (5 cents).\n\nLet the ball cost \\(x\\). Then the bat costs \\(x + 1.00\\).\n\n\\[\nx + (x + 1.00) = 1.10\n\\]\n\n\\[\n2x + 1.00 = 1.10\n\\]\n\n\\[\n2x = 0.10\n\\]\n\n\\[\nx = 0.05\n\\]"
+        },
+        "tokens_per_sec": 50.2,
+        "thinking_off": {
+          "pass": true,
+          "answer": "391"
+        },
+        "tool_call": {
+          "pass": true,
+          "calls": [
+            {
+              "name": "get_weather",
+              "arguments": "{\"city\":\"Paris\"}"
+            }
+          ]
+        },
+        "vision": {
+          "pass": true,
+          "answer": "Red"
+        }
+      }
+    }
+  }
+}
