@@ -1,0 +1,134 @@
+# Questions asked to every quantized version by tools/compare_quants.py.
+# Edit freely: add your own prompts, change max_tokens, or switch thinking on/off.
+#
+# Fields per prompt:
+#   id          short unique name (used in the report)
+#   category    group shown in the report
+#   thinking    true = thinking mode on (slower, longer answers), false = direct answer
+#   max_tokens  upper limit for the answer (thinking needs more)
+#   prompt      the question
+#   image       optional: "bars" attaches a generated bar-chart image
+#   long_text   optional: true inserts ~7K tokens of text before the prompt (needle test)
+#   tools       optional: function definitions for a tool-calling test
+#   check       how the answer is graded automatically:
+#     {type: contains, any: [...]}        passes if the answer contains any of these (case-insensitive)
+#     {type: number, value: 391}          passes if this exact number appears in the answer
+#     {type: bullets, count: 3}           passes if the answer has exactly N bullet lines
+#     {type: tool_call, name: x, arg_contains: y}
+#     {type: python, tests: "..."}        runs the answer's Python code with these asserts (10 s limit)
+#     {type: manual}                      not graded; compare the answers by reading them
+
+settings:
+  repeats: 2        # each prompt is timed this many times; the average is reported
+  ctx: 16384        # context size given to llama-server
+  seed: 42
+
+prompts:
+  - id: bat-ball
+    category: Logic
+    thinking: true
+    max_tokens: 4096
+    prompt: "A bat and a ball cost $1.10 in total. The bat costs $1.00 more than the ball. How much does the ball cost?"
+    check: {type: contains, any: ["0.05", "5 cents", "five cents"]}
+
+  - id: multiply
+    category: Math
+    thinking: false
+    max_tokens: 64
+    prompt: "What is 17 multiplied by 23? Reply with just the number."
+    check: {type: number, value: 391}
+
+  - id: word-problem
+    category: Math
+    thinking: true
+    max_tokens: 4096
+    prompt: "A shop sells pens at 12 rupees each. Riya buys 7 pens and pays with a 100 rupee note. She then spends half of her change on a notebook. How many rupees does she have left?"
+    check: {type: number, value: 8}
+
+  - id: sheep
+    category: Reasoning
+    thinking: true
+    max_tokens: 4096
+    prompt: "A farmer has 17 sheep. All but 9 run away. How many sheep does the farmer have left? Answer with the number."
+    check: {type: number, value: 9}
+
+  - id: palindrome-code
+    category: Code
+    thinking: false
+    max_tokens: 512
+    prompt: "Write a Python function is_palindrome(s) that returns True if the string s is a palindrome, ignoring case, spaces and punctuation. Reply with only the code in one Python code block."
+    check:
+      type: python
+      tests: |
+        assert is_palindrome("A man, a plan, a canal: Panama")
+        assert is_palindrome("racecar")
+        assert not is_palindrome("hello")
+        assert is_palindrome("")
+
+  - id: capital
+    category: Knowledge
+    thinking: false
+    max_tokens: 64
+    prompt: "What is the capital city of Australia? Answer in one word."
+    check: {type: contains, any: ["Canberra"]}
+
+  - id: three-bullets
+    category: Instruction following
+    thinking: false
+    max_tokens: 256
+    prompt: "Give exactly 3 bullet points on why model quantization is useful. Use '-' for each bullet and write nothing else."
+    check: {type: bullets, count: 3}
+
+  - id: malayalam
+    category: Multilingual
+    thinking: false
+    max_tokens: 128
+    prompt: "ഇന്ത്യയുടെ തലസ്ഥാനം ഏതാണ്? ഒരു വാക്യത്തിൽ ഉത്തരം നൽകുക."
+    check: {type: contains, any: ["ഡൽഹി", "ദില്ലി", "Delhi"]}
+
+  - id: hindi
+    category: Multilingual
+    thinking: false
+    max_tokens: 128
+    prompt: "भारत की राजधानी क्या है? एक वाक्य में उत्तर दें।"
+    check: {type: contains, any: ["दिल्ली", "Delhi"]}
+
+  - id: summary
+    category: Summarization
+    thinking: false
+    max_tokens: 256
+    prompt: "Summarize in two sentences: Quantization stores the weights of a neural network with fewer bits, for example 4 bits instead of 16. This makes the model file several times smaller and lets it run on GPUs with less memory, and generation usually becomes faster because less data is read for every token. The cost is a small loss of accuracy, which grows as the number of bits goes down, so 8-bit versions are almost identical to the original while 3-bit versions lose noticeably more."
+    check: {type: manual}
+
+  - id: needle
+    category: Long context
+    thinking: false
+    max_tokens: 64
+    long_text: true
+    prompt: "Somewhere in the text above there is a sentence about a vault access code. What is the access code? Reply with just the number."
+    check: {type: number, value: 7341}
+
+  - id: weather-tool
+    category: Tool calling
+    thinking: false
+    max_tokens: 256
+    prompt: "What's the weather in Paris right now?"
+    tools:
+      - type: function
+        function:
+          name: get_weather
+          description: Get the current weather for a city
+          parameters:
+            type: object
+            properties:
+              city: {type: string}
+            required: [city]
+    check: {type: tool_call, name: get_weather, arg_contains: paris}
+
+  - id: chart-vision
+    category: Vision
+    thinking: false
+    max_tokens: 64
+    image: bars
+    prompt: "This bar chart has a red, a green and a blue bar. Which colour is the tallest bar? Answer with one word."
+    check: {type: contains, any: ["green"]}

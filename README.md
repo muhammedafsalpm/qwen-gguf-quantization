@@ -386,6 +386,21 @@ Monitor a running model download:
 python tools/progress.py
 ```
 
+Ask every quant the same questions and compare answers and latency:
+
+```bash
+python tools/compare_quants.py                       # all quants, all prompts (~15–30 min)
+python tools/compare_quants.py --only Q4_K_M IQ3_M   # selected quants
+python tools/compare_quants.py --prompts-only bat-ball needle --repeats 1
+```
+
+Each quant is loaded on its own in `llama-server` (with the vision projector), warmed up, and asked every
+prompt in [`tools/prompts.yaml`](tools/prompts.yaml) at temperature 0 with a fixed seed. Answers with a known
+result are graded automatically (logic, math, code tests, knowledge, instruction following, Malayalam and
+Hindi, a 6K-token needle-in-text test, tool calling, a chart image); open answers are compared with the Q8_0
+answer. Add your own questions to `prompts.yaml`. The report is written to
+`results/compare/<date-time>/report.md`, with `results.csv` and `results.json` beside it.
+
 ## Configuration
 
 All settings are in [`config.yaml`](config.yaml):
@@ -450,7 +465,9 @@ perplexity, mean / 99.9th percentile / maximum KL divergence, RMS Δp and same-t
 │   ├── 07_model_card.py
 │   └── 08_upload.py
 ├── tools/
-│   └── progress.py          Download progress bar
+│   ├── progress.py          Download progress bar
+│   ├── compare_quants.py    Same questions to every quant: answers, accuracy, latency
+│   └── prompts.yaml         The questions used by compare_quants.py (editable)
 └── results/                 Calibration statistics, source manifest, evaluation results
 ```
 
