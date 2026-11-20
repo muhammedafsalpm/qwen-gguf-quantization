@@ -1,0 +1,89 @@
+quant,prompt,category,thinking,correct,wall_s,prefill_ms,tok_s,gen_tokens,prompt_tokens,reasoning_chars,similarity_to_q8_0,answer
+Q4_K_M,bat-ball,Logic,True,True,2.95,293.78,44.86,116,86,171,,"The ball costs **$0.05** (5 cents).
+
+If the ball is $0.05, the bat is $1.05, and together they cost $1.10."
+Q4_K_M,multiply,Math,False,True,0.3,135.6,41.49,4,29,0,,391
+Q4_K_M,word-problem,Math,True,True,4.22,247.01,43.97,172,102,296,,"Riya spends \(7 \times 12 = 84\) rupees on pens.
+
+Change from 100 rupees: \(100 - 84 = 16\) rupees.
+
+She spends half of the change: \(16 \div 2 = 8\) rupees.
+
+So she has **8 rupees left**."
+Q4_K_M,sheep,Reasoning,True,True,1.66,228.68,42.64,58,39,199,,9
+Q4_K_M,palindrome-code,Code,False,True,1.14,138.11,42.74,39,50,0,,"```python
+def is_palindrome(s):
+    cleaned = ''.join(c.lower() for c in s if c.isalnum())
+    return cleaned == cleaned[::-1]
+```"
+Q4_K_M,capital,Knowledge,False,True,0.27,130.63,39.45,3,25,0,,Canberra
+Q4_K_M,three-bullets,Instruction following,False,True,1.66,132.13,43.19,63,36,0,,"- Reduces memory footprint by storing weights in lower precision formats, enabling deployment on resource-constrained devices.
+- Accelerates inference speed by leveraging hardware optimizations for quantized data types, resulting in lower latency.
+- Decreases bandwidth requirements for data transfer between memory and processing units, improving overall system efficiency."
+Q4_K_M,malayalam,Multilingual,False,True,0.67,140.15,44.89,21,44,0,,ഇന്ത്യയുടെ തലസ്ഥാനം ന്യൂഡൽഹിയാണ്.
+Q4_K_M,hindi,Multilingual,False,True,0.51,126.88,44.43,13,31,0,,भारत की राजधानी नई दिल्ली है।
+Q4_K_M,summary,Summarization,False,,1.38,159.17,44.65,50,114,0,,"Quantization reduces neural network file size and improves speed by storing weights with fewer bits, enabling operation on hardware with limited memory. However, this efficiency comes at the cost of reduced accuracy, with the degradation becoming more significant as the bit depth decreases."
+Q4_K_M,needle,Long context,False,True,3.4,3183.51,41.64,5,6455,0,,7341
+Q4_K_M,weather-tool,Tool calling,False,True,1.15,313.0,44.94,26,280,0,,
+Q4_K_M,chart-vision,Vision,False,True,0.44,300.81,35.93,2,120,0,,green
+IQ3_M,bat-ball,Logic,True,True,3.63,288.45,53.4,174,86,156,,"The ball costs **$0.05** (5 cents).
+
+Let the ball cost \(x\). Then the bat costs \(x + 1.00\).
+
+\[
+x + (x + 1.00) = 1.10
+\]
+
+\[
+2x + 1.00 = 1.10
+\]
+
+\[
+2x = 0.10
+\]
+
+\[
+x = 0.05
+\]"
+IQ3_M,multiply,Math,False,True,0.28,130.09,50.12,4,29,0,,391
+IQ3_M,word-problem,Math,True,True,5.05,226.42,53.26,254,102,500,,"Riya’s pens cost:
+
+\[
+7 \times 12 = 84
+\]
+
+Change from a 100-rupee note:
+
+\[
+100 - 84 = 16
+\]
+
+She spends half of her change on a notebook:
+
+\[
+16 \div 2 = 8
+\]
+
+So she has:
+
+\[
+16 - 8 = 8
+\]
+
+**Answer: 8 rupees**"
+IQ3_M,sheep,Reasoning,True,True,1.39,221.13,53.72,58,39,199,,9
+IQ3_M,palindrome-code,Code,False,True,0.92,126.2,54.03,39,50,0,,"```python
+def is_palindrome(s):
+    cleaned = ''.join(char.lower() for char in s if char.isalnum())
+    return cleaned == cleaned[::-1]
+```"
+IQ3_M,capital,Knowledge,False,True,0.26,120.33,47.6,3,25,0,,Canberra
+IQ3_M,three-bullets,Instruction following,False,True,1.05,128.37,54.0,47,36,0,,"- Reduces memory footprint and storage requirements by using lower-precision data types.
+- Accelerates inference speed by enabling faster computation on hardware optimized for reduced precision.
+- Lowers energy consumption and operational costs during model deployment."
+IQ3_M,malayalam,Multilingual,False,True,0.59,132.49,53.95,21,44,0,,ഇന്ത്യയുടെ തലസ്ഥാനം ന്യൂഡൽഹിയാണ്.
+IQ3_M,hindi,Multilingual,False,True,0.43,129.76,53.13,13,31,0,,भारत की राजधानी नई दिल्ली है।
+IQ3_M,summary,Summarization,False,,1.32,143.58,53.3,60,114,0,,"Quantization reduces neural network file sizes and improves generation speed by storing weights with fewer bits, enabling operation on hardware with limited memory. However, this efficiency comes at the cost of reduced accuracy, which remains minimal at 8-bit but becomes significantly more pronounced at lower bit depths like 3-bit."
+IQ3_M,needle,Long context,False,True,3.34,3132.47,50.14,5,6455,0,,7341
+IQ3_M,weather-tool,Tool calling,False,True,0.96,301.38,53.57,26,280,0,,
+IQ3_M,chart-vision,Vision,False,True,0.41,275.23,42.42,2,120,0,,green
