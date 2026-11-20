@@ -44,6 +44,6 @@ for f in files:
         c = {"size": st.st_size, "mtime": int(st.st_mtime), "sha256": sha256(f)}
     result[f.name] = c
 save_json(RESULTS / "checksums.json", result)
-(OUT / "SHA256SUMS.txt").write_text(
-    "".join(f"{v['sha256']}  {k}\n" for k, v in result.items()), encoding="utf-8")
+(OUT / "SHA256SUMS.txt").write_text(  # LF endings, so `sha256sum -c` works on Linux too
+    "".join(f"{v['sha256']}  {k}\n" for k, v in result.items()), encoding="utf-8", newline="\n")
 log(f"checksums written for {len(result)} files")

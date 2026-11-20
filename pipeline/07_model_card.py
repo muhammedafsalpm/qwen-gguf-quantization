@@ -21,10 +21,22 @@ require(RESULTS / "checksums.json", "Run step 05 first.")
 # ---- release folder (hard links) ----
 RELEASE.mkdir(exist_ok=True)
 files = [gguf(t) for t in qc["types"] if gguf(t).exists()] + [MMPROJ, IMATRIX, OUT / "SHA256SUMS.txt"]
+def up_to_date(src, dst):
+    # A hard link IS the source file. A copy (used when linking is not possible) is current
+    # only if size and modification time match; a size check alone would keep a stale copy
+    # of a rebuilt quant, since rebuilt quants have exactly the same size.
+    if not dst.exists():
+        return False
+    if os.path.samefile(src, dst):
+        return True
+    a, b = src.stat(), dst.stat()
+    return a.st_size == b.st_size and int(a.st_mtime) == int(b.st_mtime)
+
+
 for f in files:
     require(f, "Run the earlier steps first.")
     dst = RELEASE / f.name
-    if dst.exists() and dst.stat().st_size == f.stat().st_size:
+    if up_to_date(f, dst):
         continue
     dst.unlink(missing_ok=True)
     try:
@@ -51,6 +63,7 @@ NOTES = {
 
 
 LICENSE_NAMES = {"apache-2.0": "Apache 2.0", "mit": "MIT"}
+OLLAMA_TESTED = "0.40.16"  # latest Ollama release tested; it could not load these files (Nov 2026)
 
 
 def fmt(v, nd=4):
@@ -133,17 +146,21 @@ vision (image input) and tool calling**. Every quant was **measured against the 
 
 ## How to run
 
-**llama.cpp** (chat with image support):
+> **Compatibility:** these files need **llama.cpp build {CFG['llama_cpp']['build']} or newer**. Recent llama.cpp
+> stores some of this model's tensors in a combined layout (`attn_qkv_gate`, `ssm_beta_alpha`) that older
+> runtimes cannot read. **Ollama {OLLAMA_TESTED} and older cannot load them** (error: `tensor 'blk.0.ssm_beta.weight'
+> not found`). Other apps work once their bundled llama.cpp is at least build {CFG['llama_cpp']['build']}.
+
+**llama.cpp** (chat with image support; tested):
 ```bash
 llama-server -m {NAME}-Q4_K_M.gguf --mmproj {MMPROJ.name} -ngl 99 -c 16384 --jinja
 ```
 
-**Ollama:**
-```bash
-ollama run hf.co/{repo}:Q4_K_M
-```
+**Ollama:** not supported yet (see Compatibility). For Ollama, use its own library model instead:
+`ollama run qwen3.8:27b`.
 
-**LM Studio:** search for `{repo}` and pick a quant.
+**LM Studio and other llama.cpp-based apps:** load a quant once the app's llama.cpp runtime is build
+{CFG['llama_cpp']['build']} or newer.
 
 **Thinking mode** is on by default (reasoning effort `xhigh`). Per request, with llama-server or any
 OpenAI-compatible API:
@@ -157,6 +174,11 @@ Run through `llama-server` with the vision projector loaded (temperature 0):
 | Quant | Thinking on | Thinking off | Tool call | Vision | Generation speed (tok/s, RTX 6000 Ada) |
 |---|---|---|---|---|---|
 {chr(10).join(func_rows) if func_rows else "| — | | | | | |"}
+
+**Scope of the evaluation:** the functional tests are smoke tests (one prompt per feature) that confirm each
+feature works; they do not score quality. Accuracy (perplexity, KL divergence) is measured on English
+Wikipedia text at 512-token context, so code, math, other languages, long context and image quality are not
+separately measured.
 
 ## How these quants were made
 
@@ -181,6 +203,7 @@ The model weights are licensed under **{LICENSE_NAMES.get(mc['license'], mc['lic
 [{mc['repo_id']}](https://huggingface.co/{mc['repo_id']}). All credit for the model goes to the Qwen team.
 Quantized with [llama.cpp](https://github.com/ggml-org/llama.cpp).
 """
-(RELEASE / "README.md").write_text(card, encoding="utf-8")
-total = sum(f.stat().st_size for f in RELEASE.iterdir() if f.is_file())
-log(f"release/ ready: {len(list(RELEASE.iterdir()))} files, {gb(total)} GB. Review release/README.md")
+(RELEASE / "README.md").write_text(card, encoding="utf-8", newline="\n")
+published = [f for f in RELEASE.iterdir() if f.is_file()]  # skips the uploader's hidden .cache folder
+total = sum(f.stat().st_size for f in published)
+log(f"release/ ready: {len(published)} files, {gb(total)} GB. Review release/README.md")

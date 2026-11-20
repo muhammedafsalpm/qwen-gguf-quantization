@@ -100,7 +100,32 @@ def sha256(p: Path, chunk: int = 16 * 1024 * 1024) -> str:
 
 
 def save_json(p: Path, data) -> None:
-    p.write_text(json.dumps(data, indent=2, ensure_ascii=False), encoding="utf-8")
+    p.write_text(json.dumps(data, indent=2, ensure_ascii=False), encoding="utf-8", newline="\n")
+
+
+def file_id(p: Path) -> dict:
+    """Cheap identity of a file (size + modification time) to detect rebuilt files."""
+    st = p.stat()
+    return {"size": st.st_size, "mtime": int(st.st_mtime)}
+
+
+def single_instance(lock_path: Path, what: str):
+    """Exit if another process already holds this lock. The operating system releases
+    the lock when the process ends, even after a crash, so it never goes stale.
+    Keep the returned file object alive for as long as the lock is needed."""
+    f = open(lock_path, "a+")
+    f.seek(0)
+    try:
+        if os.name == "nt":
+            import msvcrt
+            msvcrt.locking(f.fileno(), msvcrt.LK_NBLCK, 1)
+        else:
+            import fcntl
+            fcntl.flock(f, fcntl.LOCK_EX | fcntl.LOCK_NB)
+    except OSError:
+        f.close()
+        sys.exit(f"Another {what} is already running (lock: {lock_path}). Wait for it to finish.")
+    return f
 
 
 def load_json(p: Path, default=None):

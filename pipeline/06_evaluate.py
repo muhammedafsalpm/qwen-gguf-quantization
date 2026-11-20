@@ -11,14 +11,15 @@ import argparse
 import base64
 import json
 import re
+import socket
 import struct
 import subprocess
 import time
 import urllib.request
 import zlib
 
-from common import (BF16, CFG, DATA, EVAL_TEXT, KLD_BASE, LOGS, MMPROJ, RESULTS, gguf, load_json,
-                    log, require, run, save_json, tool)
+from common import (BF16, CFG, DATA, EVAL_TEXT, KLD_BASE, LOGS, MMPROJ, RESULTS, file_id, gguf,
+                    load_json, log, require, run, save_json, tool)
 
 ap = argparse.ArgumentParser()
 ap.add_argument("--only", nargs="*")
@@ -44,6 +45,17 @@ PATTERNS = {
 }
 
 
+def is_current(entry: dict, f) -> bool:
+    """True if the stored results belong to the file as it is now. Results saved before
+    file tracking existed are adopted for the current file (they were measured on it)."""
+    if not f.exists():
+        return False
+    if "file" not in entry:
+        entry["file"] = file_id(f)
+        return True
+    return entry["file"] == file_id(f)
+
+
 def parse(output: str) -> dict:
     out = {}
     for key, pat in PATTERNS.items():
@@ -62,23 +74,33 @@ def parse(output: str) -> dict:
 if not args.skip_kld:
     require(EVAL_TEXT, "Run step 03 first.")
     common_args = ["-c", ev["ctx"], "--chunks", ev["chunks"]]
-    if not KLD_BASE.exists() or "ppl" not in res["base"]:
+    # A rebuilt BF16 invalidates every comparison. If BF16 was deleted to free disk space,
+    # the saved reference is kept as it is.
+    base_changed = BF16.exists() and not is_current(res["base"], BF16)
+    if not KLD_BASE.exists() or "ppl" not in res["base"] or base_changed:
         require(BF16, "Run step 02 first.")
         log("Computing BF16 reference logits (one-time, partially on CPU because BF16 > 48 GB)")
         out = run([tool("llama-perplexity"), "-m", BF16, "-f", EVAL_TEXT, "-ngl", ev["base_ngl"],
                    "--kl-divergence-base", KLD_BASE, *common_args], "06_kld_base_BF16")
         m = re.findall(rf"Final estimate: PPL = {NUM} \+/- {NUM}", out)
         res["base"] = {"type": "BF16", "ppl": float(m[-1][0]), "ppl_err": float(m[-1][1])} if m else {"type": "BF16"}
+        res["base"]["file"] = file_id(BF16)
         save_json(RES_FILE, res)
     for t in types:
         q = res["quants"].setdefault(t, {})
-        if "kld_mean" in q and not args.force:
+        unchanged = not gguf(t).exists() or is_current(q, gguf(t))
+        if "kld_mean" in q and unchanged and not base_changed and not args.force:
             log(f"skip KLD: {t} already measured")
             continue
         require(gguf(t), "Run step 05 first.")
+        if "kld_mean" in q:
+            log(f"  {t}: file or reference changed since the last measurement, re-measuring")
+            for k in [k for k in q if k not in ("functional", "file")]:
+                del q[k]  # drop old numbers so none of them survive a partial parse
         out = run([tool("llama-perplexity"), "-m", gguf(t), "-ngl", ev["ngl"],
                    "--kl-divergence-base", KLD_BASE, "--kl-divergence", *common_args], f"06_kld_{t}")
         q.update(parse(out))
+        q["file"] = file_id(gguf(t))
         save_json(RES_FILE, res)
         log(f"  {t}: PPL {q.get('ppl')}  mean KLD {q.get('kld_mean')}  same-top {q.get('same_top')}%")
 
@@ -125,8 +147,17 @@ TOOLS = [{"type": "function", "function": {
     "parameters": {"type": "object", "properties": {"city": {"type": "string"}}, "required": ["city"]}}}]
 
 
+def port_in_use(port: int) -> bool:
+    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+        s.settimeout(1)
+        return s.connect_ex(("127.0.0.1", port)) == 0
+
+
 def functional(t: str) -> dict:
     port = ev["server_port"]
+    if port_in_use(port):
+        # Otherwise the health check could reach an old server and test the wrong model
+        return {"error": f"port {port} is already in use; stop the other llama-server or change eval.server_port"}
     img = DATA / "test_red_square.png"
     if not img.exists():
         make_png(img)
@@ -192,16 +223,25 @@ if not args.skip_functional:
     require(MMPROJ, "Run step 02 first.")
     for t in types:
         q = res["quants"].setdefault(t, {})
-        if "functional" in q and not args.force:
+        fn = q.get("functional")
+        # A run that ended in an error (server crash, busy port) is retried, not kept
+        unchanged = fn is not None and "error" not in fn and (not gguf(t).exists() or is_current(fn, gguf(t)))
+        if unchanged and not args.force:
             log(f"skip functional: {t} already tested")
             continue
         require(gguf(t), "Run step 05 first.")
+        if fn is not None:
+            log(f"  {t}: file changed since the last test, re-testing")
         log(f"functional tests: {t}")
         q["functional"] = functional(t)
+        if "error" not in q["functional"]:
+            q["functional"]["file"] = file_id(gguf(t))
         save_json(RES_FILE, res)
         f = q["functional"]
         log("  " + "  ".join(f"{k}={'PASS' if v.get('pass') else 'FAIL'}"
-                             for k, v in f.items() if isinstance(v, dict)) + f"  {f.get('tokens_per_sec')} tok/s"
+                             for k, v in f.items() if isinstance(v, dict) and k != "file")
+            + f"  {f.get('tokens_per_sec')} tok/s"
             + (f"  ERROR: {f['error']}" if "error" in f else ""))
 
+save_json(RES_FILE, res)  # also stores file identities adopted for older results
 log(f"results saved to {RES_FILE}")

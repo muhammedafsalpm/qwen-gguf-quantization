@@ -219,6 +219,11 @@ the conversation context.
 
 The vision projector `mmproj-Qwen3.8-27B-F16.gguf` (0.9 GB) works with every type.
 
+**Compatibility:** the files need **llama.cpp build b12345 or newer**. This llama.cpp version stores some of the
+model's tensors in a combined layout (`attn_qkv_gate`, `ssm_beta_alpha`) that older runtimes cannot read.
+Ollama 0.40.16 (the latest release when tested) fails with `tensor 'blk.0.ssm_beta.weight' not found`; use
+`llama-server` directly, or an app whose bundled llama.cpp is at least build b12345.
+
 ## Results
 
 Measured with llama.cpp `b12345` on an NVIDIA RTX 6000 Ada. Accuracy is compared with the original BF16
@@ -249,6 +254,34 @@ How to read the table:
 Summary: Q8_0, Q6_K and Q5_K_M are practically indistinguishable from the original. Q4_K_M stays very close
 at less than a third of the original size. The 3-bit types show a measurable but moderate loss and remain
 fully functional.
+
+**Scope:** the functional tests are smoke tests (one prompt per feature) that confirm each feature works;
+they do not score quality. Accuracy is measured on English Wikipedia text at 512-token context, so code,
+math, other languages, long context and image quality are not separately measured.
+
+### Speed benchmark
+
+Measured with `llama-bench` (llama.cpp `b12345`, all layers on the RTX 6000 Ada, mean ± standard deviation).
+Raw output: `results/Qwen3.8-27B-<type>.stdout.txt`.
+
+| Type | Prompt processing, 512 tokens (tok/s) ↑ | Generation, 128 tokens (tok/s) ↑ |
+|---|---|---|
+| Q8_0 | 2458 ± 64 | 27.4 ± 0.9 |
+| Q6_K | 1981 ± 42 | 35.4 ± 0.2 |
+| Q5_K_M | 2097 ± 37 | 38.7 ± 0.7 |
+| Q4_K_M | 2208 ± 66 | 43.6 ± 1.7 |
+| IQ4_XS | 2410 ± 112 | 46.2 ± 1.7 |
+| Q3_K_M | 2125 ± 49 | 49.7 ± 2.1 |
+| IQ3_M | 2215 ± 64 | 50.5 ± 0.7 |
+
+Generation speed rises as the files get smaller, because generating each token reads the whole model from
+GPU memory. Prompt processing is limited by computation instead, so it stays around 2,000–2,500 tok/s for
+every type. The generation numbers agree with the functional-test speeds above to within 1 tok/s.
+
+### Serving every version at once
+
+[`models.ini`](models.ini) is a `llama-server` preset that lists all seven types with the vision projector
+(`ngl = 99`, 8K context), so one server can switch between them.
 
 ## Pipeline
 

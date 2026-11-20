@@ -2,7 +2,11 @@
   "base": {
     "type": "BF16",
     "ppl": 6.4334,
-    "ppl_err": 0.07955
+    "ppl_err": 0.07955,
+    "file": {
+      "size": 54657728736,
+      "mtime": 1794559992
+    }
   },
   "quants": {
     "Q8_0": {
@@ -40,7 +44,15 @@
         "vision": {
           "pass": true,
           "answer": "Red"
+        },
+        "file": {
+          "size": 29047079136,
+          "mtime": 1794560507
         }
+      },
+      "file": {
+        "size": 29047079136,
+        "mtime": 1794560507
       }
     },
     "Q6_K": {
@@ -78,7 +90,15 @@
         "vision": {
           "pass": true,
           "answer": "Red"
+        },
+        "file": {
+          "size": 22430994880,
+          "mtime": 1794561401
         }
+      },
+      "file": {
+        "size": 22430994880,
+        "mtime": 1794561401
       }
     },
     "Q5_K_M": {
@@ -116,7 +136,15 @@
         "vision": {
           "pass": true,
           "answer": "Red"
+        },
+        "file": {
+          "size": 19635966400,
+          "mtime": 1794561697
         }
+      },
+      "file": {
+        "size": 19635966400,
+        "mtime": 1794561697
       }
     },
     "Q4_K_M": {
@@ -154,7 +182,15 @@
         "vision": {
           "pass": true,
           "answer": "red"
+        },
+        "file": {
+          "size": 17005351360,
+          "mtime": 1794561992
         }
+      },
+      "file": {
+        "size": 17005351360,
+        "mtime": 1794561992
       }
     },
     "IQ4_XS": {
@@ -192,7 +228,15 @@
         "vision": {
           "pass": true,
           "answer": "Red"
+        },
+        "file": {
+          "size": 15544963520,
+          "mtime": 1794562211
         }
+      },
+      "file": {
+        "size": 15544963520,
+        "mtime": 1794562211
       }
     },
     "Q3_K_M": {
@@ -230,7 +274,15 @@
         "vision": {
           "pass": true,
           "answer": "Red"
+        },
+        "file": {
+          "size": 13709136320,
+          "mtime": 1794562475
         }
+      },
+      "file": {
+        "size": 13709136320,
+        "mtime": 1794562475
       }
     },
     "IQ3_M": {
@@ -268,7 +320,15 @@
         "vision": {
           "pass": true,
           "answer": "Red"
+        },
+        "file": {
+          "size": 12968866240,
+          "mtime": 1794562945
         }
+      },
+      "file": {
+        "size": 12968866240,
+        "mtime": 1794562945
       }
     }
   }

@@ -11,7 +11,7 @@ import sys
 
 from huggingface_hub import HfApi
 
-from common import CFG, RELEASE, gb, log, require
+from common import CFG, OUT, RELEASE, gb, log, require, single_instance
 
 ap = argparse.ArgumentParser()
 ap.add_argument("--yes", action="store_true", help="actually upload")
@@ -35,6 +35,9 @@ for f in files:
 print(f"  {gb(total):>7.2f} GB  total\n")
 
 if args.yes:
+    # Two uploads at once compete for bandwidth and share one progress cache. The lock lives
+    # in out/, not release/, so it is never uploaded; it is released when this process ends.
+    lock = single_instance(OUT / ".upload.lock", "upload")
     api.create_repo(hf["repo_id"], repo_type="model", private=hf["private"], exist_ok=True)
     log("uploading (resumable; re-run the same command if it stops)")
     api.upload_large_folder(repo_id=hf["repo_id"], folder_path=RELEASE, repo_type="model")
