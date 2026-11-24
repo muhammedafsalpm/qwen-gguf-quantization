@@ -1,0 +1,228 @@
+quant,prompt,category,thinking,correct,wall_s,prefill_ms,tok_s,gen_tokens,prompt_tokens,reasoning_chars,similarity_to_q8_0,answer
+Q8_0,bat-ball,Logic,True,True,3.15,254.75,27.74,80,86,164,,The ball costs **$0.05** (5 cents).
+Q8_0,multiply,Math,False,True,0.33,158.72,26.14,4,29,0,,391
+Q8_0,word-problem,Math,True,True,5.02,190.19,28.31,135,60,163,,"Riya spends \(7 \times 12 = 84\) rupees on pens.
+
+Change from 100 rupees: \(100 - 84 = 16\) rupees.
+
+She spends half of the change: \(16 \div 2 = 8\) rupees.
+
+So she has **8 rupees left**."
+Q8_0,sheep,Reasoning,True,True,2.23,196.73,28.23,58,39,199,,9
+Q8_0,palindrome-code,Code,False,True,1.56,153.51,28.06,39,50,0,,"```python
+def is_palindrome(s):
+    cleaned = ''.join(char.lower() for char in s if char.isalnum())
+    return cleaned == cleaned[::-1]
+```"
+Q8_0,capital,Knowledge,False,True,0.28,146.93,25.6,3,25,0,,Canberra
+Q8_0,three-bullets,Instruction following,False,True,1.81,142.63,28.2,45,36,0,,"- Reduces memory footprint and storage requirements by using lower-precision data types.
+- Accelerates inference speed by leveraging hardware optimizations for quantized operations.
+- Lowers computational costs and energy consumption during model deployment."
+Q8_0,malayalam,Multilingual,False,True,0.88,146.56,28.05,21,44,0,,ഇന്ത്യയുടെ തലസ്ഥാനം ന്യൂഡൽഹിയാണ്.
+Q8_0,hindi,Multilingual,False,True,0.6,135.75,27.73,13,31,0,,भारत की राजधानी नई दिल्ली है।
+Q8_0,summary,Summarization,False,,1.97,162.0,28.12,51,114,0,,"Quantization reduces neural network model size and improves inference speed by storing weights with fewer bits, enabling operation on hardware with limited memory. However, this efficiency comes at the cost of reduced accuracy, with the degradation becoming more significant as the bit depth decreases."
+Q8_0,needle,Long context,False,True,1.84,1596.52,26.7,5,6455,0,,7341
+Q8_0,weather-tool,Tool calling,False,True,1.25,243.38,28.04,26,280,0,,
+Q8_0,chart-vision,Vision,False,True,0.4,298.58,23.67,2,120,0,,green
+Q6_K,bat-ball,Logic,True,True,2.57,271.6,35.19,80,86,164,1.0,The ball costs **$0.05** (5 cents).
+Q6_K,multiply,Math,False,True,0.32,159.8,32.92,4,29,0,1.0,391
+Q6_K,word-problem,Math,True,True,4.26,208.54,35.32,140,60,183,1.0,"Riya spends \(7 \times 12 = 84\) rupees on pens.
+
+Change from 100 rupees: \(100 - 84 = 16\) rupees.
+
+She spends half of the change: \(16 \div 2 = 8\) rupees.
+
+So she has **8 rupees left**."
+Q6_K,sheep,Reasoning,True,True,1.86,216.6,35.12,58,39,199,1.0,9
+Q6_K,palindrome-code,Code,False,True,1.33,169.53,34.85,39,50,0,0.967,"```python
+def is_palindrome(s):
+    cleaned = ''.join(c.lower() for c in s if c.isalnum())
+    return cleaned == cleaned[::-1]
+```"
+Q6_K,capital,Knowledge,False,True,0.28,158.17,30.55,3,25,0,1.0,Canberra
+Q6_K,three-bullets,Instruction following,False,True,1.7,172.76,34.94,50,36,0,0.772,"- Reduces memory footprint and storage requirements by using lower-precision data types.
+- Accelerates inference speed by leveraging hardware optimizations for quantized operations.
+- Lowers computational cost and energy consumption, enabling deployment on resource-constrained devices."
+Q6_K,malayalam,Multilingual,False,True,0.75,166.04,34.9,21,44,0,1.0,ഇന്ത്യയുടെ തലസ്ഥാനം ന്യൂഡൽഹിയാണ്.
+Q6_K,hindi,Multilingual,False,True,0.55,157.0,34.73,13,31,0,1.0,भारत की राजधानी नई दिल्ली है।
+Q6_K,summary,Summarization,False,,1.66,159.16,35.02,51,114,0,1.0,"Quantization reduces neural network model size and improves inference speed by storing weights with fewer bits, enabling operation on hardware with limited memory. However, this efficiency comes at the cost of reduced accuracy, with the degradation becoming more significant as the bit depth decreases."
+Q6_K,needle,Long context,False,True,2.13,1935.19,33.06,5,6455,0,1.0,7341
+Q6_K,weather-tool,Tool calling,False,True,1.17,285.6,34.82,26,280,0,1.0,
+Q6_K,chart-vision,Vision,False,True,0.37,251.13,29.16,2,120,0,1.0,green
+Q5_K_M,bat-ball,Logic,True,True,2.31,256.54,39.43,80,86,164,1.0,The ball costs **$0.05** (5 cents).
+Q5_K_M,multiply,Math,False,True,0.32,163.15,33.15,4,29,0,1.0,391
+Q5_K_M,word-problem,Math,True,True,5.27,250.48,39.05,192,60,263,0.668,"Riya’s pens cost:
+
+\(7 \times 12 = 84\) rupees
+
+Change from 100 rupees:
+
+\(100 - 84 = 16\) rupees
+
+She spends half of her change:
+
+\(16 \div 2 = 8\) rupees
+
+So she has:
+
+\(16 - 8 = 8\) rupees left.
+
+**Answer: 8 rupees**"
+Q5_K_M,sheep,Reasoning,True,True,1.68,214.58,39.3,58,39,199,1.0,9
+Q5_K_M,palindrome-code,Code,False,True,1.21,154.64,39.1,39,50,0,1.0,"```python
+def is_palindrome(s):
+    cleaned = ''.join(char.lower() for char in s if char.isalnum())
+    return cleaned == cleaned[::-1]
+```"
+Q5_K_M,capital,Knowledge,False,True,0.28,152.81,33.69,3,25,0,1.0,Canberra
+Q5_K_M,three-bullets,Instruction following,False,True,1.35,143.39,39.11,44,36,0,0.655,"- Reduces memory footprint and storage requirements by using lower-precision data types.
+- Accelerates inference speed by enabling faster arithmetic operations on hardware.
+- Lowers energy consumption and computational costs during model deployment."
+Q5_K_M,malayalam,Multilingual,False,True,0.68,154.76,39.03,21,44,0,1.0,ഇന്ത്യയുടെ തലസ്ഥാനം ന്യൂഡൽഹിയാണ്.
+Q5_K_M,hindi,Multilingual,False,True,0.53,158.59,38.35,13,31,0,1.0,भारत की राजधानी नई दिल्ली है।
+Q5_K_M,summary,Summarization,False,,1.51,170.52,39.05,51,114,0,0.909,"Quantization reduces neural network model size and improves inference speed by storing weights with fewer bits, enabling operation on hardware with limited memory. However, this efficiency comes at the cost of reduced accuracy, with the degree of loss increasing as the bit depth decreases."
+Q5_K_M,needle,Long context,False,True,2.03,1836.72,36.55,5,6455,0,1.0,7341
+Q5_K_M,weather-tool,Tool calling,False,True,1.04,247.56,39.03,26,280,0,1.0,
+Q5_K_M,chart-vision,Vision,False,True,0.33,235.31,29.88,2,120,0,0.8,Green
+Q4_K_M,bat-ball,Logic,True,True,3.01,254.51,43.49,116,86,171,0.496,"The ball costs **$0.05** (5 cents).
+
+If the ball is $0.05, the bat is $1.05, and together they cost $1.10."
+Q4_K_M,multiply,Math,False,True,0.26,165.8,40.81,4,29,0,1.0,391
+Q4_K_M,word-problem,Math,True,True,4.17,195.03,44.12,172,102,296,1.0,"Riya spends \(7 \times 12 = 84\) rupees on pens.
+
+Change from 100 rupees: \(100 - 84 = 16\) rupees.
+
+She spends half of the change: \(16 \div 2 = 8\) rupees.
+
+So she has **8 rupees left**."
+Q4_K_M,sheep,Reasoning,True,True,1.55,227.97,44.0,58,39,199,1.0,9
+Q4_K_M,palindrome-code,Code,False,True,1.1,160.9,43.94,39,50,0,0.967,"```python
+def is_palindrome(s):
+    cleaned = ''.join(c.lower() for c in s if c.isalnum())
+    return cleaned == cleaned[::-1]
+```"
+Q4_K_M,capital,Knowledge,False,True,0.29,156.48,38.93,3,25,0,1.0,Canberra
+Q4_K_M,three-bullets,Instruction following,False,True,1.71,156.95,43.89,63,36,0,0.373,"- Reduces memory footprint by storing weights in lower precision formats, enabling deployment on resource-constrained devices.
+- Accelerates inference speed by leveraging hardware optimizations for quantized data types, resulting in lower latency.
+- Decreases bandwidth requirements for data transfer between memory and processing units, improving overall system efficiency."
+Q4_K_M,malayalam,Multilingual,False,True,0.63,153.06,43.62,21,44,0,1.0,ഇന്ത്യയുടെ തലസ്ഥാനം ന്യൂഡൽഹിയാണ്.
+Q4_K_M,hindi,Multilingual,False,True,0.48,146.71,43.06,13,31,0,1.0,भारत की राजधानी नई दिल्ली है।
+Q4_K_M,summary,Summarization,False,,1.33,153.44,43.96,50,114,0,0.968,"Quantization reduces neural network file size and improves speed by storing weights with fewer bits, enabling operation on hardware with limited memory. However, this efficiency comes at the cost of reduced accuracy, with the degradation becoming more significant as the bit depth decreases."
+Q4_K_M,needle,Long context,False,True,1.93,1770.23,40.58,5,6455,0,1.0,7341
+Q4_K_M,weather-tool,Tool calling,False,True,0.98,252.27,43.8,26,280,0,1.0,
+Q4_K_M,chart-vision,Vision,False,True,0.33,240.16,34.66,2,120,0,1.0,green
+IQ4_XS,bat-ball,Logic,True,True,2.1,224.7,47.37,86,86,171,1.0,The ball costs **$0.05** (5 cents).
+IQ4_XS,multiply,Math,False,True,0.27,144.11,42.79,4,29,0,1.0,391
+IQ4_XS,word-problem,Math,True,True,3.59,196.69,47.48,156,60,185,0.252,"Riya buys 7 pens at 12 rupees each:
+
+7 × 12 = 84 rupees
+
+She pays with a 100 rupee note, so her change is:
+
+100 − 84 = 16 rupees
+
+She spends half of her change on a notebook:
+
+16 ÷ 2 = 8 rupees
+
+So she has **8 rupees left**."
+IQ4_XS,sheep,Reasoning,True,True,1.41,194.4,47.29,58,39,199,1.0,9
+IQ4_XS,palindrome-code,Code,False,True,1.01,152.39,47.46,39,50,0,0.978,"```python
+def is_palindrome(s):
+    cleaned = ''.join(ch.lower() for ch in s if ch.isalnum())
+    return cleaned == cleaned[::-1]
+```"
+IQ4_XS,capital,Knowledge,False,True,0.27,149.87,41.63,3,25,0,1.0,Canberra
+IQ4_XS,three-bullets,Instruction following,False,True,1.29,141.44,47.43,51,36,0,0.552,"- Reduces memory footprint and storage requirements by using lower-precision data types.
+- Accelerates inference speed by enabling faster computation on hardware optimized for reduced precision.
+- Lowers energy consumption and operational costs, making deployment feasible on edge devices."
+IQ4_XS,malayalam,Multilingual,False,True,0.63,180.68,47.17,21,44,0,1.0,ഇന്ത്യയുടെ തലസ്ഥാനം ന്യൂഡൽഹിയാണ്.
+IQ4_XS,hindi,Multilingual,False,True,0.47,156.4,46.87,13,31,0,1.0,भारत की राजधानी नई दिल्ली है।
+IQ4_XS,summary,Summarization,False,,1.27,159.11,47.44,51,114,0,0.909,"Quantization reduces neural network model size and improves inference speed by storing weights with fewer bits, enabling operation on hardware with limited memory. However, this efficiency comes at the cost of reduced accuracy, with the degree of loss increasing as the bit depth decreases."
+IQ4_XS,needle,Long context,False,True,1.77,1613.91,43.85,5,6455,0,1.0,7341
+IQ4_XS,weather-tool,Tool calling,False,True,0.94,245.72,47.03,26,280,0,1.0,
+IQ4_XS,chart-vision,Vision,False,True,0.32,229.4,37.67,2,120,0,1.0,green
+Q3_K_M,bat-ball,Logic,True,True,1.9,241.84,51.47,83,86,178,1.0,The ball costs **$0.05** (5 cents).
+Q3_K_M,multiply,Math,False,True,0.3,150.95,46.93,4,29,0,1.0,391
+Q3_K_M,word-problem,Math,True,True,3.03,189.86,50.92,140,60,183,0.979,"Riya spends \(7 \times 12 = 84\) rupees on pens.  
+Change from 100 rupees: \(100 - 84 = 16\) rupees.  
+She spends half of the change: \(16 \div 2 = 8\) rupees.  
+
+So she has **8 rupees left**."
+Q3_K_M,sheep,Reasoning,True,True,1.4,182.86,51.06,62,39,216,1.0,9
+Q3_K_M,palindrome-code,Code,False,True,0.96,146.23,51.1,39,50,0,0.978,"```python
+def is_palindrome(s):
+    cleaned = ''.join(ch.lower() for ch in s if ch.isalnum())
+    return cleaned == cleaned[::-1]
+```"
+Q3_K_M,capital,Knowledge,False,True,0.26,147.55,44.83,3,25,0,1.0,Canberra
+Q3_K_M,three-bullets,Instruction following,False,True,1.12,156.16,50.8,44,36,0,0.664,"- Reduces memory footprint and storage requirements by using lower-precision data types.
+- Accelerates inference speed by enabling more efficient computation on hardware.
+- Lowers energy consumption and operational costs during model deployment."
+Q3_K_M,malayalam,Multilingual,False,True,0.55,143.52,50.8,21,44,0,1.0,ഇന്ത്യയുടെ തലസ്ഥാനം ന്യൂഡൽഹിയാണ്.
+Q3_K_M,hindi,Multilingual,False,True,0.45,155.08,49.92,13,31,0,1.0,भारत की राजधानी नई दिल्ली है।
+Q3_K_M,summary,Summarization,False,,1.31,159.24,51.29,57,114,0,0.692,"Quantization reduces neural network file sizes and improves generation speed by storing weights with fewer bits, enabling operation on GPUs with limited memory. However, this efficiency comes at the cost of reduced accuracy, which becomes more pronounced as the bit depth decreases from 8-bit to 3-bit."
+Q3_K_M,needle,Long context,False,True,1.96,1786.91,45.4,5,6455,0,1.0,7341
+Q3_K_M,weather-tool,Tool calling,False,True,0.89,253.72,51.07,26,280,0,1.0,
+Q3_K_M,chart-vision,Vision,False,True,0.34,231.11,40.19,2,120,0,1.0,green
+IQ3_M,bat-ball,Logic,True,True,3.71,255.89,51.76,174,86,156,0.326,"The ball costs **$0.05** (5 cents).
+
+Let the ball cost \(x\). Then the bat costs \(x + 1.00\).
+
+\[
+x + (x + 1.00) = 1.10
+\]
+
+\[
+2x + 1.00 = 1.10
+\]
+
+\[
+2x = 0.10
+\]
+
+\[
+x = 0.05
+\]"
+IQ3_M,multiply,Math,False,True,0.23,145.33,48.46,4,29,0,1.0,391
+IQ3_M,word-problem,Math,True,True,5.22,200.42,51.41,254,102,500,0.429,"Riya’s pens cost:
+
+\[
+7 \times 12 = 84
+\]
+
+Change from a 100-rupee note:
+
+\[
+100 - 84 = 16
+\]
+
+She spends half of her change on a notebook:
+
+\[
+16 \div 2 = 8
+\]
+
+So she has:
+
+\[
+16 - 8 = 8
+\]
+
+**Answer: 8 rupees**"
+IQ3_M,sheep,Reasoning,True,True,1.33,198.97,51.41,58,39,199,1.0,9
+IQ3_M,palindrome-code,Code,False,True,0.94,144.19,51.96,39,50,0,1.0,"```python
+def is_palindrome(s):
+    cleaned = ''.join(char.lower() for char in s if char.isalnum())
+    return cleaned == cleaned[::-1]
+```"
+IQ3_M,capital,Knowledge,False,True,0.25,145.06,45.78,3,25,0,1.0,Canberra
+IQ3_M,three-bullets,Instruction following,False,True,1.14,142.78,51.83,47,36,0,0.664,"- Reduces memory footprint and storage requirements by using lower-precision data types.
+- Accelerates inference speed by enabling faster computation on hardware optimized for reduced precision.
+- Lowers energy consumption and operational costs during model deployment."
+IQ3_M,malayalam,Multilingual,False,True,0.54,141.2,51.88,21,44,0,1.0,ഇന്ത്യയുടെ തലസ്ഥാനം ന്യൂഡൽഹിയാണ്.
+IQ3_M,hindi,Multilingual,False,True,0.45,143.93,51.91,13,31,0,1.0,भारत की राजधानी नई दिल्ली है।
+IQ3_M,summary,Summarization,False,,1.37,159.01,50.98,60,114,0,0.68,"Quantization reduces neural network file sizes and improves generation speed by storing weights with fewer bits, enabling operation on hardware with limited memory. However, this efficiency comes at the cost of reduced accuracy, which remains minimal at 8-bit but becomes significantly more pronounced at lower bit depths like 3-bit."
+IQ3_M,needle,Long context,False,True,1.93,1784.46,48.57,5,6455,0,1.0,7341
+IQ3_M,weather-tool,Tool calling,False,True,0.86,234.18,51.53,26,280,0,1.0,
+IQ3_M,chart-vision,Vision,False,True,0.31,224.02,39.7,2,120,0,1.0,green
