@@ -1,0 +1,117 @@
+# Parallel language set for tools/compare_quants.py: the same problems in English, Malayalam and Hindi,
+# so a difference between languages comes from the language, not the question.
+#
+#     python tools/compare_quants.py --prompts tools/prompts_multilingual.yaml
+#
+# Malayalam and Hindi answers must also stay in that language: each check requires at least 10 words
+# in the script anywhere in the answer (Malayalam U+0D00-U+0D7F, Devanagari U+0900-U+097F); math answers
+# mix numbers and symbols between the words, so the words are not required to be consecutive.
+# Answers: coconuts 3 x 24 x 15 x 12 = 12,960 | shortest Joseph, tallest Ravi |
+#          100 days after Wednesday = Friday | 800 x 0.75 x 1.05 = 630 | translation keeps train, Kochi, 2 hours, rain
+
+settings:
+  repeats: 1
+  ctx: 16384
+  seed: 42
+
+prompts:
+  # ---------- English ----------
+  - id: en-coconuts
+    category: English
+    thinking: true
+    max_tokens: 8192
+    prompt: "A farmer has 3 fields. Each field has 24 coconut trees. Each tree gives 15 coconuts per month. He sells each coconut for ₹12. How much does he earn in one month? Explain step by step."
+    check: {type: regex, all: ['12960']}
+
+  - id: en-heights
+    category: English
+    thinking: true
+    max_tokens: 8192
+    prompt: "Ravi is taller than Anu. Anu is taller than Meera. Meera is taller than Joseph. Who is the shortest? Who is the tallest?"
+    check: {type: regex, all: ['joseph', 'ravi']}
+
+  - id: en-weekday
+    category: English
+    thinking: true
+    max_tokens: 8192
+    prompt: "If today is Wednesday, what day of the week will it be 100 days from today? Explain."
+    check: {type: regex, all: ['friday']}
+
+  - id: en-discount
+    category: English
+    thinking: true
+    max_tokens: 8192
+    prompt: "A shirt costs ₹800. The shop gives a 25% discount, then adds 5% tax on the discounted price. What is the final price? Explain."
+    check: {type: regex, all: ['\b630\b']}
+
+  # ---------- Malayalam ----------
+  - id: ml-coconuts
+    category: Malayalam
+    thinking: true
+    max_tokens: 8192
+    prompt: "ഒരു കർഷകന് 3 പറമ്പുകളുണ്ട്. ഓരോ പറമ്പിലും 24 തെങ്ങുകൾ ഉണ്ട്. ഓരോ തെങ്ങിൽ നിന്നും മാസം 15 തേങ്ങ കിട്ടും. ഒരു തേങ്ങ ₹12-ന് വിൽക്കുന്നു. ഒരു മാസം അദ്ദേഹത്തിന് എത്ര രൂപ ലഭിക്കും? മലയാളത്തിൽ ഘട്ടം ഘട്ടമായി വിശദീകരിക്കുക."
+    check: {type: regex, all: ['12960', '(?:[ഀ-ൿ]{2,}.*?){10}']}
+
+  - id: ml-heights
+    category: Malayalam
+    thinking: true
+    max_tokens: 8192
+    prompt: "രവി അനുവിനേക്കാൾ ഉയരമുള്ളവനാണ്. അനു മീരയേക്കാൾ ഉയരമുള്ളവളാണ്. മീര ജോസഫിനേക്കാൾ ഉയരമുള്ളവളാണ്. ഏറ്റവും ഉയരം കുറഞ്ഞത് ആർക്കാണ്? ഏറ്റവും ഉയരം കൂടിയത് ആർക്കാണ്? മലയാളത്തിൽ ഉത്തരം നൽകുക."
+    check: {type: regex, all: ['ജോസഫ|joseph', 'രവി|ravi', '(?:[ഀ-ൿ]{2,}.*?){10}']}
+
+  - id: ml-weekday
+    category: Malayalam
+    thinking: true
+    max_tokens: 8192
+    prompt: "ഇന്ന് ബുധനാഴ്ചയാണെങ്കിൽ, ഇന്നു മുതൽ 100 ദിവസം കഴിഞ്ഞാൽ ഏത് ദിവസമായിരിക്കും? മലയാളത്തിൽ വിശദീകരിക്കുക."
+    check: {type: regex, all: ['വെള്ളി|friday', '(?:[ഀ-ൿ]{2,}.*?){10}']}
+
+  - id: ml-discount
+    category: Malayalam
+    thinking: true
+    max_tokens: 8192
+    prompt: "ഒരു ഷർട്ടിന്റെ വില ₹800 ആണ്. കട 25% കിഴിവ് നൽകുന്നു, തുടർന്ന് കിഴിവ് ചെയ്ത വിലയിൽ 5% നികുതി ചേർക്കുന്നു. അവസാന വില എത്ര? മലയാളത്തിൽ വിശദീകരിക്കുക."
+    check: {type: regex, all: ['\b630\b', '(?:[ഀ-ൿ]{2,}.*?){10}']}
+
+  - id: ml-translate
+    category: Malayalam
+    thinking: false
+    max_tokens: 512
+    prompt: "താഴെയുള്ള മലയാളം വാക്യം ഇംഗ്ലീഷിലേക്ക് വിവർത്തനം ചെയ്യുക: \"കനത്ത മഴ കാരണം കൊച്ചിയിലേക്കുള്ള ട്രെയിൻ രണ്ട് മണിക്കൂർ വൈകി.\""
+    check: {type: regex, all: ['train', 'kochi|cochin', 'two hours|2 hours', 'rain']}
+
+  # ---------- Hindi ----------
+  - id: hi-coconuts
+    category: Hindi
+    thinking: true
+    max_tokens: 8192
+    prompt: "एक किसान के पास 3 खेत हैं। हर खेत में 24 नारियल के पेड़ हैं। हर पेड़ से हर महीने 15 नारियल मिलते हैं। वह एक नारियल ₹12 में बेचता है। एक महीने में उसकी कितनी कमाई होगी? हिंदी में चरण दर चरण समझाइए।"
+    check: {type: regex, all: ['12960', '(?:[ऀ-ॿ]{2,}.*?){10}']}
+
+  - id: hi-heights
+    category: Hindi
+    thinking: true
+    max_tokens: 8192
+    prompt: "रवि अनु से लंबा है। अनु मीरा से लंबी है। मीरा जोसेफ से लंबी है। सबसे छोटा कौन है? सबसे लंबा कौन है? हिंदी में उत्तर दीजिए।"
+    check: {type: regex, all: ['जोसेफ|joseph', 'रवि|ravi', '(?:[ऀ-ॿ]{2,}.*?){10}']}
+
+  - id: hi-weekday
+    category: Hindi
+    thinking: true
+    max_tokens: 8192
+    prompt: "अगर आज बुधवार है, तो आज से 100 दिन बाद कौन सा दिन होगा? हिंदी में समझाइए।"
+    check: {type: regex, all: ['शुक्रवार|friday', '(?:[ऀ-ॿ]{2,}.*?){10}']}
+
+  - id: hi-discount
+    category: Hindi
+    thinking: true
+    max_tokens: 8192
+    prompt: "एक शर्ट की कीमत ₹800 है। दुकान 25% की छूट देती है, फिर छूट वाली कीमत पर 5% टैक्स जोड़ती है। अंतिम कीमत क्या है? हिंदी में समझाइए।"
+    check: {type: regex, all: ['\b630\b', '(?:[ऀ-ॿ]{2,}.*?){10}']}
+
+  - id: hi-translate
+    category: Hindi
+    thinking: false
+    max_tokens: 512
+    prompt: "नीचे दिए गए हिंदी वाक्य का अंग्रेज़ी में अनुवाद कीजिए: \"भारी बारिश के कारण कोच्चि जाने वाली ट्रेन दो घंटे लेट हो गई।\""
+    check: {type: regex, all: ['train', 'kochi|cochin', 'two hours|2 hours', 'rain']}
