@@ -1,0 +1,433 @@
+# Extended evaluation set for tools/compare_quants.py (harder, longer questions).
+#
+#     python tools/compare_quants.py --prompts tools/prompts_extended.yaml
+#
+# Same fields as prompts.yaml. Automatic checks cover answers that can be verified by machine; open
+# questions (system design, root-cause analysis, architecture) are "manual" and compared by reading.
+# Extra check types used here:
+#   {type: contains, all: [...]}   every string must appear (thousands separators and ** are ignored)
+#   {type: regex, all: [...]}      every regular expression must match (case-insensitive)
+# Images are files in tools/test_images/ with known answers:
+#   invoice.png        INV-2026-0457, 12 October 2026, Bluewave Supplies Pvt Ltd -> Sunrise Retail LLC,
+#                      tax 7,380.00, total 48,380.00, and NO payment due date (the answer must be null)
+#   revenue_chart.png  Jan 80, Feb 95, Mar 70, Apr 120, May 110, Jun 140 (INR thousands): +75% Jan to Jun
+
+settings:
+  repeats: 1
+  ctx: 16384
+  seed: 42
+
+prompts:
+  # ---------- A. Reasoning ----------
+  - id: q01-shop-profit
+    category: Reasoning
+    thinking: true
+    max_tokens: 8192
+    prompt: |
+      A shopkeeper buys 120 items at ₹80 each. He sells 40% of them at ₹100 each and the remaining items at ₹90 each.
+
+      Calculate:
+      1. Total investment.
+      2. Total revenue.
+      3. Total profit.
+      4. Profit percentage.
+
+      Show the calculations step by step.
+    check: {type: contains, all: ["9600", "11280", "1680", "17.5"]}
+
+  - id: q02-syllogism
+    category: Reasoning
+    thinking: true
+    max_tokens: 8192
+    prompt: |
+      All engineers are problem-solvers.
+      Some problem-solvers are researchers.
+      Can we conclude that some engineers are researchers?
+
+      Explain your answer using formal logical reasoning. Do not make assumptions beyond the given statements.
+    check: {type: regex, all: ['(cannot|can ?not|can''t)\s+(validly\s+|logically\s+)?(be\s+)?conclude|does not (necessarily |logically )?follow|not (a )?valid|invalid|^\s*#*\s*no\b']}
+
+  - id: q03-bat-ball-inr
+    category: Reasoning
+    thinking: true
+    max_tokens: 8192
+    prompt: |
+      A bat and a ball together cost ₹110.
+      The bat costs ₹100 more than the ball.
+
+      How much does the ball cost?
+
+      Explain why the intuitive answer may be incorrect.
+    check: {type: regex, all: ['(₹|rs\.?|inr)\s?5(?!\d|\.\d)|\b5 rupees']}
+
+  - id: q04-sequence
+    category: Reasoning
+    thinking: true
+    max_tokens: 8192
+    prompt: |
+      Find the next two numbers in this sequence:
+
+      2, 6, 12, 20, 30, ?, ?
+
+      Explain the mathematical pattern and derive the next two numbers.
+    check: {type: contains, all: ["42", "56"]}
+
+  - id: q05-light-switches
+    category: Reasoning
+    thinking: true
+    max_tokens: 8192
+    prompt: |
+      You have three switches outside a closed room. Inside the room, there are three incandescent bulbs. Each switch controls exactly one bulb.
+
+      You can operate the switches as many times as you want, but you can enter the room only once.
+
+      How can you determine which switch controls each bulb?
+
+      Explain the complete procedure.
+    check: {type: regex, all: ['warm|hot|heat']}
+
+  # ---------- B. Mathematics ----------
+  - id: q06-probability
+    category: Mathematics
+    thinking: true
+    max_tokens: 8192
+    prompt: |
+      A bag contains 5 red balls, 4 blue balls and 3 green balls.
+
+      Two balls are selected randomly without replacement.
+
+      Calculate:
+      1. Probability that both balls are red.
+      2. Probability that both balls are the same colour.
+      3. Probability that the two balls have different colours.
+
+      Show the formulas and calculations.
+    check: {type: regex, all: ['5\s*/\s*33|\\frac\{5\}\{33\}', '19\s*/\s*66|\\frac\{19\}\{66\}', '47\s*/\s*66|\\frac\{47\}\{66\}']}
+
+  - id: q07-equations
+    category: Mathematics
+    thinking: true
+    max_tokens: 8192
+    prompt: |
+      Solve the following system of equations:
+
+      2x + 3y = 17
+      3x - 2y = 6
+
+      Find x and y. Verify your answer by substituting the values into both original equations.
+    check: {type: regex, all: ['x\s*=\s*4\b', 'y\s*=\s*3\b']}
+
+  - id: q08-optimization
+    category: Mathematics
+    thinking: true
+    max_tokens: 8192
+    prompt: |
+      A company has a budget of ₹100,000 for two types of products.
+
+      Product A costs ₹2,000 and generates ₹500 profit per unit.
+      Product B costs ₹5,000 and generates ₹1,500 profit per unit.
+
+      The company must purchase at least 10 units of A and at least 5 units of B.
+
+      How many units of each product should it purchase to maximize profit without exceeding the budget?
+
+      Explain your optimization approach.
+    check: {type: regex, all: ['29000', '\b16\b']}
+
+  # ---------- C. Coding and SQL ----------
+  - id: q09-duplicates-code
+    category: Coding
+    thinking: false
+    max_tokens: 4096
+    prompt: |
+      Write a Python function named find_duplicates(items) that identifies duplicate elements in a list.
+
+      Requirements:
+      1. Return only duplicate values.
+      2. Each duplicate should appear only once in the result.
+      3. Preserve the order in which duplicates are first detected.
+      4. Handle an empty list.
+      5. Provide time and space complexity.
+      6. Include at least five test cases.
+    check:
+      type: python
+      tests: |
+        assert find_duplicates([3, 1, 3, 1, 2]) == [3, 1]
+        assert find_duplicates([]) == []
+        assert find_duplicates([1, 2, 3]) == []
+        assert find_duplicates(["a", "b", "a", "a"]) == ["a"]
+        assert find_duplicates([5, 5, 5, 5]) == [5]
+
+  - id: q10-debugging
+    category: Coding
+    thinking: false
+    max_tokens: 4096
+    prompt: |
+      ```python
+      def calculate_average(numbers):
+          total = 0
+          for i in range(len(numbers) + 1):
+              total += numbers[i]
+          return total / len(numbers)
+      ```
+
+      Identify every problem in this function.
+
+      Rewrite it correctly and explain:
+      1. Why the original code fails.
+      2. What happens with an empty list.
+      3. Time complexity.
+      4. Space complexity.
+    check:
+      type: python
+      tests: |
+        assert calculate_average([1, 2, 3]) == 2
+        assert calculate_average([10]) == 10
+        assert abs(calculate_average([1.5, 2.5]) - 2.0) < 1e-9
+
+  - id: q11-sql
+    category: SQL
+    thinking: false
+    max_tokens: 4096
+    prompt: |
+      Consider the following SQL Server database tables:
+
+      Employees:
+      - EmployeeID
+      - EmployeeName
+      - DepartmentID
+      - Salary
+
+      Departments:
+      - DepartmentID
+      - DepartmentName
+
+      Write an SQL query to retrieve:
+      1. Each department name.
+      2. Total number of employees.
+      3. Average salary.
+      4. Maximum salary.
+      5. Only departments having more than 5 employees.
+      6. Sort by average salary in descending order.
+
+      Explain the query.
+    check: {type: regex, all: ['join', 'group\s+by', 'having\s+count\s*\(.*\)\s*>\s*5', 'order\s+by[^;]*desc', 'avg\s*\(', 'max\s*\(']}
+
+  - id: q12-system-design
+    category: System design
+    thinking: false
+    max_tokens: 4096
+    prompt: |
+      Design a production-ready AI document intelligence platform.
+
+      Requirements:
+      - Users upload PDF, Word and Excel files.
+      - Extract text and tables.
+      - Perform OCR for scanned documents.
+      - Generate embeddings.
+      - Store embeddings in a vector database.
+      - Support RAG-based question answering.
+      - Implement authentication and role-based access control.
+      - Support multiple tenants.
+      - Provide audit logging.
+
+      Explain the architecture, components, data flow, failure handling, security and scalability.
+    check: {type: manual}
+
+  # ---------- D. Data analysis ----------
+  - id: q13-revenue-analysis
+    category: Data analysis
+    thinking: true
+    max_tokens: 8192
+    prompt: |
+      A company's monthly revenue is:
+
+      January: ₹100,000
+      February: ₹120,000
+      March: ₹90,000
+      April: ₹150,000
+      May: ₹140,000
+
+      Calculate:
+      1. Total revenue.
+      2. Average monthly revenue.
+      3. Highest and lowest revenue months.
+      4. Percentage change from January to May.
+      5. Identify any unusual changes and explain them without assuming their causes.
+    check: {type: regex, all: ['600000', '120000', '40\s?%', 'april', 'march']}
+
+  - id: q14-anomaly
+    category: Data analysis
+    thinking: false
+    max_tokens: 4096
+    prompt: |
+      A database table contains the following transaction amounts:
+
+      100, 105, 98, 102, 110, 103, 99, 105, 1000
+
+      Identify potential anomalies.
+
+      Explain:
+      1. Which value is suspicious?
+      2. How would you detect it statistically?
+      3. Explain the IQR method.
+      4. Why should an anomaly not automatically be classified as fraud?
+      5. What additional data would you investigate?
+    check: {type: regex, all: ['1000', 'iqr|interquartile', 'q1|first quartile|25th']}
+
+  # ---------- E. Instruction following and hallucination ----------
+  - id: q15-five-bullets
+    category: Instruction following
+    thinking: false
+    max_tokens: 1024
+    prompt: |
+      Summarize the following information using exactly 5 bullet points.
+
+      Information:
+      - The company started operations in 2018.
+      - It has 250 employees.
+      - It operates in 4 countries.
+      - Its headquarters are in Dubai.
+      - It provides software development and consulting services.
+
+      Rules:
+      - Use exactly 5 bullet points.
+      - Each bullet must contain no more than 10 words.
+      - Do not add information.
+      - Do not write an introduction or conclusion.
+    check: {type: bullets, count: 5}
+
+  - id: q16-unknown-revenue
+    category: Hallucination
+    thinking: false
+    max_tokens: 1024
+    prompt: |
+      What was the exact revenue of Northwind Analytics Ltd for the financial year 2025–2026?
+
+      Provide:
+      1. Exact revenue.
+      2. Source of information.
+      3. Date of publication.
+
+      If you do not have reliable information, explicitly state that the information is unavailable. Do not invent numbers or sources.
+    check: {type: regex, all: ['unavailable|not available|do not have|don''t have|no (reliable|verified|public)|cannot (provide|verify|confirm)|not (publicly )?(known|disclosed)']}
+
+  - id: q17-contradictions
+    category: Hallucination
+    thinking: true
+    max_tokens: 8192
+    prompt: |
+      A project report contains these statements:
+
+      1. The project started on 1 January 2026.
+      2. The project was completed on 15 December 2025.
+      3. The project duration was 6 months.
+
+      Identify all inconsistencies.
+
+      Do not silently correct any dates. Explain what information needs clarification.
+    check: {type: regex, all: ['before|earlier|precedes|prior to', '6|six']}
+
+  # ---------- F. Agentic and production scenarios ----------
+  - id: q18-tool-plan
+    category: Agentic
+    thinking: false
+    max_tokens: 4096
+    prompt: |
+      You are an AI assistant connected to three tools:
+
+      1. SQL Tool: Executes read-only database queries.
+      2. Email Tool: Sends emails.
+      3. Document Search Tool: Searches company documents.
+
+      A user asks:
+
+      "Find all employees whose attendance is below 75%, identify their department managers, and prepare an email report."
+
+      Explain:
+      1. Which tools you would use.
+      2. In what order.
+      3. What information each tool should return.
+      4. How you would validate the results.
+      5. Whether you would send the email immediately or request approval.
+    check: {type: regex, all: ['approv']}
+
+  - id: q19-root-cause
+    category: Agentic
+    thinking: false
+    max_tokens: 4096
+    prompt: |
+      A production AI application suddenly experiences:
+
+      - Response latency increased from 2 seconds to 15 seconds.
+      - GPU utilization is 98%.
+      - RAM usage is 90%.
+      - Request volume has increased by 300%.
+      - Error rate increased from 1% to 12%.
+
+      Identify the likely causes and create a prioritized troubleshooting plan.
+
+      Separate confirmed observations from hypotheses. Do not assume one cause without evidence.
+    check: {type: manual}
+
+  - id: q20-deployment-choice
+    category: Agentic
+    thinking: false
+    max_tokens: 4096
+    prompt: |
+      A company wants to deploy an open-source LLM for its internal enterprise AI assistant.
+
+      Requirements:
+      - 500 employees.
+      - Private company data.
+      - SQL database integration.
+      - Document-based RAG.
+      - Role-based permissions.
+      - Low operating cost.
+      - Reliable production performance.
+
+      Compare a 7B, 14B and 27B model deployment.
+
+      Recommend an architecture and explain the trade-offs involving model quality, GPU requirements, latency, concurrency, security and cost.
+
+      State assumptions clearly.
+    check: {type: manual}
+
+  # ---------- G. Vision ----------
+  - id: q22-invoice-json
+    category: Vision
+    thinking: false
+    max_tokens: 1024
+    image: test_images/invoice.png
+    prompt: |
+      Extract the following information from this document:
+
+      1. Invoice number.
+      2. Invoice date.
+      3. Supplier name.
+      4. Customer name.
+      5. Total amount.
+      6. Tax amount.
+      7. Payment due date.
+
+      Return the result in JSON format.
+
+      If a field is missing or unreadable, return null. Do not guess.
+    check: {type: regex, all: ['inv-2026-0457', '48380', '7380', 'sunrise retail', 'bluewave', 'due[^\n]{0,40}null']}
+
+  - id: q23-chart
+    category: Vision
+    thinking: false
+    max_tokens: 2048
+    image: test_images/revenue_chart.png
+    prompt: |
+      Analyze this chart.
+
+      1. Identify the highest value.
+      2. Identify the lowest value.
+      3. Calculate the percentage change between the first and last periods.
+      4. Identify significant trends.
+      5. Explain what conclusions can and cannot be drawn.
+
+      Use only the information visible in the chart.
+    check: {type: regex, all: ['140', '\b70\b', '75\s?%', 'jun', 'mar']}

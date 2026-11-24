@@ -93,6 +93,16 @@ def long_text() -> str:
 
 IMAGES = {"bars": "data:image/png;base64," + base64.b64encode(bar_chart_png()).decode()}
 LONG = long_text()
+MIME = {".png": "image/png", ".jpg": "image/jpeg", ".jpeg": "image/jpeg", ".webp": "image/webp"}
+
+
+def image_url(name: str) -> str:
+    """'bars' is generated; anything else is an image file path relative to the prompts file."""
+    if name in IMAGES:
+        return IMAGES[name]
+    f = (args.prompts.resolve().parent / name)
+    require(f, f"Image for a prompt is missing: {name}")
+    return f"data:{MIME.get(f.suffix.lower(), 'image/png')};base64," + base64.b64encode(f.read_bytes()).decode()
 
 
 def build_messages(p: dict) -> list:
@@ -101,7 +111,7 @@ def build_messages(p: dict) -> list:
         text = LONG + "\n\n" + text
     if p.get("image"):
         return [{"role": "user", "content": [{"type": "text", "text": text},
-                                             {"type": "image_url", "image_url": {"url": IMAGES[p["image"]]}}]}]
+                                             {"type": "image_url", "image_url": {"url": image_url(p["image"])}}]}]
     return [{"role": "user", "content": text}]
 
 
@@ -112,21 +122,36 @@ def last_number(s: str):
 
 
 def run_python(answer: str, tests: str) -> bool:
-    m = re.search(r"```(?:python)?\s*\n(.*?)```", answer, re.S)
-    code = m.group(1) if m else answer
-    try:
-        r = subprocess.run([sys.executable, "-I", "-c", code + "\n" + tests],
-                           capture_output=True, text=True, timeout=10)
-        return r.returncode == 0
-    except subprocess.TimeoutExpired:
-        return False
+    # Answers may quote the original code or put tests in a separate block, so every code block is
+    # tried on its own; the answer passes if any block passes the tests.
+    blocks = re.findall(r"```(?:python|py)?[ \t]*\n(.*?)```", answer, re.S) or [answer]
+    for code in blocks:
+        try:
+            r = subprocess.run([sys.executable, "-I", "-c", code + "\n" + tests],
+                               capture_output=True, text=True, timeout=10)
+            if r.returncode == 0:
+                return True
+        except subprocess.TimeoutExpired:
+            pass
+    return False
+
+
+def norm(s: str) -> str:
+    """Lower case without thousands separators or markdown emphasis, so '₹11,280' and '**11280**' match."""
+    return s.lower().replace(",", "").replace("*", "")
 
 
 def grade(p: dict, content: str, calls: list):
     c = p.get("check", {"type": "manual"})
     kind = c["type"]
     if kind == "contains":
-        return any(s.lower() in content.lower() for s in c["any"])
+        text = norm(content)
+        if "all" in c and not all(norm(s) in text for s in c["all"]):
+            return False
+        return any(norm(s) in text for s in c["any"]) if "any" in c else True
+    if kind == "regex":  # every pattern must match (case-insensitive)
+        text = norm(content)
+        return all(re.search(pat, text, re.I | re.S) for pat in c["all"])
     if kind == "number":
         return last_number(content) == float(c["value"])
     if kind == "bullets":
