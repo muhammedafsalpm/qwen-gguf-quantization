@@ -1,0 +1,92 @@
+{
+  "settings": {
+    "repeats": 1,
+    "ctx": 16384,
+    "seed": 42,
+    "temperature": 0,
+    "llama_cpp": "b12345",
+    "prompts_file": "tools\\prompts_extended.yaml"
+  },
+  "quants": {
+    "IQ3_M": {
+      "load_s": 12.7,
+      "answers": {
+        "q03-bat-ball-inr": {
+          "category": "Reasoning",
+          "thinking": true,
+          "content": "Let the ball cost **₹x**.\n\nThen the bat costs **₹(x + 100)**.\n\nTogether they cost ₹110:\n\n\\[\nx + (x + 100) = 110\n\\]\n\n\\[\n2x + 100 = 110\n\\]\n\n\\[\n2x = 10\n\\]\n\n\\[\nx = 5\n\\]\n\nSo the **ball costs ₹5**.\n\nThe intuitive answer is often **₹10**, because people quickly think:\n\n- Total = ₹110\n- Bat costs ₹100 more\n- So maybe ball = ₹10 and bat = ₹100\n\nBut that is wrong because if the ball costs ₹10, then the bat would need to cost ₹110 to be ₹100 more, making the total ₹120, not ₹110. The correct split is:\n\n- Ball = ₹5\n- Bat = ₹105\n- Total = ₹110\n- Difference = ₹100",
+          "reasoning_chars": 724,
+          "calls": [],
+          "finish": "stop",
+          "correct": true,
+          "wall_s": 10.01,
+          "prefill_ms": 405.45,
+          "tok_s": 52.36,
+          "gen_tokens": 498,
+          "prompt_tokens": 96,
+          "similarity_to_ref": null
+        },
+        "q09-duplicates-code": {
+          "category": "Coding",
+          "thinking": false,
+          "content": "```python\ndef find_duplicates(items):\n    \"\"\"\n    Identify duplicate elements in a list.\n    \n    Args:\n        items: A list of elements.\n        \n    Returns:\n        A list of duplicate values, each appearing only once,\n        in the order they were first detected as duplicates.\n        \n    Time Complexity: O(n)\n    Space Complexity: O(n)\n    \"\"\"\n    if not items:\n        return []\n    \n    seen = set()\n    duplicates = set()\n    result = []\n    \n    for item in items:\n        if item in seen:\n            if item not in duplicates:\n                duplicates.add(item)\n                result.append(item)\n        else:\n            seen.add(item)\n    \n    return result\n\n\n# Test cases\nif __name__ == \"__main__\":\n    # Test 1: Basic duplicates\n    assert find_duplicates([1, 2, 3, 2, 4, 3, 5]) == [2, 3], f\"Test 1 failed: {find_duplicates([1, 2, 3, 2, 4, 3, 5])}\"\n    \n    # Test 2: No duplicates\n    assert find_duplicates([1, 2, 3, 4, 5]) == [], f\"Test 2 failed: {find_duplicates([1, 2, 3, 4, 5])}\"\n    \n    # Test 3: Empty list\n    assert find_duplicates([]) == [], f\"Test 3 failed: {find_duplicates([])}\"\n    \n    # Test 4: All same elements\n    assert find_duplicates([7, 7, 7, 7]) == [7], f\"Test 4 failed: {find_duplicates([7, 7, 7, 7])}\"\n    \n    # Test 5: Multiple duplicates with different orders\n    assert find_duplicates([5, 3, 5, 3, 5, 3]) == [5, 3], f\"Test 5 failed: {find_duplicates([5, 3, 5, 3, 5, 3])}\"\n    \n    # Test 6: Single element\n    assert find_duplicates([1]) == [], f\"Test 6 failed: {find_duplicates([1])}\"\n    \n    # Test 7: Strings\n    assert find_duplicates([\"a\", \"b\", \"a\", \"c\", \"b\"]) == [\"a\", \"b\"], f\"Test 7 failed: {find_duplicates(['a', 'b', 'a', 'c', 'b'])}\"\n    \n    print(\"All tests passed!\")\n```",
+          "reasoning_chars": 0,
+          "calls": [],
+          "finish": "stop",
+          "correct": true,
+          "wall_s": 11.13,
+          "prefill_ms": 157.41,
+          "tok_s": 52.84,
+          "gen_tokens": 575,
+          "prompt_tokens": 93,
+          "similarity_to_ref": null
+        },
+        "q10-debugging": {
+          "category": "Coding",
+          "thinking": false,
+          "content": "## Problems in the Original Code\n\nLet's analyze the original function line by line:\n\n```python\ndef calculate_average(numbers):\n    total = 0\n    for i in range(len(numbers) + 1):   # ❌ Problem 1: Off-by-one error\n        total += numbers[i]              # ❌ Problem 2: IndexError on last iteration\n    return total / len(numbers)          # ❌ Problem 3: ZeroDivisionError on empty list\n```\n\n### Problem 1: Off-by-one error in `range()`\n`range(len(numbers) + 1)` generates indices from `0` to `len(numbers)`, inclusive. But valid indices are `0` to `len(numbers) - 1`. So the loop iterates **one extra time**.\n\n### Problem 2: `IndexError`\nOn the last iteration, `i = len(numbers)`, and `numbers[i]` raises an `IndexError` because that index is out of bounds.\n\n### Problem 3: `ZeroDivisionError` on empty list\nIf `numbers` is empty, `len(numbers)` is `0`, so `total / len(numbers)` raises a `ZeroDivisionError`. There is no guard against this.\n\n### Problem 4: No input validation\nThe function doesn't handle non-numeric inputs or non-list iterables gracefully (though this is more of a design concern).\n\n---\n\n## Corrected Code\n\n```python\ndef calculate_average(numbers):\n    if not numbers:\n        raise ValueError(\"Cannot calculate average of an empty list\")\n    total = sum(numbers)\n    return total / len(numbers)\n```\n\nOr, if you prefer to keep the explicit loop (e.g., for educational purposes or to handle custom iterables):\n\n```python\ndef calculate_average(numbers):\n    if not numbers:\n        raise ValueError(\"Cannot calculate average of an empty list\")\n    total = 0\n    for number in numbers:\n        total += number\n    return total / len(numbers)\n```\n\n> **Note:** Using `sum(numbers)` is idiomatic Python and is implemented in C under the hood, making it faster than a Python-level loop.\n\n---\n\n## Detailed Explanations\n\n### 1. Why the Original Code Fails\n\n| Issue | Explanation |\n|-------|-------------|\n| **Off-by-one in `range()`** | `range(len(numbers) + 1)` produces `len(numbers) + 1` iterations instead of `len(numbers)`. For a list of length `n`, valid indices are `0..n-1`, but the loop tries to access index `n`. |\n| **`IndexError`** | On the final iteration, `i == len(numbers)`, so `numbers[i]` is out of bounds. This crashes the function for **any** non-empty list. |\n| **`ZeroDivisionError`** | If `numbers` is empty, `len(numbers)` is `0`, and dividing by zero raises an exception. The original code has no check for this case. |\n\n**Example trace** with `numbers = [1, 2, 3]`:\n- `len(numbers) = 3`\n- `range(3 + 1)` → `range(4)` → `i` takes values `0, 1, 2, 3`\n- When `i = 3`: `numbers[3]` → **IndexError** (list only has indices 0, 1, 2)\n\n### 2. What Happens with an Empty List\n\n- **Original code:**\n  - `range(len([]) + 1)` → `range(1)` → `i = 0`\n  - `numbers[0]` → **IndexError** (empty list has no index 0)\n  - Even if the loop were fixed, `total / len(numbers)` → `0 / 0` → **ZeroDivisionError**\n\n- **Corrected code:**\n  - Explicitly checks `if not numbers` and raises a clear `ValueError` with a descriptive message. This is the standard Pythonic way to handle this edge case.\n\n### 3. Time Complexity\n\n- **O(n)**, where `n` is the number of elements in `numbers`.\n- The loop (or `sum()`) visits each element exactly once.\n- Division is O(1).\n\n### 4. Space Complexity\n\n- **O(1)** auxiliary space.\n- Only a fixed number of variables (`total`, and the loop variable) are used regardless of input size.\n- The input list itself is not counted as auxiliary space.\n\n---\n\n## Summary of Fixes\n\n| Original | Fixed |\n|----------|-------|\n| `range(len(numbers) + 1)` | Iterate directly over `numbers` (or use `sum()`) |\n| No empty-list check | Raise `ValueError` for empty input |\n| Manual summation loop | Use built-in `sum()` for clarity and performance |",
+          "reasoning_chars": 0,
+          "calls": [],
+          "finish": "stop",
+          "correct": true,
+          "wall_s": 20.69,
+          "prefill_ms": 166.04,
+          "tok_s": 52.17,
+          "gen_tokens": 1064,
+          "prompt_tokens": 104,
+          "similarity_to_ref": null
+        },
+        "q22-invoice-json": {
+          "category": "Vision",
+          "thinking": false,
+          "content": "```json\n{\n  \"invoice_number\": \"INV-2026-0457\",\n  \"invoice_date\": \"12 October 2026\",\n  \"supplier_name\": \"Bluewave Supplies Pvt Ltd\",\n  \"customer_name\": \"Sunrise Retail LLC\",\n  \"total_amount\": \"48,380.00\",\n  \"tax_amount\": \"7,380.00\",\n  \"payment_due_date\": null\n}\n```",
+          "reasoning_chars": 0,
+          "calls": [],
+          "finish": "stop",
+          "correct": true,
+          "wall_s": 3.46,
+          "prefill_ms": 1105.32,
+          "tok_s": 51.54,
+          "gen_tokens": 110,
+          "prompt_tokens": 1362,
+          "similarity_to_ref": null
+        },
+        "q23-chart": {
+          "category": "Vision",
+          "thinking": false,
+          "content": "Based on the provided bar chart titled **\"Monthly Revenue, Jan to Jun 2026 (INR thousands)\"**, here is the analysis:\n\n---\n\n### 1. **Highest Value**\n- The highest monthly revenue is **140 (INR thousands)**, recorded in **June 2026**.\n\n---\n\n### 2. **Lowest Value**\n- The lowest monthly revenue is **70 (INR thousands)**, recorded in **March 2026**.\n\n---\n\n### 3. **Percentage Change Between First and Last Periods**\n- First period (January): **80**\n- Last period (June): **140**\n\n**Formula for percentage change:**\n> ((New Value - Old Value) / Old Value) × 100\n\n**Calculation:**\n> ((140 - 80) / 80) × 100 = (60 / 80) × 100 = **75%**\n\n✅ **Percentage change from January to June: +75%**\n\n---\n\n### 4. **Significant Trends**\n\n- **Overall upward trend**: Despite a dip in March, revenue generally increases over the six-month period, ending at its peak in June.\n  \n- **Dip in March**: Revenue drops from 95 (Feb) to 70 (Mar), the lowest point in the dataset — a decline of ~26.3% from February.\n\n- **Strong recovery and growth from April onward**: \n  - April: 120 (up from 70 in March → +71.4%)\n  - May: 110 (slight dip from April, but still well above Jan–Mar levels)\n  - June: 140 (new high, up from May)\n\n- **Volatility**: There’s noticeable month-to-month fluctuation, especially between Feb→Mar (drop) and Mar→Apr (sharp rise).\n\n- **End-of-period strength**: The last two months (May and June) show strong performance, with June being the absolute peak.\n\n---\n\n### 5. **Conclusions That Can and Cannot Be Drawn**\n\n#### ✅ **Can be concluded (based only on visible data):**\n- Revenue grew significantly from January to June (+75%).\n- March was the weakest month; June was the strongest.\n- There was a sharp drop in March followed by a strong rebound in April.\n- The business showed resilience and growth after the March dip.\n- The overall trajectory from January to June is positive.\n\n#### ❌ **Cannot be concluded (not visible or inferable from this chart alone):**\n- **Why** revenue dropped in March (e.g., seasonality, one-time event, market conditions).\n- **Why** revenue surged in April and June (e.g., new product launch, marketing campaign, seasonal demand).\n- Whether this trend will continue into July or beyond.\n- Profitability — revenue ≠ profit; costs are not shown.\n- Comparison to prior years or industry benchmarks.\n- Customer acquisition, retention, or other operational metrics.\n- Whether the growth is sustainable or due to temporary factors.\n\n---\n\n### Summary:\nThis chart shows a volatile but ultimately strong upward trend in monthly revenue from January to June 2026, with a notable dip in March and a peak in June. While we can quantify the changes and identify patterns, we cannot determine underlying causes or future projections without additional context or data.",
+          "reasoning_chars": 0,
+          "calls": [],
+          "finish": "stop",
+          "correct": true,
+          "wall_s": 15.29,
+          "prefill_ms": 518.72,
+          "tok_s": 50.86,
+          "gen_tokens": 744,
+          "prompt_tokens": 699,
+          "similarity_to_ref": null
+        }
+      }
+    }
+  }
+}
