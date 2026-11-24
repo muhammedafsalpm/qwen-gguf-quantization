@@ -1,0 +1,131 @@
+{
+  "settings": {
+    "levels": [
+      1,
+      4,
+      16
+    ],
+    "gen": 256,
+    "prompt_chars": 2000,
+    "ctx_per_slot": 4096,
+    "waves": 1,
+    "slots": 16,
+    "llama_cpp": "b12345"
+  },
+  "quants": {
+    "Q8_0": {
+      "gpu_mem_loaded_mb": 34418,
+      "levels": {
+        "1": {
+          "requests": 1,
+          "errors": 0,
+          "throughput_tok_s": 25.9,
+          "user_tok_s": 28.4,
+          "ttft_p50_s": 0.47,
+          "ttft_p95_s": 0.47,
+          "latency_p50_s": 9.48,
+          "latency_p95_s": 9.48,
+          "gpu_mem_peak_mb": 34436
+        },
+        "4": {
+          "requests": 4,
+          "errors": 0,
+          "throughput_tok_s": 77.6,
+          "user_tok_s": 23.7,
+          "ttft_p50_s": 1.48,
+          "ttft_p95_s": 1.48,
+          "latency_p50_s": 12.3,
+          "latency_p95_s": 12.3,
+          "gpu_mem_peak_mb": 34439
+        },
+        "16": {
+          "requests": 16,
+          "errors": 0,
+          "throughput_tok_s": 170.5,
+          "user_tok_s": 14.2,
+          "ttft_p50_s": 6.81,
+          "ttft_p95_s": 7.22,
+          "latency_p50_s": 23.87,
+          "latency_p95_s": 23.92,
+          "gpu_mem_peak_mb": 34478
+        }
+      }
+    },
+    "Q4_K_M": {
+      "gpu_mem_loaded_mb": 23727,
+      "levels": {
+        "1": {
+          "requests": 1,
+          "errors": 0,
+          "throughput_tok_s": 33.5,
+          "user_tok_s": 41.2,
+          "ttft_p50_s": 0.44,
+          "ttft_p95_s": 0.44,
+          "latency_p50_s": 6.65,
+          "latency_p95_s": 6.65,
+          "gpu_mem_peak_mb": 23876
+        },
+        "4": {
+          "requests": 4,
+          "errors": 0,
+          "throughput_tok_s": 103.6,
+          "user_tok_s": 32.1,
+          "ttft_p50_s": 1.63,
+          "ttft_p95_s": 1.63,
+          "latency_p50_s": 9.6,
+          "latency_p95_s": 9.6,
+          "gpu_mem_peak_mb": 23876
+        },
+        "16": {
+          "requests": 16,
+          "errors": 0,
+          "throughput_tok_s": 196.9,
+          "user_tok_s": 17.2,
+          "ttft_p50_s": 6.19,
+          "ttft_p95_s": 6.84,
+          "latency_p50_s": 20.4,
+          "latency_p95_s": 20.5,
+          "gpu_mem_peak_mb": 23878
+        }
+      }
+    },
+    "IQ3_M": {
+      "gpu_mem_loaded_mb": 20168,
+      "levels": {
+        "1": {
+          "requests": 1,
+          "errors": 0,
+          "throughput_tok_s": 46.2,
+          "user_tok_s": 50.6,
+          "ttft_p50_s": 0.48,
+          "ttft_p95_s": 0.48,
+          "latency_p50_s": 5.53,
+          "latency_p95_s": 5.53,
+          "gpu_mem_peak_mb": 20204
+        },
+        "4": {
+          "requests": 4,
+          "errors": 0,
+          "throughput_tok_s": 116.5,
+          "user_tok_s": 36.1,
+          "ttft_p50_s": 1.37,
+          "ttft_p95_s": 1.37,
+          "latency_p50_s": 8.46,
+          "latency_p95_s": 8.46,
+          "gpu_mem_peak_mb": 20244
+        },
+        "16": {
+          "requests": 16,
+          "errors": 0,
+          "throughput_tok_s": 194.6,
+          "user_tok_s": 17.8,
+          "ttft_p50_s": 7.54,
+          "ttft_p95_s": 8.1,
+          "latency_p50_s": 20.95,
+          "latency_p95_s": 21.02,
+          "gpu_mem_peak_mb": 20244
+        }
+      }
+    }
+  }
+}
