@@ -209,7 +209,7 @@ the conversation context.
 
 | Type | Size | Use case |
 |---|---|---|
-| Q8_0 | 29.1 GB | Near-lossless, 32 GB+ GPUs |
+| Q8_0 | 29.0 GB | Near-lossless, 32 GB+ GPUs |
 | Q6_K | 22.4 GB | Excellent quality, 24–32 GB GPUs |
 | Q5_K_M | 19.6 GB | Very high quality, 24 GB GPUs |
 | Q4_K_M | 17.0 GB | Recommended default |
@@ -218,6 +218,24 @@ the conversation context.
 | IQ3_M | 13.0 GB | 12–16 GB GPUs |
 
 The vision projector `mmproj-Qwen3.8-27B-F16.gguf` (0.9 GB) works with every type.
+
+### GPU memory needed
+
+Approximate GPU memory to run each type entirely on the GPU: the model file, the 0.9 GB vision projector and
+about 2 GB for an 8K-token context. Longer context needs more; without image input, subtract about 1 GB.
+
+| Type | File size | GPU memory needed (8K context) | Example GPUs |
+|---|---|---|---|
+| Q8_0 | 29.0 GB | ~32 GB | RTX 5090 (32 GB), RTX 6000 Ada (48 GB) |
+| Q6_K | 22.4 GB | ~25 GB | 32 GB GPUs, or 24 GB with a shorter context |
+| Q5_K_M | 19.6 GB | ~23 GB | RTX 3090 / 4090 (24 GB) |
+| Q4_K_M | 17.0 GB | ~20 GB | RTX 3090 / 4090 (24 GB) |
+| IQ4_XS | 15.5 GB | ~18 GB | 16 GB GPUs with a small context, or 20–24 GB |
+| Q3_K_M | 13.7 GB | ~17 GB | 16 GB GPUs (tight) |
+| IQ3_M | 13.0 GB | ~16 GB | 16 GB GPUs; 12 GB GPUs with some layers on the CPU (slower) |
+
+A GPU with less memory can still run a type by keeping some layers in system RAM (lower `-ngl`), at a
+noticeably lower speed.
 
 **Compatibility:** the files need **llama.cpp build b12345 or newer**. This llama.cpp version stores some of the
 model's tensors in a combined layout (`attn_qkv_gate`, `ssm_beta_alpha`) that older runtimes cannot read.
@@ -258,6 +276,32 @@ fully functional.
 **Scope:** the functional tests are smoke tests (one prompt per feature) that confirm each feature works;
 they do not score quality. Accuracy is measured on English Wikipedia text at 512-token context, so code,
 math, other languages, long context and image quality are not separately measured.
+
+### Accuracy drop
+
+The same measurements expressed as a loss against the original BF16 model, together with the result of the
+same-question comparison ([`tools/compare_quants.py`](tools/compare_quants.py), 12 graded prompts covering logic,
+math, code, knowledge, instruction following, Malayalam, Hindi, a 6K-token needle test, tool calling and vision;
+reports in [`results/compare/`](results/compare/)).
+
+| Type | Bits/weight | Next token differs from original ↓ | Perplexity increase ↓ | Graded prompts passed |
+|---|---|---|---|---|
+| BF16 (original) | 16 | 0% | 0% (PPL 6.4334) | reference |
+| Q8_0 | 8.50 | 1.14% | +0.10% | 12/12 |
+| Q6_K | 6.57 | 2.09% | −0.03% (noise) | 12/12 |
+| Q5_K_M | 5.75 | 2.90% | +0.33% | 12/12 |
+| Q4_K_M | 4.98 | 4.91% | +0.48% | 12/12 |
+| IQ4_XS | 4.55 | 5.34% | +1.10% | 12/12 |
+| Q3_K_M | 4.01 | 9.19% | +3.36% | 12/12 |
+| IQ3_M | 3.80 | 9.67% | +4.46% | 12/12 |
+
+- **Next token differs** is 100% minus the same-top-token rate: how often the quant's most likely next token is
+  not the original's. Most of these are near-ties where both tokens were almost equally likely, so a different
+  token is usually still a correct one.
+- **Perplexity increase** is relative to the original's 6.4334. Increases up to about 1.2% are within the
+  measurement uncertainty (±0.08).
+- The graded prompts confirm that every type still answers correctly; they are too easy to separate the types,
+  so use the first two columns to compare them.
 
 ### Speed benchmark
 
