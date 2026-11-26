@@ -107,9 +107,10 @@ card:
     - "**I-quants included** (IQ4_XS, IQ3_M) for 8–10 GB GPUs, next to the standard K-quants."
     - "**Functionally tested:** thinking on, thinking off and tool calling on every file, plus 43 graded questions per file (reasoning, math, code, SQL, Malayalam and Hindi)."
     - "**Measured per language:** accuracy against BF16 on Malayalam, Hindi and Python code, not only English."
+    - "**Standard Qwen3 GGUF:** tested in llama.cpp and Ollama; LM Studio and other llama.cpp apps load it too."
   context_gb: 1.7                  # 8K context: 1.34 GB KV cache (40 layers x 8 KV heads x 128) + compute buffers
   language_results: true           # include results/Qwen3-14B/kld_by_language.json if present
-  ollama: false                    # set to the tested Ollama version after the Ollama test
+  ollama: "0.40.18"                # tested: Q4_K_M loads and answers correctly (thinking on and off) in Ollama 0.40.18
   test_summary: |                  # verified by reading the answers (results/Qwen3-14B/compare/)
     Every quant answered the same questions at temperature 0 with
     [`compare_quants.py`](https://github.com/muhammedafsalpm/qwen-gguf-quantization/blob/main/tools/compare_quants.py).
