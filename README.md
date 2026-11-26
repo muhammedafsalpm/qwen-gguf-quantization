@@ -9,8 +9,8 @@ quantizations, measures every quant against the original BF16 model, tests think
 | Model | Original | Config | Input | Quantized model |
 |---|---|---|---|---|
 | Qwen3.8-27B | [Qwen/Qwen3.8-27B](https://huggingface.co/Qwen/Qwen3.8-27B) | [`config.yaml`](config.yaml) | Text + images | [muhammed-afsal-p-m/Qwen3.8-27B-GGUF](https://huggingface.co/muhammed-afsal-p-m/Qwen3.8-27B-GGUF) |
-| Qwen3-8B | [Qwen/Qwen3-8B](https://huggingface.co/Qwen/Qwen3-8B) | [`configs/qwen3-8b.yaml`](configs/qwen3-8b.yaml) | Text | Quantized and measured; upload pending |
-| Qwen3-14B | [Qwen/Qwen3-14B](https://huggingface.co/Qwen/Qwen3-14B) | [`configs/qwen3-14b.yaml`](configs/qwen3-14b.yaml) | Text | Planned |
+| Qwen3-8B | [Qwen/Qwen3-8B](https://huggingface.co/Qwen/Qwen3-8B) | [`configs/qwen3-8b.yaml`](configs/qwen3-8b.yaml) | Text | [muhammed-afsal-p-m/Qwen3-8B-GGUF](https://huggingface.co/muhammed-afsal-p-m/Qwen3-8B-GGUF) |
+| Qwen3-14B | [Qwen/Qwen3-14B](https://huggingface.co/Qwen/Qwen3-14B) | [`configs/qwen3-14b.yaml`](configs/qwen3-14b.yaml) | Text | In progress |
 
 Each model has its own configuration file and its own output folders, so models never overwrite each other.
 
@@ -344,6 +344,7 @@ every type. The generation numbers agree with the functional-test speeds above t
 Same method as above (wikitext-2 test, 150 chunks × 512 tokens, against BF16 logits). The BF16 model
 fits in GPU memory, so the importance matrix was computed on BF16 directly. Original perplexity **9.5927 ± 0.15**.
 Full data: [`results/Qwen3-8B/eval.json`](results/Qwen3-8B/eval.json).
+Download: [muhammed-afsal-p-m/Qwen3-8B-GGUF](https://huggingface.co/muhammed-afsal-p-m/Qwen3-8B-GGUF).
 
 | Type | Size | Bits/weight | Perplexity ↓ | Mean KLD ↓ | Same top token ↑ | Speed (tok/s) |
 |---|---|---|---|---|---|---|

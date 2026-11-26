@@ -26,6 +26,7 @@ cfg = Path(args.config) if Path(args.config).is_absolute() else ROOT / args.conf
 if not cfg.exists():
     sys.exit(f"Config file not found: {cfg}")
 os.environ["QUANT_CONFIG"] = str(cfg)  # every step reads the same model config
+os.environ["PYTHONUTF8"] = "1"  # steps print tokenizer text; avoid cp1252 errors when output goes to a file
 extra = [] if args.config == "config.yaml" else [f" --config {args.config}"]
 
 t0 = time.time()
