@@ -206,6 +206,22 @@ Mean KL divergence against BF16 (lower is better) on held-out text in each langu
 {chr(10).join(lrows)}
 """
 
+# Optional card sections (off by default, so the Qwen3.8-27B card is unchanged)
+language_yaml = "".join(f"- {code}\n" for code in cc.get("language", []))
+language_yaml = f"language:\n{language_yaml}" if language_yaml else ""
+top_block = ""
+if cc.get("quick_start"):
+    quick = (f"ollama run hf.co/{repo}:Q4_K_M" if cc.get("ollama")
+             else f"llama-server -hf {repo}:Q4_K_M -ngl 99 -c 16384 --jinja")
+    top_block += f"## Quick start\n\n```bash\n{quick}\n```\n\n"
+if cc.get("highlights"):
+    top_block += "## Why these quants\n\n" + "\n".join(f"- {h}" for h in cc["highlights"]) + "\n\n"
+
+tests_block = f"\n## Question tests\n\n{cc['test_summary'].strip()}\n" if cc.get("test_summary") else ""
+if lang_block:  # other languages and code are measured below, so do not call them unmeasured
+    not_measured = ("math and long context are not separately measured (accuracy on Malayalam, Hindi and\n"
+                    "code is in the next section).")
+
 card = f"""---
 base_model: {mc['repo_id']}
 base_model_relation: quantized
@@ -213,7 +229,7 @@ license: {mc['license']}
 pipeline_tag: {pipeline_tag}
 library_name: gguf
 quantized_by: {hf['username']}
-tags:
+{language_yaml}tags:
 {tags}
 ---
 
@@ -222,7 +238,7 @@ tags:
 Quantized GGUF versions of [{mc['repo_id']}](https://huggingface.co/{mc['repo_id']}), with {features}. Every quant was **measured against the original BF16 model**
 (perplexity + KL divergence) and **functionally tested** ({tested}).
 {gh}
-## Files
+{top_block}## Files
 
 | File | Type | Size | Bits/weight | VRAM* | PPL ↓ | Mean KLD ↓ | Same top token ↑ | Notes |
 |---|---|---|---|---|---|---|---|---|
@@ -256,7 +272,7 @@ Quantized GGUF versions of [{mc['repo_id']}](https://huggingface.co/{mc['repo_id
 **Scope of the evaluation:** the functional tests are smoke tests (one prompt per feature) that confirm each
 feature works; they do not score quality. Accuracy (perplexity, KL divergence) is measured on English
 Wikipedia text at 512-token context, so {not_measured}
-{lang_block}
+{lang_block}{tests_block}
 ## How these quants were made
 
 1. Original weights: `{mc['repo_id']}` at commit `{src.get('commit', 'unknown')}` (SHA256-verified).

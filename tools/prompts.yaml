@@ -84,7 +84,7 @@ prompts:
     thinking: false
     max_tokens: 128
     prompt: "ഇന്ത്യയുടെ തലസ്ഥാനം ഏതാണ്? ഒരു വാക്യത്തിൽ ഉത്തരം നൽകുക."
-    check: {type: contains, any: ["ഡൽഹി", "ദില്ലി", "Delhi"]}
+    check: {type: contains, any: ["ഡൽഹി", "ഡെൽഹി", "ഡെല്ഹി", "ദില്ലി", "Delhi"]}  # standard and valid spelling variants
 
   - id: hindi
     category: Multilingual

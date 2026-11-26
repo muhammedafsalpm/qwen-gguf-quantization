@@ -76,7 +76,7 @@ for lang in args.langs:
     base = DATA / f"kld_base_{lang}.bin"  # this model's BF16 reference logits (temporary)
     if not base.exists():
         require(BF16, "The BF16 GGUF is needed as the reference (step 02).")
-        log(f"=== {name}: BF16 reference logits ({args.chunks} chunks, partly on CPU)")
+        log(f"=== {name}: BF16 reference logits ({args.chunks} chunks)")
         out = run([tool("llama-perplexity"), "-m", BF16, "-f", text, "-ngl", ev["base_ngl"],
                    "--kl-divergence-base", base, *common_args], f"lang_kld_base_{lang}")
         m = re.findall(rf"Final estimate: PPL = {NUM} \+/- {NUM}", out)
