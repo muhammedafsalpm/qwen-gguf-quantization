@@ -1,0 +1,868 @@
+quant,prompt,category,thinking,correct,wall_s,prefill_ms,tok_s,gen_tokens,prompt_tokens,reasoning_chars,similarity_to_q8_0,answer
+Q8_0,bat-ball,Logic,True,True,35.11,35.47,50.69,1773,39,4649,,"To solve the problem, we are given the following information:
+
+- A bat and a ball together cost **$1.10**.
+- The **bat costs $1.00 more than the ball**.
+
+---
+
+### Step 1: Define Variables
+
+Let the cost of the **ball** be $ x $ dollars.  
+Then, the cost of the **bat** is $ x + 1.00 $ dollars.
+
+---
+
+### Step 2: Set Up the Equation
+
+The total cost of the bat and the ball is given as $1.10:
+
+$$
+x + (x + 1.00) = 1.10
+$$
+
+Simplify the left-hand side:
+
+$$
+2x + 1.00 = 1.10
+$$
+
+---
+
+### Step 3: Solve for $ x $
+
+Subtract 1.00 from both sides:
+
+$$
+2x = 0.10
+$$
+
+Divide both sides by 2:
+
+$$
+x = 0.05
+$$
+
+---
+
+### Step 4: Interpret the Result
+
+The ball costs **$0.05** (or 5 cents), and the bat costs $0.05 + $1.00 = **$1.05**.
+
+Check the total:
+
+$$
+0.05 + 1.05 = 1.10
+$$
+
+This confirms the solution is correct.
+
+---
+
+### Final Answer
+
+$$
+\boxed{0.05}
+$$"
+Q8_0,multiply,Math,False,True,0.18,24.75,49.43,4,26,0,,391
+Q8_0,word-problem,Math,True,True,27.47,38.27,50.76,1388.5,55,4145,,"To determine how many rupees Riya has left, we'll break the problem into clear steps:
+
+---
+
+### **Step 1: Cost of Pens**
+Riya buys **7 pens**, each costing **12 rupees**.
+
+$$
+\text{Total cost of pens} = 7 \times 12 = 84 \text{ rupees}
+$$
+
+---
+
+### **Step 2: Change Received**
+She pays with a **100 rupee note**, so the change she receives is:
+
+$$
+\text{Change} = 100 - 84 = 16 \text{ rupees}
+$$
+
+---
+
+### **Step 3: Spending on a Notebook**
+She spends **half of her change** on a notebook:
+
+$$
+\text{Amount spent on notebook} = \frac{1}{2} \times 16 = 8 \text{ rupees}
+$$
+
+---
+
+### **Step 4: Remaining Money**
+Now, subtract the amount spent on the notebook from the change she had:
+
+$$
+\text{Remaining money} = 16 - 8 = 8 \text{ rupees}
+$$
+
+---
+
+### **Final Answer**
+$$
+\boxed{8}
+$$"
+Q8_0,sheep,Reasoning,True,True,6.88,28.44,51.59,349,33,1421,,9
+Q8_0,palindrome-code,Code,False,True,0.81,25.64,51.55,39,47,0,,"```python
+import string
+
+def is_palindrome(s):
+    cleaned = ''.join(char.lower() for char in s if char.isalnum())
+    return cleaned == cleaned[::-1]
+```"
+Q8_0,capital,Knowledge,False,True,0.1,25.67,49.51,3,22,0,,Canberra
+Q8_0,three-bullets,Instruction following,False,True,1.0,25.56,51.56,50,33,0,,"- Reduces model size, making it easier to deploy on devices with limited storage.  
+- Lowers computational requirements, leading to faster inference and lower power consumption.  
+- Enables efficient execution on edge devices and mobile platforms with limited processing power."
+Q8_0,malayalam,Multilingual,False,True,0.91,31.48,51.84,46,82,0,,ഇന്ത്യയുടെ തലസ്ഥാനം ന്യൂഡൽഹിയാണ്.
+Q8_0,hindi,Multilingual,False,True,0.59,25.97,51.87,29,54,0,,भारत की राजधानी नई दिल्ली है।
+Q8_0,summary,Summarization,False,,1.34,25.85,51.78,68.5,111,0,,"Quantization reduces the number of bits used to store neural network weights, making models smaller, more memory-efficient, and faster to run, especially on GPUs. While this comes with a slight accuracy loss that increases as bit count decreases, 8-bit models remain nearly identical to the original, whereas 3-bit models show more noticeable performance drops."
+Q8_0,needle,Long context,False,True,1.18,1026.08,46.27,5,6495,0,,7341
+Q8_0,weather-tool,Tool calling,False,True,0.64,32.21,51.49,20,160,0,,
+Q6_K,bat-ball,Logic,True,True,19.63,32.25,63.99,1251,39,2789,0.976,"To solve the problem, we are given the following information:
+
+- A bat and a ball together cost **$1.10**.
+- The **bat costs $1.00 more than the ball**.
+
+---
+
+### Step 1: Define Variables
+
+Let the cost of the **ball** be $ x $ dollars.
+
+Then, the cost of the **bat** is $ x + 1.00 $ dollars.
+
+---
+
+### Step 2: Set Up the Equation
+
+The total cost of the bat and the ball is $1.10:
+
+$$
+x + (x + 1.00) = 1.10
+$$
+
+Simplify the left-hand side:
+
+$$
+2x + 1.00 = 1.10
+$$
+
+---
+
+### Step 3: Solve for $ x $
+
+Subtract 1.00 from both sides:
+
+$$
+2x = 0.10
+$$
+
+Divide both sides by 2:
+
+$$
+x = 0.05
+$$
+
+---
+
+### Step 4: Interpret the Result
+
+The ball costs **$0.05** (or 5 cents), and the bat costs:
+
+$$
+x + 1.00 = 0.05 + 1.00 = 1.05
+$$
+
+Check the total:
+
+$$
+0.05 + 1.05 = 1.10
+$$
+
+This confirms the solution is correct.
+
+---
+
+### Final Answer
+
+$$
+\boxed{0.05}
+$$"
+Q6_K,multiply,Math,False,True,0.16,23.27,61.87,4,26,0,1.0,391
+Q6_K,word-problem,Math,True,True,21.79,23.12,62.85,1363.5,55,3548,0.954,"To determine how many rupees Riya has left, we'll break the problem into clear steps:
+
+---
+
+### **Step 1: Cost of Pens**
+Riya buys **7 pens**, each costing **12 rupees**.
+
+$$
+\text{Total cost of pens} = 7 \times 12 = 84 \text{ rupees}
+$$
+
+---
+
+### **Step 2: Payment and Change Received**
+She pays with a **100 rupee note**.
+
+$$
+\text{Change received} = 100 - 84 = 16 \text{ rupees}
+$$
+
+---
+
+### **Step 3: Spending on a Notebook**
+She spends **half of her change** on a notebook.
+
+$$
+\text{Amount spent on notebook} = \frac{1}{2} \times 16 = 8 \text{ rupees}
+$$
+
+---
+
+### **Step 4: Remaining Money**
+Now, subtract the amount spent on the notebook from the change she had:
+
+$$
+\text{Remaining money} = 16 - 8 = 8 \text{ rupees}
+$$
+
+---
+
+### ✅ Final Answer:
+$$
+\boxed{8}
+$$"
+Q6_K,sheep,Reasoning,True,True,6.97,24.36,63.74,436.5,33,1862,1.0,9
+Q6_K,palindrome-code,Code,False,True,0.66,22.55,63.67,39,47,0,1.0,"```python
+import string
+
+def is_palindrome(s):
+    cleaned = ''.join(char.lower() for char in s if char.isalnum())
+    return cleaned == cleaned[::-1]
+```"
+Q6_K,capital,Knowledge,False,True,0.09,21.87,60.13,3,22,0,1.0,Canberra
+Q6_K,three-bullets,Instruction following,False,True,0.82,22.5,63.91,50,33,0,0.64,"- Reduces model size, making it easier to deploy on devices with limited storage.  
+- Lowers computational requirements, enabling faster inference and lower power consumption.  
+- Enhances model efficiency without significant loss in accuracy, improving real-time performance."
+Q6_K,malayalam,Multilingual,False,True,0.75,27.23,64.07,46,82,0,1.0,ഇന്ത്യയുടെ തലസ്ഥാനം ന്യൂഡൽഹിയാണ്.
+Q6_K,hindi,Multilingual,False,True,0.47,27.35,64.33,29,54,0,1.0,भारत की राजधानी नई दिल्ली है।
+Q6_K,summary,Summarization,False,,1.09,28.14,63.92,67,111,0,0.443,"Quantization reduces the number of bits used to store neural network weights, making models smaller, more memory-efficient, and faster to run, though it slightly decreases accuracy. Lower bit versions, like 3-bit, experience more accuracy loss compared to higher bit versions such as 8-bit, which remain nearly identical to the original model."
+Q6_K,needle,Long context,False,True,1.33,1204.35,55.47,5,6495,0,1.0,7341
+Q6_K,weather-tool,Tool calling,False,True,0.57,33.03,63.55,20,160,0,1.0,
+Q5_K_M,bat-ball,Logic,True,True,25.28,28.72,71.27,1794,39,4307,0.609,"To solve the problem, we are told that:
+
+- A bat and a ball together cost **$1.10**.
+- The **bat costs $1.00 more than the ball**.
+
+---
+
+### Step 1: Define Variables
+
+Let the cost of the **ball** be $ x $ dollars.
+
+Then, the **bat** costs $ x + 1.00 $ dollars.
+
+---
+
+### Step 2: Set Up the Equation
+
+The total cost of the bat and the ball is given as $1.10:
+
+$$
+x + (x + 1.00) = 1.10
+$$
+
+Simplify the left-hand side:
+
+$$
+2x + 1.00 = 1.10
+$$
+
+---
+
+### Step 3: Solve for $ x $
+
+Subtract 1.00 from both sides:
+
+$$
+2x = 0.10
+$$
+
+Divide both sides by 2:
+
+$$
+x = 0.05
+$$
+
+---
+
+### Step 4: Interpret the Result
+
+So, the **ball costs $0.05** (5 cents), and the **bat costs $1.05**.
+
+Let’s verify:
+
+- Ball: $0.05
+- Bat: $1.05
+- Total: $0.05 + $1.05 = $1.10 ✅
+- Bat is $1.00 more than the ball: $1.05 - $0.05 = $1.00 ✅
+
+---
+
+### Final Answer
+
+$$
+\boxed{0.05}
+$$"
+Q5_K_M,multiply,Math,False,True,0.16,19.41,71.13,4,26,0,1.0,391
+Q5_K_M,word-problem,Math,True,True,16.71,24.81,71.2,1181.5,55,3411,0.549,"To determine how many rupees Riya has left, let's break the problem into clear steps:
+
+---
+
+### Step 1: Calculate the total cost of the pens
+
+Riya buys **7 pens**, each costing **12 rupees**.
+
+$$
+\text{Total cost of pens} = 7 \times 12 = 84 \text{ rupees}
+$$
+
+---
+
+### Step 2: Determine the change received
+
+Riya pays with a **100 rupee note**.
+
+$$
+\text{Change received} = 100 - 84 = 16 \text{ rupees}
+$$
+
+---
+
+### Step 3: Calculate the amount spent on the notebook
+
+She spends **half of her change** on a notebook.
+
+$$
+\text{Amount spent on notebook} = \frac{1}{2} \times 16 = 8 \text{ rupees}
+$$
+
+---
+
+### Step 4: Determine the remaining amount
+
+$$
+\text{Remaining amount} = 16 - 8 = 8 \text{ rupees}
+$$
+
+---
+
+### Final Answer
+
+$$
+\boxed{8}
+$$"
+Q5_K_M,sheep,Reasoning,True,True,5.46,21.45,72.0,385.5,33,1197,1.0,9
+Q5_K_M,palindrome-code,Code,False,True,0.6,23.45,71.66,39,47,0,1.0,"```python
+import string
+
+def is_palindrome(s):
+    cleaned = ''.join(char.lower() for char in s if char.isalnum())
+    return cleaned == cleaned[::-1]
+```"
+Q5_K_M,capital,Knowledge,False,True,0.08,23.84,61.68,3,22,0,1.0,Canberra
+Q5_K_M,three-bullets,Instruction following,False,True,0.67,21.32,72.73,46,33,0,0.67,"- Reduces model size, making it easier to deploy on devices with limited storage.  
+- Lowers computational requirements, improving inference speed and energy efficiency.  
+- Enables deployment on edge devices and mobile platforms with constrained resources."
+Q5_K_M,malayalam,Multilingual,False,True,0.67,27.66,71.74,46,82,0,1.0,ഇന്ത്യയുടെ തലസ്ഥാനം ന്യൂഡൽഹിയാണ്.
+Q5_K_M,hindi,Multilingual,False,True,0.45,22.83,72.64,29,54,0,1.0,भारत की राजधानी नई दिल्ली है।
+Q5_K_M,summary,Summarization,False,,0.83,26.06,71.99,58,111,0,0.346,"Quantization reduces the number of bits used to store neural network weights, making models smaller and faster by decreasing memory usage and data transfer. While this slightly reduces accuracy, the impact is minimal with 8-bit quantization, but becomes more noticeable with lower bit counts like 3 bits."
+Q5_K_M,needle,Long context,False,True,1.24,1098.11,60.93,5,6495,0,1.0,7341
+Q5_K_M,weather-tool,Tool calling,False,True,0.54,30.68,70.64,20,160,0,1.0,
+Q4_K_M,bat-ball,Logic,True,True,26.67,26.85,80.21,2133.5,39,6775,0.591,"To solve the problem, we begin by translating the given information into a mathematical model.
+
+---
+
+### Step 1: Define Variables
+
+Let the cost of the **ball** be $ x $ dollars.  
+Since the **bat costs $1.00 more than the ball**, the cost of the **bat** is $ x + 1.00 $ dollars.
+
+---
+
+### Step 2: Use the Total Cost
+
+We are told that the **total cost** of the bat and the ball is $1.10. So, we can write the equation:
+
+$$
+x + (x + 1.00) = 1.10
+$$
+
+Simplify the left-hand side:
+
+$$
+2x + 1.00 = 1.10
+$$
+
+---
+
+### Step 3: Solve for $ x $
+
+Subtract 1.00 from both sides:
+
+$$
+2x = 0.10
+$$
+
+Now divide both sides by 2:
+
+$$
+x = 0.05
+$$
+
+---
+
+### Step 4: Interpret the Result
+
+This means the **ball costs $0.05** (or 5 cents), and the **bat costs $1.05** (since it is $1.00 more than the ball).  
+Checking the total:
+
+$$
+0.05 + 1.05 = 1.10
+$$
+
+This confirms the solution is correct.
+
+---
+
+### Final Answer
+
+$$
+\boxed{0.05}
+$$"
+Q4_K_M,multiply,Math,False,True,0.13,17.34,80.0,4,26,0,1.0,391
+Q4_K_M,word-problem,Math,True,True,16.63,29.16,80.2,1325,55,3287,0.511,"To determine how many rupees Riya has left, we'll break the problem into clear steps:
+
+---
+
+### Step 1: Calculate the total cost of the pens
+
+Each pen costs **12 rupees**, and Riya buys **7 pens**:
+
+$$
+7 \times 12 = 84 \text{ rupees}
+$$
+
+---
+
+### Step 2: Determine the change she receives
+
+Riya pays with a **100 rupee note**, so the change she gets back is:
+
+$$
+100 - 84 = 16 \text{ rupees}
+$$
+
+---
+
+### Step 3: Calculate how much she spends on the notebook
+
+She spends **half of her change** on a notebook:
+
+$$
+\frac{1}{2} \times 16 = 8 \text{ rupees}
+$$
+
+---
+
+### Step 4: Determine how much money she has left
+
+After spending 8 rupees on the notebook, the remaining amount is:
+
+$$
+16 - 8 = 8 \text{ rupees}
+$$
+
+---
+
+### Final Answer:
+
+$$
+\boxed{8}
+$$"
+Q4_K_M,sheep,Reasoning,True,True,4.9,29.75,81.69,392.5,33,1242,1.0,9
+Q4_K_M,palindrome-code,Code,False,True,0.55,26.44,80.43,39,47,0,0.97,"```python
+import string
+
+def is_palindrome(s):
+    cleaned = ''.join(c.lower() for c in s if c.isalnum())
+    return cleaned == cleaned[::-1]
+```"
+Q4_K_M,capital,Knowledge,False,True,0.08,22.61,75.41,3,22,0,1.0,Canberra
+Q4_K_M,three-bullets,Instruction following,False,True,0.59,17.71,81.75,46,33,0,0.67,"- Reduces model size, making it easier to deploy on devices with limited storage.  
+- Lowers computational requirements, improving inference speed and energy efficiency.  
+- Enables deployment on edge devices and mobile platforms with constrained resources."
+Q4_K_M,malayalam,Multilingual,False,True,0.62,27.31,80.62,47,82,0,0.985,ഇന്ത്യയുടെ തലസ്ഥാനം ന്യൂ ഡൽഹിയാണ്.
+Q4_K_M,hindi,Multilingual,False,True,0.39,20.7,81.97,29,54,0,1.0,भारत की राजधानी नई दिल्ली है।
+Q4_K_M,summary,Summarization,False,,0.82,30.16,82.41,64,111,0,0.311,"Quantization reduces the number of bits used to store neural network weights, making models smaller and faster while requiring less memory, though it slightly decreases accuracy. Lower bit versions, like 3-bit, experience more accuracy loss compared to higher bit versions such as 8-bit, which remain nearly identical to the original model."
+Q4_K_M,needle,Long context,False,True,1.17,1041.18,68.27,5,6495,0,1.0,7341
+Q4_K_M,weather-tool,Tool calling,False,True,0.51,29.36,80.58,20,160,0,1.0,
+IQ4_XS,bat-ball,Logic,True,True,18.36,44.2,86.31,1572,39,3981,0.14,"To solve the problem, we begin by translating the given information into a mathematical equation.
+
+---
+
+### Step 1: Define Variables
+
+Let the cost of the **ball** be $ x $ dollars.
+
+Since the **bat costs $1.00 more than the ball**, the cost of the **bat** is $ x + 1.00 $ dollars.
+
+---
+
+### Step 2: Use the Total Cost
+
+We are told that the **total cost of the bat and the ball is $1.10**. So, we can write the equation:
+
+$$
+x + (x + 1.00) = 1.10
+$$
+
+---
+
+### Step 3: Simplify the Equation
+
+$$
+2x + 1.00 = 1.10
+$$
+
+Subtract 1.00 from both sides:
+
+$$
+2x = 0.10
+$$
+
+Divide both sides by 2:
+
+$$
+x = 0.05
+$$
+
+---
+
+### Step 4: Interpret the Result
+
+The value of $ x $ is **$0.05**, which means the **ball costs 5 cents**.
+
+To verify:
+
+- Ball: $0.05
+- Bat: $0.05 + $1.00 = $1.05
+- Total: $0.05 + $1.05 = $1.10 ✅
+
+---
+
+### Final Answer
+
+$$
+\boxed{0.05}
+$$"
+IQ4_XS,multiply,Math,False,True,0.15,21.13,82.95,4,26,0,1.0,391
+IQ4_XS,word-problem,Math,True,True,14.22,27.02,86.56,1224,55,2557,0.809,"To determine how many rupees Riya has left, let's analyze the situation step by step:
+
+---
+
+### Step 1: Cost of Pens
+Riya buys **7 pens**, each costing **12 rupees**.
+
+$$
+\text{Total cost of pens} = 7 \times 12 = 84 \text{ rupees}
+$$
+
+---
+
+### Step 2: Change Received
+She pays with a **100 rupee note**, so the change she receives is:
+
+$$
+\text{Change} = 100 - 84 = 16 \text{ rupees}
+$$
+
+---
+
+### Step 3: Spending on a Notebook
+She spends **half of her change** on a notebook:
+
+$$
+\text{Amount spent on notebook} = \frac{1}{2} \times 16 = 8 \text{ rupees}
+$$
+
+---
+
+### Step 4: Remaining Money
+Now, subtract the amount spent on the notebook from the change:
+
+$$
+\text{Remaining money} = 16 - 8 = 8 \text{ rupees}
+$$
+
+---
+
+### Final Answer
+
+$$
+\boxed{8}
+$$"
+IQ4_XS,sheep,Reasoning,True,True,3.86,19.92,88.68,333,33,1180,1.0,9
+IQ4_XS,palindrome-code,Code,False,True,0.54,20.14,88.84,43,47,0,0.847,"```python
+import string
+
+def is_palindrome(s):
+    s = s.lower()
+    s = ''.join(char for char in s if char.isalnum())
+    return s == s[::-1]
+```"
+IQ4_XS,capital,Knowledge,False,True,0.08,22.48,80.49,3,22,0,1.0,Canberra
+IQ4_XS,three-bullets,Instruction following,False,True,0.56,19.16,88.82,46,33,0,0.67,"- Reduces model size, making it easier to deploy on devices with limited storage.  
+- Lowers computational requirements, improving inference speed and energy efficiency.  
+- Enables deployment on edge devices and mobile platforms with constrained resources."
+IQ4_XS,malayalam,Multilingual,False,False,0.58,23.31,88.61,48,82,0,0.882,ഇന്ത്യയുടെ തലസ്ഥാനം ന്യൂ ഡല്ലീയാണ്.
+IQ4_XS,hindi,Multilingual,False,True,0.35,18.37,90.2,29,54,0,1.0,भारत की राजधानी नई दिल्ली है।
+IQ4_XS,summary,Summarization,False,,0.69,27.43,88.72,58,111,0,0.448,"Quantization reduces the number of bits used to store neural network weights, making models smaller and faster while slightly decreasing accuracy. Lower bit versions, like 3-bit, experience more accuracy loss compared to higher bit versions such as 8-bit, which remain nearly identical to the original model."
+IQ4_XS,needle,Long context,False,True,1.09,973.54,71.86,5,6495,0,1.0,7341
+IQ4_XS,weather-tool,Tool calling,False,True,0.49,25.71,87.41,20,160,0,1.0,
+Q3_K_M,bat-ball,Logic,True,True,21.02,53.29,92.73,1938,39,5192,0.792,"To solve the problem, we are told that:
+
+- A bat and a ball together cost **$1.10**.
+- The **bat costs $1.00 more than the ball**.
+
+---
+
+### Step 1: Define Variables
+
+Let the cost of the **ball** be $ x $ dollars.  
+Then, the cost of the **bat** is $ x + 1.00 $ dollars.
+
+---
+
+### Step 2: Set Up the Equation
+
+The total cost of the bat and the ball is $1.10:
+
+$$
+x + (x + 1.00) = 1.10
+$$
+
+Simplify the left-hand side:
+
+$$
+2x + 1.00 = 1.10
+$$
+
+---
+
+### Step 3: Solve for $ x $
+
+Subtract 1.00 from both sides:
+
+$$
+2x = 0.10
+$$
+
+Divide both sides by 2:
+
+$$
+x = 0.05
+$$
+
+---
+
+### Step 4: Interpret the Result
+
+- The **ball costs** $ x = 0.05 $ dollars.
+- The **bat costs** $ x + 1.00 = 1.05 $ dollars.
+- Total: $ 0.05 + 1.05 = 1.10 $, which matches the given total.
+
+---
+
+### Final Answer
+
+$$
+\boxed{0.05}
+$$"
+Q3_K_M,multiply,Math,False,True,0.14,19.62,92.46,4,26,0,1.0,391
+Q3_K_M,word-problem,Math,True,True,10.96,27.42,90.89,987,55,2938,0.144,"Riya buys 7 pens at 12 rupees each. The total cost of the pens is calculated as follows:
+
+$$
+7 \times 12 = 84 \text{ rupees}
+$$
+
+She pays with a 100 rupee note, so the change she receives is:
+
+$$
+100 - 84 = 16 \text{ rupees}
+$$
+
+She then spends half of her change on a notebook. Half of 16 rupees is:
+
+$$
+\frac{16}{2} = 8 \text{ rupees}
+$$
+
+Therefore, the amount of money she has left after spending half of her change is:
+
+$$
+16 - 8 = 8 \text{ rupees}
+$$
+
+$$
+\boxed{8}
+$$"
+Q3_K_M,sheep,Reasoning,True,True,7.49,24.6,92.15,679.5,33,2313,1.0,9
+Q3_K_M,palindrome-code,Code,False,True,0.48,20.01,94.41,39,47,0,0.97,"```python
+import string
+
+def is_palindrome(s):
+    cleaned = ''.join(c.lower() for c in s if c.isalnum())
+    return cleaned == cleaned[::-1]
+```"
+Q3_K_M,capital,Knowledge,False,True,0.06,16.14,81.52,3,22,0,1.0,Canberra
+Q3_K_M,three-bullets,Instruction following,False,True,0.56,22.37,92.74,47,33,0,0.439,"- Reduces model size, making it easier to deploy on devices with limited memory.  
+- Improves inference speed by enabling faster computations on hardware.  
+- Lowers power consumption, which is beneficial for mobile and edge devices."
+Q3_K_M,malayalam,Multilingual,False,False,0.55,24.99,92.56,48,82,0,0.882,ഇന്ത്യയുടെ തലസ്ഥാനം ന്യൂ ഡല്ലീയാണ്.
+Q3_K_M,hindi,Multilingual,False,True,0.35,18.74,94.97,29,54,0,1.0,भारत की राजधानी नई दिल्ली है।
+Q3_K_M,summary,Summarization,False,,0.74,29.88,94.18,65,111,0,0.352,"Quantization reduces the bit width of neural network weights, significantly decreasing model size and improving inference speed on GPUs, though it comes with a slight accuracy loss. Lower bit versions, like 3-bit, experience more accuracy degradation compared to higher bit versions such as 8-bit, which remain nearly identical to the original model."
+Q3_K_M,needle,Long context,False,True,1.22,1108.51,75.45,5,6495,0,1.0,7341
+Q3_K_M,weather-tool,Tool calling,False,True,0.46,30.77,94.35,20,160,0,1.0,
+IQ3_M,bat-ball,Logic,True,True,16.43,50.12,91.51,1495.5,39,4422,0.581,"To solve the problem, we begin by translating the given information into a mathematical equation.
+
+---
+
+### Step 1: Define Variables
+
+Let the cost of the **ball** be $ x $ dollars.  
+Then, the **bat** costs $ x + 1.00 $ dollars, since it is $1.00 more than the ball.
+
+---
+
+### Step 2: Set Up the Equation
+
+The total cost of the bat and the ball is $1.10. So:
+
+$$
+x + (x + 1.00) = 1.10
+$$
+
+Simplify the left-hand side:
+
+$$
+2x + 1.00 = 1.10
+$$
+
+---
+
+### Step 3: Solve for $ x $
+
+Subtract 1.00 from both sides:
+
+$$
+2x = 0.10
+$$
+
+Divide both sides by 2:
+
+$$
+x = 0.05
+$$
+
+---
+
+### Step 4: Interpret the Result
+
+This means the **ball costs $0.05** (or 5 cents), and the **bat costs $1.05**, which is indeed $1.00 more than the ball. The total is:
+
+$$
+0.05 + 1.05 = 1.10
+$$
+
+This confirms the solution is consistent with the problem's conditions.
+
+---
+
+### Final Answer
+
+$$
+\boxed{0.05}
+$$"
+IQ3_M,multiply,Math,False,True,0.12,21.97,96.73,4,26,0,1.0,391
+IQ3_M,word-problem,Math,True,True,14.7,23.45,89.55,1309.5,55,2745,0.918,"To determine how many rupees Riya has left after her purchases, let's break the problem into clear steps:
+
+---
+
+### Step 1: Cost of Pens
+Riya buys **7 pens**, and each pen costs **12 rupees**.
+
+$$
+\text{Total cost of pens} = 7 \times 12 = 84 \text{ rupees}
+$$
+
+---
+
+### Step 2: Change Received
+She pays with a **100-rupee note**, so the change she receives is:
+
+$$
+\text{Change} = 100 - 84 = 16 \text{ rupees}
+$$
+
+---
+
+### Step 3: Spending on a Notebook
+She spends **half of her change** on a notebook:
+
+$$
+\text{Amount spent on notebook} = \frac{1}{2} \times 16 = 8 \text{ rupees}
+$$
+
+---
+
+### Step 4: Remaining Money
+Now, subtract the amount spent on the notebook from the change she had:
+
+$$
+\text{Remaining money} = 16 - 8 = 8 \text{ rupees}
+$$
+
+---
+
+### Final Answer
+
+$$
+\boxed{8}
+$$"
+IQ3_M,sheep,Reasoning,True,True,6.19,21.58,91.78,558.5,33,1915,1.0,9
+IQ3_M,palindrome-code,Code,False,True,0.46,19.61,95.57,39,47,0,1.0,"```python
+import string
+
+def is_palindrome(s):
+    cleaned = ''.join(char.lower() for char in s if char.isalnum())
+    return cleaned == cleaned[::-1]
+```"
+IQ3_M,capital,Knowledge,False,True,0.06,16.08,85.95,3,22,0,1.0,Canberra
+IQ3_M,three-bullets,Instruction following,False,True,0.63,20.02,94.59,56.5,33,0,0.151,"- Model quantization reduces the memory footprint, allowing models to run on devices with limited memory.  
+- It can significantly decrease inference latency, making models faster and more efficient.  
+- Quantization often leads to lower power consumption, which is beneficial for mobile and edge devices."
+IQ3_M,malayalam,Multilingual,False,False,0.54,25.92,94.65,47,82,0,0.955,ഇന്ത്യയുടെ തലസ്ഥാനം ന്യൂദെൽഹിയാണ്.
+IQ3_M,hindi,Multilingual,False,True,0.33,22.09,96.11,29,54,0,1.0,भारत की राजधानी नई दिल्ली है।
+IQ3_M,summary,Summarization,False,,0.69,23.32,93.45,61,111,0,0.513,"Quantization reduces the number of bits used to store neural network weights, making models smaller, faster, and more memory-efficient, though it comes with a slight accuracy loss. While 8-bit models perform nearly as well as the original, lower bit versions like 3-bit experience more significant accuracy drops."
+IQ3_M,needle,Long context,False,True,1.08,980.01,79.41,5,6495,0,1.0,7341
+IQ3_M,weather-tool,Tool calling,False,True,0.46,32.46,96.21,20,160,0,1.0,

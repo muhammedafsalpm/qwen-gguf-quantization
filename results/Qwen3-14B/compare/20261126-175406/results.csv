@@ -1,0 +1,1693 @@
+quant,prompt,category,thinking,correct,wall_s,prefill_ms,tok_s,gen_tokens,prompt_tokens,reasoning_chars,similarity_to_q8_0,answer
+Q8_0,en-coconuts,English,True,True,20.8,38.55,52.45,1089,56,2424,,"The farmer earns ₹12,960 in one month. Here's the step-by-step breakdown:
+
+1. **Total Number of Trees**:  
+   The farmer has 3 fields, each with 24 trees.  
+   $ 3 \text{ fields} \times 24 \text{ trees/field} = 72 \text{ trees} $.
+
+2. **Total Coconuts Produced**:  
+   Each tree yields 15 coconuts per month.  
+   $ 72 \text{ trees} \times 15 \text{ coconuts/tree} = 1,080 \text{ coconuts} $.
+
+3. **Total Earnings**:  
+   Each coconut is sold for ₹12.  
+   $ 1,080 \text{ coconuts} \times ₹12/\text{coconut} = ₹12,960 $.
+
+**Answer:** ₹12,960."
+Q8_0,en-heights,English,True,True,9.27,27.55,52.51,480,38,1261,,"To determine who is the shortest and who is the tallest among the individuals mentioned, we analyze the given relationships step by step:
+
+1. **Ravi is taller than Anu** → Ravi > Anu  
+2. **Anu is taller than Meera** → Anu > Meera  
+3. **Meera is taller than Joseph** → Meera > Joseph  
+
+By combining these relationships, we can establish a clear hierarchy from tallest to shortest:
+
+- **Ravi > Anu > Meera > Joseph**
+
+---
+
+### Conclusion:
+
+- The **tallest** person is **Ravi**.
+- The **shortest** person is **Joseph**.
+
+$$
+\boxed{\text{Shortest: Joseph, Tallest: Ravi}}
+$$"
+Q8_0,en-weekday,English,True,True,41.69,28.98,51.92,2160,28,5875,,"To determine what day of the week it will be 100 days from Wednesday, we can use the fact that the days of the week repeat every 7 days. This means we can use modular arithmetic to find the equivalent day within the 7-day cycle.
+
+---
+
+### Step 1: Understand the Weekly Cycle
+
+The days of the week cycle in a repeating pattern of 7 days:
+
+- Wednesday = 0  
+- Thursday = 1  
+- Friday = 2  
+- Saturday = 3  
+- Sunday = 4  
+- Monday = 5  
+- Tuesday = 6  
+
+If today is Wednesday (which we'll assign the value 0), then any number of days from today can be reduced modulo 7 to find the corresponding day in the cycle.
+
+---
+
+### Step 2: Compute the Remainder
+
+We want to find the day of the week 100 days from Wednesday. This is equivalent to computing:
+
+$$
+100 \mod 7
+$$
+
+We divide 100 by 7:
+
+$$
+100 \div 7 = 14 \text{ remainder } 2
+$$
+
+So, 100 days from Wednesday is the same as 2 days after Wednesday.
+
+---
+
+### Step 3: Count Forward from Wednesday
+
+- Wednesday + 1 day = **Thursday**  
+- Wednesday + 2 days = **Friday**
+
+---
+
+### Step 4: Final Answer
+
+Thus, 100 days from Wednesday is:
+
+$$
+\boxed{Friday}
+$$"
+Q8_0,en-discount,English,True,True,34.17,28.02,52.16,1773,42,4179,,"To determine the final price of the shirt after applying a 25% discount and then a 5% tax on the discounted price, we proceed step by step:
+
+---
+
+### **Step 1: Apply the 25% Discount**
+
+The original price of the shirt is ₹800. A 25% discount means the customer pays 75% of the original price.
+
+$$
+\text{Discounted Price} = 800 \times (1 - 0.25) = 800 \times 0.75 = 600
+$$
+
+So, after the discount, the price of the shirt is **₹600**.
+
+---
+
+### **Step 2: Apply the 5% Tax on the Discounted Price**
+
+Now, a 5% tax is added to the discounted price of ₹600.
+
+$$
+\text{Tax Amount} = 600 \times 0.05 = 30
+$$
+
+$$
+\text{Final Price} = 600 + 30 = 630
+$$
+
+---
+
+### **Final Answer**
+
+$$
+\boxed{630}
+$$
+
+The final price of the shirt after the discount and tax is **₹630**."
+Q8_0,ml-coconuts,Malayalam,True,True,19.03,62.24,52.12,982,293,1017,,"**ഘട്ടം 1: പറമ്പുകളിലെ തെങ്ങുകളുടെ എണ്ണം കണക്കാക്കുക**  
+കർഷകന് 3 പറമ്പുകളുണ്ട്. ഓരോ പറമ്പിലും 24 തെങ്ങുകൾ ഉണ്ട്.  
+അതിനാൽ, ആകെ തെങ്ങുകളുടെ എണ്ണം = 3 × 24 = **72 തെങ്ങുകൾ**.
+
+---
+
+**ഘട്ടം 2: ഒരു മാസം ലഭിക്കുന്ന തേങ്ങയുടെ എണ്ണം കണക്കാക്കുക**  
+ഓരോ തെങ്ങിൽ നിന്നും മാസം 15 തേങ്ങ ലഭിക്കുന്നു.  
+അതിനാൽ, ആകെ തേങ്ങയുടെ എണ്ണം = 72 × 15 = **1080 തേങ്ങ**.
+
+---
+
+**ഘട്ടം 3: വരുമാനം കണക്കാക്കുക**  
+ഓരോ തേങ്ങ ₹12-ന് വിൽക്കുന്നു.  
+അതിനാൽ, ആകെ വരുമാനം = 1080 × 12 = **₹12,960**.
+
+---
+
+**ഉത്തരം:**  
+കർഷകന് ഒരു മാസം **₹12,960** ലഭിക്കും."
+Q8_0,ml-heights,Malayalam,True,True,10.46,50.3,52.37,540,246,1187,,"ഏറ്റവും ഉയരം കുറഞ്ഞത് **ജോസഫ്** ആണ്.  
+ഏറ്റവും ഉയരം കൂടിയത് **രവി** ആണ്.  
+
+**വിശദീകരണം:**  
+രവി > അനു > മീര > ജോസഫ്  
+ഇതിനു അനുസരിച്ച്, ജോസഫ് ഏറ്റവും കുറഞ്ഞ ഉയരമുള്ളവനാണ്, അതേസമയം രവി ഏറ്റവും ഉയരമുള്ളവനാണ്."
+Q8_0,ml-weekday,Malayalam,True,True,44.15,38.62,51.12,2251,142,4935,,"ഇന്ന് ബുധനാഴ്ചയാണെങ്കിൽ, 100 ദിവസം കഴിഞ്ഞാൽ ഏത് ദിവസമായിരിക്കും എന്ന് കണക്കാക്കാം. 
+
+**കണക്കുകൂട്ടൽ:**
+- 7 ദിവസം ഒരു ആഴ്ചയാണ്. 100 ദിവസം വിഭജിച്ചാൽ, 100 ÷ 7 = 14 ആഴ്ചകൾ കൂടി 2 ദിവസം ബാക്കി വരും (14 × 7 = 98, 100 - 98 = 2).
+- ഇന്ന് ബുധനാഴ്ചയാണെങ്കിൽ, 2 ദിവസം കൂടി കണക്കാക്കിയാൽ:  
+  - 1 ദിവസം = വ്യാഴാഴ്ച  
+  - 2 ദിവസം = **വെള്ളിയാഴ്ച**  
+
+**അവസാന ഉത്തരം:**  
+100 ദിവസം കഴിഞ്ഞാൽ **വെള്ളിയാഴ്ച** ആയിരിക്കും."
+Q8_0,ml-discount,Malayalam,True,True,17.64,46.18,51.4,897,197,1399,,"ഷർട്ടിന്റെ ആദ്യകാല വില ₹800 ആണ്. കട 25% കിഴിവ് നൽകുന്നതിനാൽ, കിഴിവ് കണക്കാക്കുക:
+
+**കിഴിവ് കണക്കാക്കൽ:**
+25% കിഴിവ് = 800 × (25/100) = ₹200  
+കിഴിവ് ചെയ്ത വില = 800 - 200 = ₹600
+
+ഇനി, കിഴിവ് ചെയ്ത വിലയിൽ 5% നികുതി ചേർക്കുന്നു:
+
+**നികുതി കണക്കാക്കൽ:**
+5% നികുതി = 600 × (5/100) = ₹30  
+അവസാന വില = 600 + 30 = ₹630
+
+**അവസാന വില:** ₹630  
+
+അതായത്, ഷർട്ടിന്റെ അവസാന വില ₹630 ആണ്."
+Q8_0,ml-translate,Malayalam,False,True,0.43,43.42,50.41,16,171,0,,"""The train to Kochi was delayed by two hours due to heavy rain."""
+Q8_0,hi-coconuts,Hindi,True,True,15.06,42.4,51.52,772,180,1145,,"एक किसान के पास 3 खेत हैं, जिनमें प्रत्येक खेत में 24 नारियल के पेड़ हैं। इसलिए, कुल पेड़ों की संख्या निम्नलिखित तरीके से ज्ञात करें:  
+**3 खेत × 24 पेड़ = 72 पेड़**  
+
+हर पेड़ से हर महीने 15 नारियल मिलते हैं, इसलिए कुल नारियल की संख्या:  
+**72 पेड़ × 15 नारियल = 1,080 नारियल**  
+
+प्रत्येक नारियल को ₹12 में बेचा जाता है, इसलिए कुल कमाई:  
+**1,080 नारियल × ₹12 = ₹12,960**  
+
+**उत्तर:** एक महीने में किसान ₹12,960 कमाएगा।"
+Q8_0,hi-heights,Hindi,True,True,11.42,32.83,51.73,584,118,1451,,"सबसे छोटा: **जोसेफ**  
+सबसे लंबा: **रवि**  
+
+**स्पष्टीकरण:**  
+- रवि > अनु (रवि अनु से लंबा है)  
+- अनु > मीरा (अनु मीरा से लंबी है)  
+- मीरा > जोसेफ (मीरा जोसेफ से लंबी है)  
+
+इस प्रकार, ऊंचाई के क्रम में: **रवि > अनु > मीरा > जोसेफ**  
+अतः, **जोसेफ सबसे छोटा** और **रवि सबसे लंबा** है।"
+Q8_0,hi-weekday,Hindi,True,True,23.59,31.08,51.49,1210,72,2483,,"आज बुधवार है, तो 100 दिन बाद कौन सा दिन होगा? इसके लिए हम दिनों की संख्या को 7 से विभाजित करते हैं क्योंकि एक सप्ताह में 7 दिन होते हैं।
+
+1. **गणना करें**:  
+   $ 100 \div 7 = 14 $ बार और शेष $ 2 $ दिन।  
+   इसका मतलब है कि 100 दिन में 14 सप्ताह (98 दिन) और 2 अतिरिक्त दिन होंगे।
+
+2. **दिन जोड़ें**:  
+   आज बुधवार है, तो 2 दिन बाद:  
+   - 1 दिन बाद: **गुरुवार**  
+   - 2 दिन बाद: **शुक्रवार**  
+
+**उत्तर**: 100 दिन बाद **शुक्रवार** होगा।  
+
+**स्पष्टीकरण**:  
+- 7 दिन एक सप्ताह होते हैं, इसलिए 98 दिन (14 सप्ताह) बाद दिन वही रहेगा (बुधवार)।  
+- शेष 2 दिन बुधवार से जोड़ने पर शुक्रवार होगा।"
+Q8_0,hi-discount,Hindi,True,True,16.46,33.77,51.54,841,127,1429,,"एक शर्ट की मूल कीमत ₹800 है। दुकान द्वारा 25% की छूट देने के बाद छूट वाली कीमत पर 5% का टैक्स जोड़ा जाता है। अंतिम कीमत की गणना इस प्रकार की जाती है:
+
+1. **छूट की गणना**:  
+   25% छूट = ₹800 × 25% = ₹200  
+   छूट वाली कीमत = ₹800 - ₹200 = **₹600**
+
+2. **टैक्स की गणना**:  
+   5% टैक्स = ₹600 × 5% = ₹30  
+   अंतिम कीमत = ₹600 + ₹30 = **₹630**
+
+**अंतिम उत्तर**: शर्ट की अंतिम कीमत ₹630 है।"
+Q8_0,hi-translate,Hindi,False,True,0.41,34.27,50.61,16,116,0,,The train to Kochi was delayed by two hours due to heavy rain.
+Q6_K,en-coconuts,English,True,True,12.2,35.5,64.68,787,56,1775,0.472,"The farmer earns ₹12,960 in one month. Here's the step-by-step breakdown:
+
+1. **Total Number of Trees**:  
+   $ 3 \text{ fields} \times 24 \text{ trees/field} = 72 \text{ trees} $.
+
+2. **Total Coconuts Produced**:  
+   $ 72 \text{ trees} \times 15 \text{ coconuts/tree} = 1,080 \text{ coconuts} $.
+
+3. **Total Earnings**:  
+   $ 1,080 \text{ coconuts} \times ₹12/\text{coconut} = ₹12,960 $.
+
+**Answer:** ₹12,960."
+Q6_K,en-heights,English,True,True,8.25,25.82,64.5,525,38,1458,0.974,"To determine who is the shortest and who is the tallest among the individuals mentioned, we analyze the given relationships step by step:
+
+1. **Ravi is taller than Anu** → Ravi > Anu  
+2. **Anu is taller than Meera** → Anu > Meera  
+3. **Meera is taller than Joseph** → Meera > Joseph  
+
+By combining these relationships, we can establish a clear hierarchy from tallest to shortest:
+
+- **Ravi > Anu > Meera > Joseph**
+
+---
+
+### Conclusion:
+
+- The **tallest** person is **Ravi**.
+- The **shortest** person is **Joseph**.
+
+$$
+\boxed{\text{Tallest: Ravi, Shortest: Joseph}}
+$$"
+Q6_K,en-weekday,English,True,True,48.33,25.52,62.77,3029,28,8408,0.469,"To determine what day of the week it will be 100 days from today, given that today is **Wednesday**, we can use the fact that the days of the week repeat every **7 days**. This cyclical pattern allows us to use **modular arithmetic** to find the equivalent day after a certain number of days.
+
+---
+
+### Step 1: Understand the Weekly Cycle
+
+The days of the week cycle in a fixed order:
+
+- Sunday = 0  
+- Monday = 1  
+- Tuesday = 2  
+- Wednesday = 3  
+- Thursday = 4  
+- Friday = 5  
+- Saturday = 6  
+
+Since today is **Wednesday**, we can assign it the value **3** in this system.
+
+---
+
+### Step 2: Use Modular Arithmetic
+
+We want to find the day of the week **100 days from Wednesday**. This is equivalent to computing:
+
+$$
+(3 + 100) \mod 7
+$$
+
+First, compute the sum:
+
+$$
+3 + 100 = 103
+$$
+
+Now, divide 103 by 7 to find the remainder:
+
+$$
+103 \div 7 = 14 \text{ remainder } 5
+$$
+
+So:
+
+$$
+103 \mod 7 = 5
+$$
+
+---
+
+### Step 3: Interpret the Result
+
+From our earlier mapping:
+
+- 0 = Sunday  
+- 1 = Monday  
+- 2 = Tuesday  
+- 3 = Wednesday  
+- 4 = Thursday  
+- 5 = **Friday**  
+- 6 = Saturday  
+
+Since the result is **5**, the day of the week 100 days from Wednesday is **Friday**.
+
+---
+
+### Final Answer
+
+$$
+\boxed{Friday}
+$$"
+Q6_K,en-discount,English,True,True,21.29,26.45,63.84,1344,42,3168,0.558,"To determine the final price of the shirt after applying a 25% discount and then a 5% tax on the discounted price, we proceed step by step:
+
+---
+
+### **Step 1: Apply the 25% Discount**
+
+The original price of the shirt is ₹800. A 25% discount means we reduce the price by 25% of ₹800.
+
+$$
+\text{Discount} = 800 \times \frac{25}{100} = 800 \times 0.25 = 200
+$$
+
+$$
+\text{Discounted Price} = 800 - 200 = 600
+$$
+
+---
+
+### **Step 2: Apply the 5% Tax on the Discounted Price**
+
+Now, a 5% tax is applied to the discounted price of ₹600.
+
+$$
+\text{Tax} = 600 \times \frac{5}{100} = 600 \times 0.05 = 30
+$$
+
+$$
+\text{Final Price} = 600 + 30 = 630
+$$
+
+---
+
+### **Final Answer**
+
+$$
+\boxed{630}
+$$"
+Q6_K,ml-coconuts,Malayalam,True,True,16.11,86.94,63.87,1016,293,1065,0.873,"**ഘട്ടം 1: പറമ്പുകളിലെ തെങ്ങുകളുടെ എണ്ണം കണക്കാക്കുക**  
+കർഷകന് 3 പറമ്പുകളുണ്ട്. ഓരോ പറമ്പിലും 24 തെങ്ങുകൾ ഉണ്ട്.  
+അതിനാൽ, ആകെ തെങ്ങുകളുടെ എണ്ണം = 3 × 24 = **72 തെങ്ങുകൾ**.
+
+---
+
+**ഘട്ടം 2: ഒരു മാസം ഉള്ള തേങ്ങയുടെ എണ്ണം കണക്കാക്കുക**  
+ഓരോ തെങ്ങിൽ നിന്നും മാസം 15 തേങ്ങ കിട്ടും.  
+അതിനാൽ, ആകെ തേങ്ങയുടെ എണ്ണം = 72 × 15 = **1080 തേങ്ങ**.
+
+---
+
+**ഘട്ടം 3: തേങ്ങ വിറ്റു ലഭിക്കുന്ന രൂപ കണക്കാക്കുക**  
+ഒരു തേങ്ങ ₹12-ന് വിൽക്കുന്നു.  
+അതിനാൽ, ആകെ ലഭിക്കുന്ന രൂപ = 1080 × 12 = **₹12,960**.
+
+---
+
+**പരിണാമം:**  
+കർഷകന് ഒരു മാസം **₹12,960** ലഭിക്കും."
+Q6_K,ml-heights,Malayalam,True,True,8.35,65.18,64.08,524,246,1095,1.0,"ഏറ്റവും ഉയരം കുറഞ്ഞത് **ജോസഫ്** ആണ്.  
+ഏറ്റവും ഉയരം കൂടിയത് **രവി** ആണ്.  
+
+**വിശദീകരണം:**  
+രവി > അനു > മീര > ജോസഫ്  
+ഇതിനു അനുസരിച്ച്, ജോസഫ് ഏറ്റവും കുറഞ്ഞ ഉയരമുള്ളവനാണ്, അതേസമയം രവി ഏറ്റവും ഉയരമുള്ളവനാണ്."
+Q6_K,ml-weekday,Malayalam,True,True,32.31,45.18,63.73,2052,142,3659,0.588,"ഇന്ന് ബുധനാഴ്ചയാണെങ്കിൽ, 100 ദിവസം കഴിഞ്ഞാൽ ഏത് ദിവസമായിരിക്കും എന്ന് കണക്കാക്കാം. 
+
+**കണക്കുകൾ:**
+- 100 ദിവസം ഒരു ആഴ്ചയിൽ (7 ദിവസം) എത്ര തവണ പൂർണമായി കഴിയും?  
+  $ 100 \div 7 = 14 $ ആഴ്ചകൾ കഴിഞ്ഞാൽ $ 14 \times 7 = 98 $ ദിവസം.  
+  ബാക്കി ദിവസം: $ 100 - 98 = 2 $ ദിവസം.  
+
+- ഇന്ന് ബുധനാഴ്ചയാണെങ്കിൽ, 2 ദിവസം കഴിഞ്ഞാൽ:  
+  1. ബുധനാഴ്ച + 1 ദിവസം = **വെള്ളിയാഴ്ച** (Thursday)  
+  2. ബുധനാഴ്ച + 2 ദിവസം = **ശനിയാഴ്ച** (Friday)  
+
+**അവസാന ഉത്തരം:**  
+100 ദിവസം കഴിഞ്ഞാൽ **ശനിയാഴ്ച** ആയിരിക്കും.  
+
+**മലയാളത്തിൽ:**  
+ഇന്ന് ബുധനാഴ്ചയാണെങ്കിൽ, 100 ദിവസം കഴിഞ്ഞാൽ **ശനിയാഴ്ച** ആയിരിക്കും."
+Q6_K,ml-discount,Malayalam,True,True,13.8,58.09,64.11,871,197,1407,0.931,"ഷർട്ടിന്റെ വില ₹800 ആണ്. കട 25% കിഴിവ് നൽകുന്നതിനാൽ, കിഴിവ് കണക്കാക്കുക:
+
+**കിഴിവ് കണക്കാക്കൽ:**
+25% കിഴിവ് = 800 × (25/100) = ₹200  
+കിഴിവ് ചെയ്ത വില = 800 - 200 = ₹600  
+
+ഇനി, കിഴിവ് ചെയ്ത വിലയിൽ 5% നികുതി ചേർക്കുന്നു:
+
+**നികുതി കണക്കാക്കൽ:**
+5% നികുതി = 600 × (5/100) = ₹30  
+അവസാന വില = 600 + 30 = **₹630**  
+
+**അവസാന ഉത്തരം:**  
+ഷർട്ടിന്റെ അവസാന വില ₹630 ആണ്."
+Q6_K,ml-translate,Malayalam,False,True,0.41,53.12,61.93,16,171,0,1.0,"""The train to Kochi was delayed by two hours due to heavy rain."""
+Q6_K,hi-coconuts,Hindi,True,True,15.39,53.74,64.21,984,180,1515,0.69,"एक किसान के पास 3 खेत हैं, जिनमें प्रत्येक खेत में 24 नारियल के पेड़ हैं। इसलिए, कुल पेड़ों की संख्या निम्नलिखित तरीके से ज्ञात करें:
+
+**चरण 1: कुल पेड़ों की संख्या**  
+3 खेत × 24 पेड़ = **72 पेड़**
+
+**चरण 2: प्रत्येक महीने कुल नारियल की संख्या**  
+प्रत्येक पेड़ से 15 नारियल मिलते हैं, इसलिए:  
+72 पेड़ × 15 नारियल = **1080 नारियल**
+
+**चरण 3: एक महीने में कमाई**  
+प्रत्येक नारियल ₹12 में बेचा जाता है, इसलिए:  
+1080 नारियल × ₹12 = **₹12,960**
+
+**उत्तर:**  
+एक महीने में किसान की कमाई **₹12,960** होगी।"
+Q6_K,hi-heights,Hindi,True,True,8.7,36.36,64.3,552,118,1334,0.859,"सबसे छोटा: **जोसेफ**  
+सबसे लंबा: **रवि**  
+
+**स्पष्टीकरण:**  
+1. रवि > अनु (रवि अनु से लंबा है)  
+2. अनु > मीरा (अनु मीरा से लंबी है)  
+3. मीरा > जोसेफ (मीरा जोसेफ से लंबी है)  
+
+इस प्रकार, ऊंचाई के क्रम में: **रवि > अनु > मीरा > जोसेफ**  
+- **सबसे छोटा**: जोसेफ  
+- **सबसे लंबा**: रवि"
+Q6_K,hi-weekday,Hindi,True,True,16.77,30.35,64.24,1072,72,1451,0.422,"आज बुधवार है, तो 100 दिन बाद कौन सा दिन होगा? इसके लिए हम निम्नलिखित चरणों का उपयोग कर सकते हैं:
+
+1. **हफ्ते के दिनों की गणना**: एक हफ्ता 7 दिनों का होता है, इसलिए हम 100 को 7 से विभाजित करेंगे।  
+   - 100 ÷ 7 = 14 शेष 2 (क्योंकि 14 × 7 = 98, और 100 - 98 = 2)।  
+   - इसका मतलब है कि 100 दिन = 14 हफ्ते (98 दिन) + 2 अतिरिक्त दिन।
+
+2. **आज के दिन से अतिरिक्त दिन जोड़ें**:  
+   - आज बुधवार है, तो 1 अतिरिक्त दिन बुधवार + 1 = **गुरुवार**।  
+   - 2 अतिरिक्त दिन बुधवार + 2 = **शुक्रवार**।  
+
+**अंतिम उत्तर**: 100 दिन बाद **शुक्रवार** होगा।  
+
+**स्पष्टीकरण**:  
+- 14 हफ्ते (98 दिन) के बाद दिन फिर से बुधवार होगा, क्योंकि हफ्ता दोहरा होता है।  
+- शेष 2 दिन बुधवार से गुरुवार और फिर शुक्रवार हो जाएंगे।  
+
+इसलिए, 100 दिन बाद **शुक्रवार** होगा। 🌟"
+Q6_K,hi-discount,Hindi,True,True,12.89,36.68,64.22,818,127,1325,0.848,"शर्ट की मूल कीमत ₹800 है। पहले 25% की छूट दी जाती है, फिर छूट वाली कीमत पर 5% टैक्स जोड़ा जाता है। अंतिम कीमत की गणना इस प्रकार करें:
+
+1. **छूट की गणना**:  
+   25% छूट = ₹800 × 25% = ₹800 × 0.25 = ₹200  
+   छूट वाली कीमत = ₹800 - ₹200 = **₹600**
+
+2. **टैक्स की गणना**:  
+   5% टैक्स = ₹600 × 5% = ₹600 × 0.05 = ₹30  
+   अंतिम कीमत = ₹600 + ₹30 = **₹630**
+
+**अंतिम उत्तर**: शर्ट की अंतिम कीमत ₹630 है।"
+Q6_K,hi-translate,Hindi,False,True,0.39,35.33,64.35,16,116,0,1.0,The train to Kochi was delayed by two hours due to heavy rain.
+Q5_K_M,en-coconuts,English,True,True,15.22,41.02,72.42,1099,56,2282,0.993,"The farmer earns ₹12,960 in one month. Here's the step-by-step breakdown:
+
+1. **Total Number of Trees**:  
+   The farmer has 3 fields, each with 24 coconut trees.  
+   $ 3 \text{ fields} \times 24 \text{ trees/field} = 72 \text{ trees} $.
+
+2. **Total Coconuts Produced**:  
+   Each tree yields 15 coconuts per month.  
+   $ 72 \text{ trees} \times 15 \text{ coconuts/tree} = 1,080 \text{ coconuts} $.
+
+3. **Total Earnings**:  
+   Each coconut is sold for ₹12.  
+   $ 1,080 \text{ coconuts} \times ₹12/\text{coconut} = ₹12,960 $.
+
+**Answer:** ₹12,960."
+Q5_K_M,en-heights,English,True,True,7.25,24.48,72.43,517,38,1346,0.707,"To determine who is the shortest and who is the tallest among Ravi, Anu, Meera, and Joseph, we analyze the given relationships step by step:
+
+1. **Ravi is taller than Anu** → Ravi > Anu  
+2. **Anu is taller than Meera** → Anu > Meera  
+3. **Meera is taller than Joseph** → Meera > Joseph  
+
+By combining these relationships, we can establish a clear hierarchy from tallest to shortest:
+
+- **Ravi > Anu > Meera > Joseph**
+
+From this chain, it is evident that:
+
+- **Ravi** is the **tallest**.
+- **Joseph** is the **shortest**.
+
+---
+
+### Final Answer:
+- **Shortest:** Joseph  
+- **Tallest:** Ravi"
+Q5_K_M,en-weekday,English,True,True,21.06,24.97,71.2,1492,28,4075,0.288,"To determine what day of the week it will be 100 days from Wednesday, we can use the fact that the days of the week repeat every 7 days. This means that the day of the week is determined by the remainder when the number of days is divided by 7.
+
+---
+
+### Step 1: Divide 100 by 7
+
+We calculate:
+
+$$
+100 \div 7 = 14 \text{ remainder } 2
+$$
+
+This tells us that 100 days is equivalent to 14 full weeks (which brings us back to the same day of the week) plus 2 extra days.
+
+---
+
+### Step 2: Add the Remainder to the Starting Day
+
+Since today is **Wednesday**, we add the 2 extra days:
+
+- Wednesday + 1 day = **Thursday**
+- Wednesday + 2 days = **Friday**
+
+---
+
+### Step 3: Confirm with Modular Arithmetic
+
+We can also use modular arithmetic to confirm:
+
+$$
+100 \mod 7 = 2
+$$
+
+So, 100 days from Wednesday is the same as 2 days after Wednesday, which is **Friday**.
+
+---
+
+### Final Answer
+
+$$
+\boxed{Friday}
+$$"
+Q5_K_M,en-discount,English,True,True,17.42,32.6,70.54,1217,42,2842,0.421,"To determine the final price of the shirt after a 25% discount and a 5% tax on the discounted price, we proceed step by step:
+
+---
+
+### **Step 1: Calculate the Discount Amount**
+
+The original price of the shirt is ₹800. A 25% discount is applied first.
+
+$$
+\text{Discount} = 800 \times \frac{25}{100} = 800 \times 0.25 = 200
+$$
+
+---
+
+### **Step 2: Subtract the Discount from the Original Price**
+
+$$
+\text{Discounted Price} = 800 - 200 = 600
+$$
+
+---
+
+### **Step 3: Calculate the Tax on the Discounted Price**
+
+A 5% tax is applied to the discounted price of ₹600.
+
+$$
+\text{Tax} = 600 \times \frac{5}{100} = 600 \times 0.05 = 30
+$$
+
+---
+
+### **Step 4: Add the Tax to the Discounted Price**
+
+$$
+\text{Final Price} = 600 + 30 = 630
+$$
+
+---
+
+### **Final Answer**
+
+$$
+\boxed{630}
+$$"
+Q5_K_M,ml-coconuts,Malayalam,True,True,14.84,81.59,70.76,1037,293,1012,0.458,"ഒരു കർഷകന് 3 പറമ്പുകളുണ്ട്. ഓരോ പറമ്പിലും 24 തെങ്ങുകൾ ഉണ്ട്. ഇതിനു പ്രകാരം ആകെ തെങ്ങുകളുടെ എണ്ണം കണക്കാക്കുക:
+
+**ഘട്ടം 1: തെങ്ങുകളുടെ എണ്ണം കണക്കാക്കുക**  
+3 പറമ്പുകളിലെ 24 തെങ്ങുകൾ = 3 × 24 = **72 തെങ്ങുകൾ**.
+
+---
+
+**ഘട്ടം 2: ഒരു മാസത്തിൽ ലഭിക്കുന്ന തേങ്ങയുടെ എണ്ണം**  
+ഓരോ തെങ്ങിൽ നിന്നും 15 തേങ്ങ ലഭിക്കുന്നു.  
+ആകെ തേങ്ങയുടെ എണ്ണം = 72 തെങ്ങുകൾ × 15 = **1080 തേങ്ങ**.
+
+---
+
+**ഘട്ടം 3: തേങ്ങ വിൽക്കുന്നതിലൂടെ ലഭിക്കുന്ന വരുമാനം**  
+ഓരോ തേങ്ങ ₹12-ന് വിൽക്കുന്നു.  
+ആകെ വരുമാനം = 1080 തേങ്ങ × ₹12 = **₹12,960**.
+
+---
+
+**അവസാന ഉത്തരം:**  
+ഒരു മാസം കർഷകന് **₹12,960** ലഭിക്കും."
+Q5_K_M,ml-heights,Malayalam,True,True,9.14,64.17,70.89,636,246,1409,0.916,"ഏറ്റവും ഉയരം കുറഞ്ഞത് **ജോസഫ്** ആണ്.  
+ഏറ്റവും ഉയരം കൂടിയത് **രവി** ആണ്.  
+
+**വിശദീകരണം:**  
+രവി > അനു > മീര > ജോസഫ്  
+ഈ ക്രമത്തിൽ ഉയരം ക്രമീകരിച്ചാൽ, ജോസഫ് ഏറ്റവും കുറഞ്ഞ ഉയരമുള്ളവനാണ്, അതേസമയം രവി ഏറ്റവും ഉയരമുള്ളവനാണ്."
+Q5_K_M,ml-weekday,Malayalam,True,True,29.37,49.16,70.76,2068,142,3414,0.174,"ഇന്ന് ബുധനാഴ്ചയാണെങ്കിൽ, 100 ദിവസം കഴിഞ്ഞാൽ ഏത് ദിവസമായിരിക്കും എന്ന് കണക്കാക്കാം:
+
+1. **ആഴ്ചയുടെ ദിവസങ്ങൾ**: 7 ദിവസങ്ങൾ (ഞായർ, തിങ്കൾ, ചൊവ്വ, ബുധൻ, വ്യാഴ, വെള്ളി, ശനി).
+2. **100 ദിവസം വിഭജിക്കുക**:  
+   $ 100 \div 7 = 14 $ ആഴ്ചകൾ + 2 ദിവസങ്ങൾ (ബാക്കി).
+3. **ബുധനാഴ്ചയിൽ നിന്ന് 2 ദിവസം കൂടുതൽ കണക്കാക്കുക**:  
+   - 1 ദിവസം: **വ്യാഴാഴ്ച**  
+   - 2 ദിവസം: **വെള്ളിയാഴ്ച**  
+
+**അവസാന ഉത്തരം**:  
+100 ദിവസം കഴിഞ്ഞാൽ **വെള്ളിയാഴ്ച** (Friday) ആയിരിക്കും.  
+
+**വിശദീകരണം**:  
+- 14 ആഴ്ചകൾ (98 ദിവസം) കഴിഞ്ഞാൽ ആഴ്ചയുടെ ദിവസം മാറിയിട്ടില്ല (ബുധനാഴ്ച തന്നെ).  
+- ബാക്കി 2 ദിവസം കൂടുതൽ കണക്കാക്കിയാൽ, ബുധനാഴ്ച + 2 = **വെള്ളിയാഴ്ച**.  
+
+**മലയാളത്തിൽ**:  
+100 ദിവസം കഴിഞ്ഞാൽ **വെള്ളിയാഴ്ച** (Friday) ആയിരിക്കും."
+Q5_K_M,ml-discount,Malayalam,True,True,12.9,53.79,71.21,903,197,1385,0.989,"ഷർട്ടിന്റെ ആദ്യകാല വില ₹800 ആണ്. കട 25% കിഴിവ് നൽകുന്നതിനാൽ, കിഴിവ് കണക്കാക്കുന്നതിന്:
+
+**കിഴിവ് കണക്കാക്കൽ:**
+25% കിഴിവ് = 800 × (25/100) = ₹200  
+കിഴിവ് ചെയ്ത വില = 800 - 200 = ₹600
+
+ഇനി, കിഴിവ് ചെയ്ത വിലയിൽ 5% നികുതി ചേർക്കുന്നു:
+
+**നികുതി കണക്കാക്കൽ:**
+5% നികുതി = 600 × (5/100) = ₹30  
+അവസാന വില = 600 + 30 = ₹630
+
+**അവസാന വില:** ₹630  
+
+അതായത്, ഷർട്ടിന്റെ അവസാന വില ₹630 ആണ്."
+Q5_K_M,ml-translate,Malayalam,False,True,0.37,55.96,70.27,16,171,0,1.0,"""The train to Kochi was delayed by two hours due to heavy rain."""
+Q5_K_M,hi-coconuts,Hindi,True,True,14.55,50.67,70.94,1026,180,1757,0.333,"एक महीने में किसान की कमाई निम्नलिखित चरणों से निकाली जा सकती है:
+
+1. **खेतों में पेड़ों की कुल संख्या ज्ञात करें:**  
+   किसान के पास 3 खेत हैं और प्रत्येक खेत में 24 नारियल के पेड़ हैं।  
+   $$
+   3 \text{ खेत} \times 24 \text{ पेड़} = 72 \text{ पेड़}
+   $$
+
+2. **एक महीने में कुल नारियल की संख्या ज्ञात करें:**  
+   प्रत्येक पेड़ से 15 नारियल मिलते हैं।  
+   $$
+   72 \text{ पेड़} \times 15 \text{ नारियल} = 1080 \text{ नारियल}
+   $$
+
+3. **कुल कमाई की गणना करें:**  
+   प्रत्येक नारियल का मूल्य ₹12 है।  
+   $$
+   1080 \text{ नारियल} \times ₹12 = ₹12,960
+   $$
+
+**उत्तर:** एक महीने में किसान ₹12,960 कमाएगा।"
+Q5_K_M,hi-heights,Hindi,True,True,8.01,34.8,70.94,558,118,1329,0.974,"सबसे छोटा: **जोसेफ**  
+सबसे लंबा: **रवि**  
+
+**स्पष्टीकरण:**  
+1. रवि > अनु (रवि अनु से लंबा है)  
+2. अनु > मीरा (अनु मीरा से लंबी है)  
+3. मीरा > जोसेफ (मीरा जोसेफ से लंबी है)  
+
+इस प्रकार, लंबाई के क्रम में: **रवि > अनु > मीरा > जोसेफ**  
+अतः, **जोसेफ सबसे छोटा** और **रवि सबसे लंबा** है।"
+Q5_K_M,hi-weekday,Hindi,True,True,18.91,32.16,71.37,1341,72,3412,0.296,"आज बुधवार है, तो 100 दिन बाद के दिन की गणना इस प्रकार करें:  
+- एक सप्ताह में 7 दिन होते हैं, इसलिए 100 को 7 से विभाजित करें:  
+  $ 100 \div 7 = 14 $ बार और शेष $ 2 $ दिन बचते हैं (क्योंकि $ 14 \times 7 = 98 $, $ 100 - 98 = 2 $)।  
+
+- अब, आज के दिन (बुधवार) में शेष दिन (2) जोड़ें:  
+  - बुधवार + 1 दिन = गुरुवार  
+  - गुरुवार + 1 दिन = **शुक्रवार**  
+
+**उत्तर:** 100 दिन बाद दिन **शुक्रवार** होगा।"
+Q5_K_M,hi-discount,Hindi,True,True,9.93,36.2,71.83,701,127,1478,0.351,"शर्ट की मूल कीमत ₹800 है।  
+1. **छूट की गणना**:  
+   25% छूट = 800 × (25/100) = ₹200  
+   छूट वाली कीमत = 800 - 200 = ₹600  
+
+2. **टैक्स की गणना**:  
+   5% टैक्स = 600 × (5/100) = ₹30  
+   अंतिम कीमत = 600 + 30 = **₹630**  
+
+**उत्तर**: अंतिम कीमत ₹630 है।"
+Q5_K_M,hi-translate,Hindi,False,True,0.34,36.19,71.82,16,116,0,1.0,The train to Kochi was delayed by two hours due to heavy rain.
+Q4_K_M,en-coconuts,English,True,True,11.63,45.35,82.46,955,56,2084,0.989,"The farmer earns ₹12,960 in one month. Here's the step-by-step breakdown:
+
+1. **Total Number of Trees**:  
+   The farmer has 3 fields, each with 24 coconut trees.  
+   $ 3 \text{ fields} \times 24 \text{ trees/field} = 72 \text{ trees} $.
+
+2. **Total Coconuts Produced**:  
+   Each tree yields 15 coconuts per month.  
+   $ 72 \text{ trees} \times 15 \text{ coconuts/tree} = 1,080 \text{ coconuts} $.
+
+3. **Total Earnings**:  
+   Each coconut is sold for ₹12.  
+   $ 1,080 \text{ coconuts} \times ₹12/\text{coconut} = ₹12,960 $.
+
+**Answer**: ₹12,960."
+Q4_K_M,en-heights,English,True,True,7.95,23.57,82.68,647,38,1764,0.336,"To determine who is the shortest and who is the tallest among Ravi, Anu, Meera, and Joseph, we analyze the given height comparisons:
+
+1. **Ravi is taller than Anu**  
+2. **Anu is taller than Meera**  
+3. **Meera is taller than Joseph**
+
+---
+
+### Step-by-step Analysis:
+
+From the first comparison, **Ravi > Anu**.  
+From the second, **Anu > Meera**.  
+From the third, **Meera > Joseph**.
+
+Using the **transitive property** of inequalities (if A > B and B > C, then A > C), we can chain these comparisons:
+
+- **Ravi > Anu > Meera > Joseph**
+
+This establishes a clear hierarchy from tallest to shortest:
+
+- **Tallest:** Ravi  
+- **Shortest:** Joseph
+
+---
+
+### Final Answer:
+
+- **The shortest person is Joseph.**  
+- **The tallest person is Ravi.**"
+Q4_K_M,en-weekday,English,True,True,34.0,25.01,79.49,2695,28,7835,0.301,"To determine what day of the week it will be 100 days from today, given that today is **Wednesday**, we can use the fact that the days of the week repeat every **7 days**. This cyclical pattern allows us to use **modular arithmetic** to simplify the calculation.
+
+---
+
+### Step 1: Understand the Weekly Cycle
+
+The days of the week cycle every 7 days. That means:
+
+- Day 0: Wednesday
+- Day 1: Thursday
+- Day 2: Friday
+- Day 3: Saturday
+- Day 4: Sunday
+- Day 5: Monday
+- Day 6: Tuesday
+- Day 7: Wednesday (cycle repeats)
+
+So, to find the day of the week 100 days from Wednesday, we can compute:
+
+$$
+100 \mod 7
+$$
+
+This gives the number of **extra days** beyond full weeks.
+
+---
+
+### Step 2: Perform the Modulo Operation
+
+$$
+100 \div 7 = 14 \text{ remainder } 2
+$$
+
+So:
+
+$$
+100 \mod 7 = 2
+$$
+
+This means that 100 days from Wednesday is the same as **2 days after Wednesday**.
+
+---
+
+### Step 3: Count the Days Ahead
+
+Starting from Wednesday:
+
+- 1 day after Wednesday is **Thursday**
+- 2 days after Wednesday is **Friday**
+
+---
+
+### Final Answer
+
+$$
+\boxed{Friday}
+$$"
+Q4_K_M,en-discount,English,True,True,27.35,22.01,81.8,2220,42,6030,0.321,"To determine the final price of the shirt after a 25% discount and a 5% tax on the discounted price, we follow a two-step process:
+
+---
+
+### **Step 1: Apply the 25% Discount**
+
+The original price of the shirt is ₹800. A 25% discount means we reduce the price by 25% of ₹800.
+
+$$
+\text{Discount} = 800 \times 0.25 = 200
+$$
+
+$$
+\text{Discounted Price} = 800 - 200 = 600
+$$
+
+---
+
+### **Step 2: Apply the 5% Tax on the Discounted Price**
+
+Now, a 5% tax is applied to the discounted price of ₹600.
+
+$$
+\text{Tax} = 600 \times 0.05 = 30
+$$
+
+$$
+\text{Final Price} = 600 + 30 = 630
+$$
+
+---
+
+### **Conclusion**
+
+The final price of the shirt, after applying a 25% discount and then a 5% tax on the discounted price, is:
+
+$$
+\boxed{630}
+$$"
+Q4_K_M,ml-coconuts,Malayalam,True,True,13.13,76.94,80.1,1032,293,1104,0.993,"**ഘട്ടം 1: പറമ്പുകളിലെ തെങ്ങുകളുടെ എണ്ണം കണക്കാക്കുക**  
+കർഷകന് 3 പറമ്പുകളുണ്ട്. ഓരോ പറമ്പിലും 24 തെങ്ങുകൾ ഉണ്ട്.  
+അതിനാൽ, ആകെ തെങ്ങുകളുടെ എണ്ണം = 3 × 24 = **72 തെങ്ങുകൾ**.
+
+---
+
+**ഘട്ടം 2: ഒരു മാസത്തിൽ ലഭിക്കുന്ന തേങ്ങയുടെ എണ്ണം കണക്കാക്കുക**  
+ഓരോ തെങ്ങിൽ നിന്നും മാസം 15 തേങ്ങ ലഭിക്കുന്നു.  
+അതിനാൽ, ആകെ തേങ്ങയുടെ എണ്ണം = 72 × 15 = **1080 തേങ്ങ**.
+
+---
+
+**ഘട്ടം 3: വരുമാനം കണക്കാക്കുക**  
+ഓരോ തേങ്ങ ₹12-ന് വിൽക്കുന്നു.  
+അതിനാൽ, ആകെ വരുമാനം = 1080 × ₹12 = **₹12,960**.
+
+---
+
+**ഉത്തരം:**  
+കർഷകന് ഒരു മാസം **₹12,960** ലഭിക്കും."
+Q4_K_M,ml-heights,Malayalam,True,True,8.18,50.95,83.36,670,246,1494,0.574,"ഏറ്റവും ഉയരം കുറഞ്ഞത് **ജോസഫ്** ആണ്.  
+ഏറ്റവും ഉയരം കൂടിയത് **രവി** ആണ്.  
+
+**വിശദീകരണം:**  
+രവി > അനു > മീര > ജോസഫ്  
+ഈ ക്രമത്തിൽ ഉയരം കൂടിയവരുടെ ക്രമം രവി, അനു, മീര, ജോസഫ് ആണ്. അതിനാൽ ജോസഫ് ഏറ്റവും ഉയരം കുറഞ്ഞവനാണ്, രവി ഏറ്റവും ഉയരം കൂടിയവനാണ്."
+Q4_K_M,ml-weekday,Malayalam,True,True,24.45,37.62,82.99,2018,142,4098,0.238,"ഇന്ന് ബുധനാഴ്ചയാണെങ്കിൽ, 100 ദിവസം കഴിഞ്ഞാൽ ഏത് ദിവസമായിരിക്കും എന്ന് കണക്കാക്കാൻ, 100 നെ 7 കൊണ്ട് ഹരിക്കുക. 100 ÷ 7 = 14 ശേഷിക്കുന്നത് 2 ദിവസം. അതായത് 14 ആഴ്ചകൾക്ക് ശേഷം 2 ദിവസം. ബുധനാഴ്ചയിൽ നിന്ന് 2 ദിവസം കൂടുതൽ കണക്കാക്കുമ്പോൾ വെള്ളിയാഴ്ച ആയിരിക്കും. അതിനാൽ, 100 ദിവസം കഴിഞ്ഞാൽ **വെള്ളിയാഴ്ച** ആയിരിക്കും."
+Q4_K_M,ml-discount,Malayalam,True,True,10.86,45.59,83.74,893,197,1434,0.896,"ഷർട്ടിന്റെ ആദ്യകാല വില ₹800 ആണ്. കട 25% കിഴിവ് നൽകുന്നതിനാൽ, കിഴിവ് കണക്കാക്കുക:
+
+**കിഴിവ് കണക്കാക്കൽ:**
+25% കിഴിവ് = ₹800 × 25% = ₹200  
+കിഴിവ് ചെയ്ത വില = ₹800 - ₹200 = **₹600**
+
+ഇപ്പോൾ, കിഴിവ് ചെയ്ത വിലയിൽ 5% നികുതി ചേർക്കുന്നു:
+
+**നികുതി കണക്കാക്കൽ:**
+5% നികുതി = ₹600 × 5% = ₹30  
+അവസാന വില = ₹600 + ₹30 = **₹630**
+
+**അവസാന വില:** ₹630  
+
+അതായത്, ഷർട്ടിന്റെ അവസാന വില ₹630 ആണ്."
+Q4_K_M,ml-translate,Malayalam,False,True,0.32,41.84,81.66,16,171,0,1.0,"""The train to Kochi was delayed by two hours due to heavy rain."""
+Q4_K_M,hi-coconuts,Hindi,True,True,8.28,42.06,83.98,691,180,1165,0.358,"एक किसान की मासिक कमाई की गणना इस प्रकार करें:
+
+1. **खेतों में पेड़ों की कुल संख्या**:  
+   - 3 खेत × 24 पेड़ = **72 पेड़**  
+
+2. **एक महीने में कुल नारियल की संख्या**:  
+   - 72 पेड़ × 15 नारियल = **1,080 नारियल**  
+
+3. **कुल कमाई की गणना**:  
+   - 1,080 नारियल × ₹12 = **₹12,960**  
+
+**उत्तर**: किसान की एक महीने में कमाई ₹12,960 होगी।"
+Q4_K_M,hi-heights,Hindi,True,True,6.92,33.16,84.12,572,118,1383,0.689,"सबसे छोटा: **जोसेफ**  
+सबसे लंबा: **रवि**  
+
+**स्पष्टीकरण:**  
+- रवि > अनु (रवि अनु से लंबा है)  
+- अनु > मीरा (अनु मीरा से लंबी है)  
+- मीरा > जोसेफ (मीरा जोसेफ से लंबी है)  
+
+इसलिए, लंबाई के अनुसार क्रम: **रवि > अनु > मीरा > जोसेफ**  
+- **सबसे लंबा**: रवि  
+- **सबसे छोटा**: जोसेफ"
+Q4_K_M,hi-weekday,Hindi,True,True,12.0,26.1,83.9,998,72,1805,0.327,"आज बुधवार है, तो 100 दिन बाद कौन सा दिन होगा? इसके लिए हम निम्नलिखित चरणों का उपयोग कर सकते हैं:
+
+1. **हफ्ते के दिनों की गणना**: एक हफ्ता 7 दिनों का होता है। इसलिए, हम 100 को 7 से विभाजित करते हैं।  
+   - $ 100 \div 7 = 14 $ हफ्ते और $ 2 $ दिन शेष (क्योंकि $ 14 \times 7 = 98 $, और $ 100 - 98 = 2 $)।
+
+2. **शेष दिनों को जोड़ें**:  
+   - आज बुधवार है, तो 14 हफ्ते (98 दिन) बाद भी बुधवार ही रहेगा (क्योंकि 14 हफ्ते पूर्ण हफ्तों के बराबर हैं)।  
+   - अब शेष 2 दिन जोड़ें:  
+     - बुधवार + 1 दिन = **गुरुवार**  
+     - गुरुवार + 1 दिन = **शुक्रवार**  
+
+**अंतिम उत्तर**: 100 दिन बाद **शुक्रवार** होगा।"
+Q4_K_M,hi-discount,Hindi,True,True,8.66,32.39,83.88,716,127,1647,0.353,"शर्ट की मूल कीमत ₹800 है।  
+1. **छूट की गणना**:  
+   - 25% छूट = 800 × (25/100) = ₹200  
+   - छूट वाली कीमत = 800 - 200 = ₹600  
+
+2. **टैक्स की गणना**:  
+   - 5% टैक्स = 600 × (5/100) = ₹30  
+   - अंतिम कीमत = 600 + 30 = ₹630  
+
+**अंतिम कीमत ₹630 है।**"
+Q4_K_M,hi-translate,Hindi,False,True,0.31,32.91,82.79,16,116,0,0.952,The train to Kochi got delayed by two hours due to heavy rain.
+IQ4_XS,en-coconuts,English,True,True,9.64,33.33,92.45,887,56,2032,0.389,"The farmer earns ₹12,960 in one month. Here's the step-by-step breakdown:
+
+1. **Total number of coconut trees**:  
+   $ 3 \text{ fields} \times 24 \text{ trees/field} = 72 \text{ trees} $.
+
+2. **Total coconuts produced per month**:  
+   $ 72 \text{ trees} \times 15 \text{ coconuts/tree} = 1,080 \text{ coconuts} $.
+
+3. **Total earnings from selling coconuts**:  
+   $ 1,080 \text{ coconuts} \times ₹12/\text{coconut} = ₹12,960 $.
+
+**Answer:** The farmer earns ₹12,960 in one month."
+IQ4_XS,en-heights,English,True,True,5.17,22.33,92.81,468,38,1319,0.5,"To determine who is the shortest and who is the tallest among Ravi, Anu, Meera, and Joseph, we analyze the given relationships:
+
+1. **Ravi is taller than Anu**  
+2. **Anu is taller than Meera**  
+3. **Meera is taller than Joseph**
+
+From these, we can construct a clear hierarchy of height:
+
+- **Ravi > Anu > Meera > Joseph**
+
+This ordering shows that **Ravi** is the **tallest**, and **Joseph** is the **shortest**.
+
+---
+
+### Final Answer:
+- **The tallest person is Ravi.**
+- **The shortest person is Joseph.**"
+IQ4_XS,en-weekday,English,True,True,45.62,23.35,88.23,4017,28,11061,0.244,"To determine what day of the week it will be 100 days from Wednesday, we can use the fact that the days of the week repeat every 7 days. This cyclical pattern allows us to use modular arithmetic to find the equivalent day after a certain number of days.
+
+---
+
+### Step-by-Step Breakdown:
+
+1. **Understand the Weekly Cycle**  
+   The days of the week cycle every 7 days:  
+   - Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday  
+   - Then it repeats again.
+
+2. **Use Modular Arithmetic**  
+   Since the cycle is 7 days, we can find the remainder when 100 is divided by 7 to determine how many days beyond full weeks we need to count.
+
+   $$
+   100 \div 7 = 14 \text{ remainder } 2
+   $$
+
+   So, 100 days is equivalent to 14 full weeks (98 days) plus **2 extra days**.
+
+3. **Count the Extra Days from Wednesday**  
+   Starting from Wednesday:
+   - 1 day later is **Thursday**
+   - 2 days later is **Friday**
+
+---
+
+### Verification with Day Numbering (Optional)
+
+We can also assign numbers to the days of the week for clarity:
+- Sunday = 0  
+- Monday = 1  
+- Tuesday = 2  
+- Wednesday = 3  
+- Thursday = 4  
+- Friday = 5  
+- Saturday = 6
+
+If today is Wednesday (3), then:
+
+$$
+(3 + 100) \mod 7 = 103 \mod 7 = 5
+$$
+
+So, the result is **Friday**, which matches our earlier conclusion.
+
+---
+
+### Final Answer
+
+$$
+\boxed{Friday}
+$$"
+IQ4_XS,en-discount,English,True,True,12.38,21.04,91.39,1104,42,2339,0.449,"To determine the final price of the shirt after a 25% discount and a 5% tax on the discounted price, we proceed step by step:
+
+---
+
+### **Step 1: Calculate the Discount Amount**
+
+The original price of the shirt is ₹800. A 25% discount is applied first.
+
+$$
+\text{Discount} = 800 \times \frac{25}{100} = 800 \times 0.25 = 200
+$$
+
+---
+
+### **Step 2: Subtract the Discount from the Original Price**
+
+$$
+\text{Discounted Price} = 800 - 200 = 600
+$$
+
+---
+
+### **Step 3: Calculate the Tax on the Discounted Price**
+
+A 5% tax is applied to the discounted price of ₹600.
+
+$$
+\text{Tax} = 600 \times \frac{5}{100} = 600 \times 0.05 = 30
+$$
+
+---
+
+### **Step 4: Add the Tax to the Discounted Price**
+
+$$
+\text{Final Price} = 600 + 30 = 630
+$$
+
+---
+
+### **Conclusion**
+
+After applying a 25% discount and then a 5% tax on the discounted price, the final price of the shirt is:
+
+$$
+\boxed{630}
+$$"
+IQ4_XS,ml-coconuts,Malayalam,True,True,16.62,58.19,90.93,1496,293,1896,0.362,"ഒരു മാസം കർഷകന് ലഭിക്കുന്ന രൂപ തുക കണക്കാക്കാൻ ഇതാ ഘട്ടം ഘട്ടമായി വിശദീകരണം:
+
+---
+
+### **ഘട്ടം 1: പറമ്പുകളിലെ തെങ്ങുകളുടെ എണ്ണം കണക്കാക്കുക**
+- കർഷകന് **3 പറമ്പുകൾ** ഉണ്ട്.
+- ഓരോ പറമ്പിലും **24 തെങ്ങുകൾ** ഉണ്ട്.
+- ആകെ തെങ്ങുകളുടെ എണ്ണം:  
+  $$
+  3 \text{ പറമ്പുകൾ} \times 24 \text{ തെങ്ങുകൾ} = 72 \text{ തെങ്ങുകൾ}
+  $$
+
+---
+
+### **ഘട്ടം 2: ഒരു മാസം ഉണ്ടാകുന്ന തേങ്ങ എണ്ണം കണക്കാക്കുക**
+- ഓരോ തെങ്ങിൽ നിന്നും **15 തേങ്ങ** ഉണ്ടാകുന്നു.
+- ആകെ തേങ്ങ എണ്ണം:  
+  $$
+  72 \text{ തെങ്ങുകൾ} \times 15 \text{ തേങ്ങ} = 1080 \text{ തേങ്ങ}
+  $$
+
+---
+
+### **ഘട്ടം 3: തേങ്ങ വിൽക്കുന്നതിലൂടെ ലഭിക്കുന്ന രൂപ തുക കണക്കാക്കുക**
+- ഓരോ തേങ്ങ ₹12-ന് വിൽക്കുന്നു.
+- ആകെ ലഭിക്കുന്ന രൂപ തുക:  
+  $$
+  1080 \text{ തേങ്ങ} \times ₹12 = ₹12,960
+  $$
+
+---
+
+### **ഉത്തരം:**
+ഒരു മാസം കർഷകന് **₹12,960** രൂപ ലഭിക്കും."
+IQ4_XS,ml-heights,Malayalam,True,True,6.15,45.63,91.79,549,246,1298,0.775,"ഏറ്റവും ഉയരം കുറഞ്ഞത്: **ജോസഫ്**  
+ഏറ്റവും ഉയരം കൂടിയത്: **രവി**  
+
+**വിശദീകരണം:**  
+രവി > അനു > മീര > ജോസഫ്  
+ഇതിനു അനുസരിച്ച്, രവി ഏറ്റവും ഉയരമുള്ളവനും, ജോസഫ് ഏറ്റവും ഉയരം കുറഞ്ഞവനുമാണ്."
+IQ4_XS,ml-weekday,Malayalam,True,True,18.99,34.1,91.23,1722,142,2567,0.192,"ഇന്ന് ബുധനാഴ്ചയാണെങ്കിൽ, 100 ദിവസം കഴിഞ്ഞാൽ ഏത് ദിവസമായിരിക്കും? ഇതിന് സാധാരണ ആഴ്ചയുടെ പുനരാവർത്തനം ഉപയോഗിച്ച് കണക്കാക്കാം.  
+
+1. **ആഴ്ചയുടെ ദിവസങ്ങൾ**: 7 ദിവസങ്ങൾ (ഞായർ, തിങ്കൾ, ബുധനാഴ്ച, വ്യാഴം, ശനി, സോമവാരം, മാന്ദിനം).  
+2. **100 ദിവസം കണക്കാക്കുക**:  
+   - 100 ÷ 7 = 14 ആഴ്ചകൾ + 2 ദിവസം (ശിഷ്ടം 2).  
+3. **ഇന്ന് ബുധനാഴ്ചയാണെങ്കിൽ**:  
+   - ബുധനാഴ്ച + 1 ദിവസം = വ്യാഴം  
+   - വ്യാഴം + 1 ദിവസം = **വെള്ളിയാഴ്ച**  
+
+**അതിനാൽ, 100 ദിവസം കഴിഞ്ഞാൽ വെള്ളിയാഴ്ച ആയിരിക്കും.**  
+
+ഈ കണക്കാക്കൽ സാധാരണ ആഴ്ചയുടെ പുനരാവർത്തനം അടിസ്ഥാനമാക്കിയാണ് ചെയ്തത്. വർഷത്തിന്റെ പ്രത്യേക ദിവസങ്ങൾ (ഉദാ: ലീപ്പ് വർഷം) പരിഗണിക്കാതെ ചെയ്ത കണക്കാണിത്."
+IQ4_XS,ml-discount,Malayalam,True,True,10.24,41.69,91.76,923,197,1422,0.666,"ഷർട്ടിന്റെ ആദ്യകാല വില ₹800 ആണ്. കടയിൽ 25% കിഴിവ് നൽകുന്നതിനാൽ, കിഴിവ് കണക്കാക്കുന്നതിന്:
+
+**കിഴിവ് തുക** = 25% ഓഫ് ₹800  
+= $ \frac{25}{100} \times 800 = 200 $ ₹
+
+**കിഴിവ് ചെയ്ത വില** = ₹800 - ₹200 = ₹600
+
+ഇനി, ഈ കിഴിവ് ചെയ്ത വിലയിൽ 5% നികുതി ചേർക്കുന്നു:
+
+**നികുതി തുക** = 5% ഓഫ് ₹600  
+= $ \frac{5}{100} \times 600 = 30 $ ₹
+
+**അവസാന വില** = ₹600 + ₹30 = **₹630**
+
+### ഉത്തരം:  
+ഷർട്ടിന്റെ അവസാന വില **₹630** ആണ്."
+IQ4_XS,ml-translate,Malayalam,False,True,0.32,37.48,89.37,16,171,0,1.0,"""The train to Kochi was delayed by two hours due to heavy rain."""
+IQ4_XS,hi-coconuts,Hindi,True,True,11.1,38.96,91.83,1012,180,1781,0.329,"एक महीने में किसान की कमाई की गणना निम्नलिखित चरणों से की जा सकती है:
+
+1. **खेतों में पेड़ों की कुल संख्या**:  
+   किसान के पास 3 खेत हैं और प्रत्येक खेत में 24 नारियल के पेड़ हैं।  
+   $$
+   3 \text{ खेत} \times 24 \text{ पेड़} = 72 \text{ पेड़}
+   $$
+
+2. **एक महीने में कुल नारियल की संख्या**:  
+   प्रत्येक पेड़ से 15 नारियल मिलते हैं।  
+   $$
+   72 \text{ पेड़} \times 15 \text{ नारियल} = 1080 \text{ नारियल}
+   $$
+
+3. **एक महीने में कमाई**:  
+   प्रत्येक नारियल का मूल्य ₹12 है।  
+   $$
+   1080 \text{ नारियल} \times ₹12 = ₹12,960
+   $$
+
+**उत्तर**: एक महीने में किसान ₹12,960 कमाएगा।"
+IQ4_XS,hi-heights,Hindi,True,True,6.42,29.46,92.05,578,118,1411,0.592,"सबसे छोटा: जोसेफ  
+सबसे लंबा: रवि  
+
+**स्पष्टीकरण:**  
+- रवि > अनु (रवि अनु से लंबा है)  
+- अनु > मीरा (अनु मीरा से लंबी है)  
+- मीरा > जोसेफ (मीरा जोसेफ से लंबी है)  
+
+इसलिए, लंबाई के अनुसार क्रम: **रवि > अनु > मीरा > जोसेफ**  
+- **सबसे लंबा**: रवि  
+- **सबसे छोटा**: जोसेफ"
+IQ4_XS,hi-weekday,Hindi,True,True,12.56,24.37,90.1,1123,72,1593,0.413,"आज बुधवार है, तो 100 दिन बाद कौन सा दिन होगा? इसके लिए हम निम्नलिखित चरणों का पालन करेंगे:
+
+1. **सप्ताह के दिनों का चक्र**: हम जानते हैं कि एक सप्ताह में 7 दिन होते हैं (सोमवार, मंगलवार, बुधवार, गुरुवार, शुक्रवार, शनिवार, रविवार)। इसलिए, 7 दिन बाद दिनों का चक्र दोहरा जाता है।
+
+2. **100 दिनों को 7 से विभाजित करें**:  
+   $ 100 \div 7 = 14 $ अभिकलन और शेष $ 2 $ (क्योंकि $ 7 \times 14 = 98 $, और $ 100 - 98 = 2 $)।  
+   इसका मतलब है कि 100 दिन = 14 सप्ताह (98 दिन) + 2 अतिरिक्त दिन।
+
+3. **दिन जोड़ें**:  
+   - आज बुधवार है।  
+   - 14 सप्ताह (98 दिन) बाद भी दिन बुधवार ही रहेगा (क्योंकि सप्ताह के चक्र के अनुसार)।  
+   - अब 2 अतिरिक्त दिन जोड़ें:  
+     - बुधवार + 1 दिन = गुरुवार  
+     - गुरुवार + 1 दिन = **शुक्रवार**  
+
+**उत्तर**: 100 दिन बाद दिन **शुक्रवार** होगा।"
+IQ4_XS,hi-discount,Hindi,True,True,9.38,29.05,88.58,821,127,1376,0.279,"शर्ट की मूल कीमत ₹800 है।  
+
+**पहला कदम: छूट की गणना**  
+दुकान 25% की छूट देती है।  
+छूट की राशि = 25% × ₹800 = (25/100) × 800 = ₹200  
+
+**दूसरा कदम: छूट वाली कीमत**  
+छूट वाली कीमत = मूल कीमत - छूट = ₹800 - ₹200 = ₹600  
+
+**तीसरा कदम: टैक्स की गणना**  
+छूट वाली कीमत पर 5% टैक्स जोड़ा जाता है।  
+टैक्स की राशि = 5% × ₹600 = (5/100) × 600 = ₹30  
+
+**अंतिम कीमत**  
+अंतिम कीमत = छूट वाली कीमत + टैक्स = ₹600 + ₹30 = **₹630**  
+
+**उत्तर:** अंतिम कीमत ₹630 है।"
+IQ4_XS,hi-translate,Hindi,False,True,0.28,29.74,86.43,16,116,0,1.0,The train to Kochi was delayed by two hours due to heavy rain.
+Q3_K_M,en-coconuts,English,True,True,7.13,44.84,96.36,681,56,1387,0.262,"The farmer earns ₹12,960 in one month. Here's the step-by-step breakdown:
+
+1. **Total Number of Coconut Trees**:  
+   - 3 fields × 24 trees per field = **72 trees**.
+
+2. **Total Coconuts Produced per Month**:  
+   - 72 trees × 15 coconuts per tree = **1,080 coconuts**.
+
+3. **Total Earnings from Selling Coconuts**:  
+   - 1,080 coconuts × ₹12 per coconut = **₹12,960**.
+
+**Final Answer**: ₹12,960."
+Q3_K_M,en-heights,English,True,True,4.89,24.16,97.07,465,38,1195,0.773,"To determine who is the tallest and who is the shortest among Ravi, Anu, Meera, and Joseph, we analyze the given height relationships:
+
+1. **Ravi is taller than Anu** → Ravi > Anu  
+2. **Anu is taller than Meera** → Anu > Meera  
+3. **Meera is taller than Joseph** → Meera > Joseph  
+
+By combining these relationships, we can establish a clear order from tallest to shortest:
+
+- **Ravi > Anu > Meera > Joseph**
+
+---
+
+### Conclusion:
+
+- **The tallest person is Ravi.**  
+- **The shortest person is Joseph.**
+
+$$
+\boxed{\text{Tallest: Ravi, Shortest: Joseph}}
+$$"
+Q3_K_M,en-weekday,English,True,True,26.64,24.39,93.61,2484,28,7208,0.315,"To determine what day of the week it will be 100 days from Wednesday, we can use the fact that the days of the week repeat every 7 days. This means we can use modular arithmetic to find the equivalent day after 100 days.
+
+---
+
+### Step 1: Use Modular Arithmetic
+
+We divide 100 by 7 to find how many full weeks and extra days are in 100 days:
+
+$$
+100 \div 7 = 14 \text{ weeks with a remainder of } 2
+$$
+
+This tells us that 100 days is equivalent to **14 full weeks and 2 extra days**.
+
+---
+
+### Step 2: Add the Extra Days to Wednesday
+
+Starting from **Wednesday**, we add the 2 extra days:
+
+- Wednesday + 1 day = **Thursday**
+- Wednesday + 2 days = **Friday**
+
+---
+
+### Step 3: Confirm with a Day Numbering System
+
+To double-check, we can assign numbers to the days of the week:
+
+- Wednesday = 0
+- Thursday = 1
+- Friday = 2
+- Saturday = 3
+- Sunday = 4
+- Monday = 5
+- Tuesday = 6
+
+Now, compute:
+
+$$
+(0 + 100) \mod 7 = 100 \mod 7 = 2
+$$
+
+So, the day corresponding to 2 is **Friday**.
+
+---
+
+### Final Answer
+
+$$
+\boxed{Friday}
+$$"
+Q3_K_M,en-discount,English,True,True,11.96,22.13,92.96,1093,42,2384,0.619,"To determine the final price of the shirt after applying a 25% discount and then a 5% tax on the discounted price, we proceed step by step:
+
+---
+
+### **Step 1: Calculate the Discount**
+
+The original price of the shirt is ₹800. A 25% discount is applied first.
+
+$$
+\text{Discount} = 25\% \text{ of } ₹800 = 0.25 \times 800 = ₹200
+$$
+
+$$
+\text{Discounted Price} = ₹800 - ₹200 = ₹600
+$$
+
+---
+
+### **Step 2: Apply the Tax on the Discounted Price**
+
+Now, a 5% tax is applied to the discounted price of ₹600.
+
+$$
+\text{Tax} = 5\% \text{ of } ₹600 = 0.05 \times 600 = ₹30
+$$
+
+$$
+\text{Final Price} = ₹600 + ₹30 = ₹630
+$$
+
+---
+
+### **Final Answer**
+
+$$
+\boxed{630}
+$$"
+Q3_K_M,ml-coconuts,Malayalam,True,True,11.77,78.87,93.6,1084,293,1176,0.784,"**ഘട്ടം 1: പറമ്പുകളിലെ തെങ്ങുകളുടെ എണ്ണം കണക്കാക്കുക**  
+കർഷകന് 3 പറമ്പുകളുണ്ട്. ഓരോ പറമ്പിലും 24 തെങ്ങുകൾ ഉണ്ട്.  
+**ആകെ തെങ്ങുകളുടെ എണ്ണം = 3 × 24 = 72 തെങ്ങുകൾ**  
+
+---
+
+**ഘട്ടം 2: ഒരു മാസം തെങ്ങുകളിൽ നിന്നും ലഭിക്കുന്ന തേങ്ങ കണക്കാക്കുക**  
+ഓരോ തെങ്ങിൽ നിന്നും മാസം 15 തേങ്ങ ലഭിക്കുന്നു.  
+**ആകെ തേങ്ങ = 72 തെങ്ങുകൾ × 15 = 1080 തേങ്ങ**  
+
+---
+
+**ഘട്ടം 3: തേങ്ങ വിറ്റു ലഭിക്കുന്ന രൂപ കണക്കാക്കുക**  
+ഒരു തേങ്ങ ₹12-ന് വിൽക്കുന്നു.  
+**ആകെ രൂപ = 1080 തേങ്ങ × ₹12 = ₹12,960**  
+
+---
+
+**ഫലം:**  
+കർഷകന് ഒരു മാസം ലഭിക്കുന്ന രൂപ **₹12,960** ആണ്."
+Q3_K_M,ml-heights,Malayalam,True,True,7.22,53.21,94.86,668,246,1484,0.442,"ഏറ്റവും ഉയരം കുറഞ്ഞത് **ജോസഫ്** ആണ്.  
+ഏറ്റവും ഉയരം കൂടിയത് **രവി** ആണ്.  
+
+**ഉത്തരം:**  
+- **ഏറ്റവും ഉയരം കുറഞ്ഞവൻ:** ജോസഫ്  
+- **ഏറ്റവും ഉയരം കൂടിയവൻ:** രവി  
+
+**ശ്രേണി (ഉയരം കൂടിയത് മുതൽ കുറഞ്ഞത് വരെ):**  
+രവി > അനു > മീര > ജോസഫ്"
+Q3_K_M,ml-weekday,Malayalam,True,True,18.59,40.02,94.53,1744,142,3100,0.185,"ഇന്ന് ബുധനാഴ്ചയാണെങ്കിൽ, 100 ദിവസം കഴിഞ്ഞാൽ അത് **വെള്ളിയാഴ്ച** ആയിരിക്കും.  
+
+### വിശദീകരണം:  
+- 100 ദിവസം കണക്കാക്കുമ്പോൾ, 7 ദിവസത്തെ ആഴ്ചയുടെ പൂർണ്ണ സംഖ്യ കണക്കാക്കുക:  
+  $ 100 \div 7 = 14 $ ആഴ്ചകൾ (98 ദിവസം) അവശേഷിക്കുന്നത് $ 100 - 98 = 2 $ ദിവസം.  
+- ഇന്ന് ബുധനാഴ്ച (Wednesday) ആണെങ്കിൽ, 2 ദിവസം കഴിഞ്ഞാൽ:  
+  - 1 ദിവസം: **വ്യാഴാഴ്ച** (Thursday)  
+  - 2 ദിവസം: **വെള്ളിയാഴ്ച** (Friday)  
+
+അതിനാൽ, 100 ദിവസം കഴിഞ്ഞാൽ **വെള്ളിയാഴ്ച** ആയിരിക്കും."
+Q3_K_M,ml-discount,Malayalam,True,True,11.58,52.94,95.42,1088,197,1356,0.631,"ഷർട്ടിന്റെ ആദ്യ വില ₹800 ആണ്. കട 25% കിഴിവ് നൽകുന്നതിനാൽ, കിഴിവ് കണക്കാക്കുക:
+
+**കിഴിവ് കണക്ക്:**  
+25% കിഴിവ് = 800 × 25% = 800 × 0.25 = ₹200  
+കിഴിവ് ചെയ്ത വില = 800 - 200 = ₹600  
+
+ശേഷം, കിഴിവ് ചെയ്ത വിലയിൽ 5% നികുതി ചേർക്കുന്നു:  
+**നികുതി കണക്ക്:**  
+5% നികുതി = 600 × 5% = 600 × 0.05 = ₹30  
+അവസാന വില = 600 + 30 = ₹630  
+
+**അവസാന വില:** ₹630  
+
+---  
+**വിശദീകരണം:**  
+1. ആദ്യ വില ₹800 ആണ്.  
+2. 25% കിഴിവ് കണക്കാക്കുമ്പോൾ, 800 ന്റെ 25% = ₹200 കിഴിവ്.  
+3. കിഴിവ് ചെയ്ത വില = ₹800 - ₹200 = ₹600.  
+4. ഇതിന് 5% നികുതി ചേർക്കുമ്പോൾ, 600 ന്റെ 5% = ₹30.  
+5. അവസാന വില = ₹600 + ₹30 = **₹630**."
+Q3_K_M,ml-translate,Malayalam,False,True,0.32,48.44,92.39,16,171,0,1.0,"""The train to Kochi was delayed by two hours due to heavy rain."""
+Q3_K_M,hi-coconuts,Hindi,True,True,9.23,45.29,95.86,876,180,1356,0.506,"एक किसान के पास 3 खेत हैं, जिसमें प्रत्येक खेत में 24 नारियल के पेड़ हैं। इसलिए, कुल पेड़ों की संख्या निम्न प्रकार निकाली जा सकती है:  
+**3 खेत × 24 पेड़ = 72 पेड़**  
+
+प्रत्येक पेड़ से हर महीने 15 नारियल मिलते हैं, इसलिए कुल नारियल की संख्या:  
+**72 पेड़ × 15 नारियल = 1,080 नारियल**  
+
+प्रत्येक नारियल का मूल्य ₹12 है, इसलिए किसान की कमाई:  
+**1,080 नारियल × ₹12 = ₹12,960**  
+
+**उत्तर:** एक महीने में किसान की कमाई ₹12,960 होगी।"
+Q3_K_M,hi-heights,Hindi,True,True,4.96,33.73,96.54,466,118,1157,0.625,"सबसे छोटा: **जोसेफ**  
+सबसे लंबा: **रवि**  
+
+**स्पष्टीकरण:**  
+- रवि > अनु  
+- अनु > मीरा  
+- मीरा > जोसेफ  
+
+इसलिए, **रवि** सबसे लंबा और **जोसेफ** सबसे छोटा है।"
+Q3_K_M,hi-weekday,Hindi,True,True,12.58,27.12,95.81,1196,72,2075,0.184,"आज बुधवार है। अब हमें जानना है कि 100 दिन बाद कौन सा दिन होगा।
+
+### चरण 1: 100 को 7 से विभाजित करें  
+एक सप्ताह में 7 दिन होते हैं, इसलिए हम 100 को 7 से विभाजित करेंगे ताकि जान सकें कि 100 दिन में कितने पूरे सप्ताह हैं और कितने अतिरिक्त दिन हैं।  
+**गणना:**  
+100 ÷ 7 = 14 बार (98 दिन) और शेष 2 दिन।  
+(क्योंकि 7 × 14 = 98, और 100 - 98 = 2)
+
+### चरण 2: शेष दिन जोड़ें  
+अब हम बुधवार से 2 दिन आगे बढ़ेंगे:  
+- **बुधवार + 1 दिन = गुरुवार**  
+- **गुरुवार + 1 दिन = शुक्रवार**  
+
+### चरण 3: उत्तर  
+इसलिए, **100 दिन बाद दिन शुक्रवार होगा**।  
+
+### संक्षिप्त व्याख्या:  
+100 दिन = 14 सप्ताह (98 दिन) + 2 दिन  
+बुधवार से 2 दिन आगे बढ़ने पर शुक्रवार होगा।  
+
+**उत्तर:** 100 दिन बाद दिन **शुक्रवार** होगा।"
+Q3_K_M,hi-discount,Hindi,True,True,7.2,34.11,96.23,680,127,1374,0.441,"शर्ट की मूल कीमत ₹800 है।  
+1. **छूट की गणना**:  
+   - 25% छूट = ₹800 × 25% = ₹200  
+   - छूट वाली कीमत = ₹800 - ₹200 = ₹600  
+
+2. **टैक्स की गणना**:  
+   - 5% टैक्स = ₹600 × 5% = ₹30  
+   - अंतिम कीमत = ₹600 + ₹30 = **₹630**  
+
+**अंतिम कीमत ₹630 है।**"
+Q3_K_M,hi-translate,Hindi,False,True,0.28,34.08,95.45,17,116,0,0.954,The train going to Kochi was delayed by two hours due to heavy rain.
+IQ3_M,en-coconuts,English,True,True,8.15,36.65,95.25,773,56,1711,0.755,"The farmer earns ₹12,960 in one month. Here's the step-by-step breakdown:
+
+1. **Total number of coconut trees**:  
+   $ 3 \text{ fields} \times 24 \text{ trees/field} = 72 \text{ trees} $.
+
+2. **Total coconuts produced per month**:  
+   $ 72 \text{ trees} \times 15 \text{ coconuts/tree} = 1,080 \text{ coconuts} $.
+
+3. **Total earnings from selling coconuts**:  
+   $ 1,080 \text{ coconuts} \times ₹12/\text{coconut} = ₹12,960 $.
+
+**Answer:** ₹12,960."
+IQ3_M,en-heights,English,True,True,4.24,26.48,95.2,392,38,973,0.752,"To determine who is the shortest and who is the tallest among Ravi, Anu, Meera, and Joseph, we analyze the given relationships step by step:
+
+1. **Ravi is taller than Anu** → Ravi > Anu  
+2. **Anu is taller than Meera** → Anu > Meera  
+3. **Meera is taller than Joseph** → Meera > Joseph  
+
+By combining these relationships, we can establish a clear order from tallest to shortest:
+
+**Ravi > Anu > Meera > Joseph**
+
+---
+
+### Final Answer:
+- **The shortest person is Joseph.**
+- **The tallest person is Ravi.**"
+IQ3_M,en-weekday,English,True,True,55.53,27.9,86.59,4801,28,14116,0.347,"To determine what day of the week it will be 100 days from today, given that today is **Wednesday**, we can use modular arithmetic, which is a powerful tool for problems involving cycles—like the 7-day cycle of the week.
+
+---
+
+### Step 1: Understand the Weekly Cycle
+
+The days of the week repeat every **7 days**. That is:
+
+- Day 0: Wednesday
+- Day 1: Thursday
+- Day 2: Friday
+- Day 3: Saturday
+- Day 4: Sunday
+- Day 5: Monday
+- Day 6: Tuesday
+- Day 7: Wednesday (cycle repeats)
+
+So, to find the day of the week 100 days from today, we need to determine how many full weeks and extra days are in 100 days.
+
+---
+
+### Step 2: Use Division with Remainder
+
+We divide 100 by 7 to find how many full weeks and how many extra days there are:
+
+$$
+100 \div 7 = 14 \text{ remainder } 2
+$$
+
+This means:
+
+- 14 full weeks (98 days) from today will also be a **Wednesday**.
+- The remaining **2 days** after that will bring us to the day of the week 2 days after Wednesday.
+
+---
+
+### Step 3: Count the Days Ahead
+
+Starting from **Wednesday**:
+
+- 1 day later: **Thursday**
+- 2 days later: **Friday**
+
+---
+
+### Final Answer
+
+So, **100 days from Wednesday** will be:
+
+$$
+\boxed{Friday}
+$$"
+IQ3_M,en-discount,English,True,True,22.7,23.84,90.55,2026,42,4516,0.603,"To determine the final price of the shirt after applying a 25% discount and then a 5% tax on the discounted price, we proceed step by step:
+
+---
+
+### **Step 1: Apply the 25% Discount**
+
+The original price of the shirt is ₹800. A 25% discount means the customer pays 75% of the original price.
+
+$$
+\text{Discounted Price} = 800 \times (1 - 0.25) = 800 \times 0.75 = 600
+$$
+
+---
+
+### **Step 2: Apply the 5% Tax on the Discounted Price**
+
+Now, a 5% tax is applied to the discounted price of ₹600.
+
+$$
+\text{Tax Amount} = 600 \times 0.05 = 30
+$$
+
+$$
+\text{Final Price} = 600 + 30 = 630
+$$
+
+---
+
+### **Alternative Combined Calculation**
+
+We can also express the entire process in one formula:
+
+$$
+\text{Final Price} = 800 \times (1 - 0.25) \times (1 + 0.05) = 800 \times 0.75 \times 1.05 = 630
+$$
+
+---
+
+### **Conclusion**
+
+After applying a 25% discount and then a 5% tax on the discounted price, the final price of the shirt is:
+
+$$
+\boxed{630}
+$$"
+IQ3_M,ml-coconuts,Malayalam,True,False,98.55,64.24,83.31,8192,293,0,0.002,"'this' എന്ന വാക്ക് ഉപയോഗിച്ച് അനുവാദം നൽകിയിട്ടില്ല, അതിനാൽ ഞാൻ അത് ഉപയോഗിക്കില്ല. എന്നാൽ, ഞാൻ സംശയം പരിഹരിക്കാൻ ശ്രമിക്കും. കൂടാതെ, ഞാൻ സംശയം പരിഹരിക്കുന്നതിന് ഒരു വിശദമായ ഉത്തരം നൽകാൻ ശ്രമിക്കും. അതിനാൽ, ഞാൻ സംശയം പരിഹരിക്കുന്നതിന് ഒരു വിശദമായ ഉത്തരം നൽകാൻ ശ്രമിക്കും. അതിനാൽ, ഞാൻ സംശയം പരിഹരിക്കുന്നതിന് ഒരു വിശദമായ ഉത്തരം നൽകാൻ ശ്രമിക്കും. അതിനാൽ, ഞാൻ സംശയം പരിഹരിക്കുന്നതിന് ഒരു വിശദമായ ഉത്തരം നൽകാൻ ശ്രമിക്കും. അതിനാൽ, ഞാൻ സംശയം പരിഹരിക്കുന്നതിന് ഒരു വിശദമായ ഉത്തരം നൽകാൻ ശ്രമിക്കും. അതിനാൽ, ഞാൻ സംശയം പരിഹരിക്കുന്നതിന് ഒരു വിശദമായ ഉത്തരം നൽകാൻ ശ്രമിക്കും. അതിനാൽ, ഞാൻ സംശയം പരിഹരിക്കുന്നതിന് ഒരു വിശദമായ ഉത്തരം നൽകാൻ ശ്രമിക്കും. അതിനാൽ, ഞാൻ സംശയം പരിഹരിക്കുന്നതിന് ഒരു വിശദമായ ഉത്തരം നൽകാൻ ശ്രമിക്കും. അതിനാൽ, ഞാൻ സംശയം പരിഹരിക്കുന്നതിന് ഒരു വിശദമായ ഉത്തരം നൽകാൻ ശ്രമിക്കും. അതിനാൽ, ഞാൻ സംശയം പരിഹരിക്കുന്നതിന് ഒരു വിശദമായ ഉത്തരം നൽകാൻ ശ്രമിക്കും. അതിനാൽ, ഞാൻ സംശയം പരിഹരിക്കുന്നതിന് ഒരു വിശദമായ ഉത്തരം നൽകാൻ ശ്രമിക്കും. അതിനാൽ, ഞാൻ സംശയം പരിഹരിക്കുന്നതിന് ഒരു വിശദമായ ഉത്തരം നൽകാൻ ശ്രമിക്കും. അതിനാൽ, ഞാൻ സംശയം പരിഹരിക്കുന്നതിന് ഒരു വിശദമായ ഉത്തരം നൽകാൻ ശ്രമിക്കും. അതിനാൽ, ഞാൻ സംശയം പരിഹരിക്കുന്നതിന് ഒരു വിശദമായ ഉത്തരം നൽകാൻ ശ്രമിക്കും. അതിനാൽ, ഞാൻ സംശയം പരിഹരിക്കുന്നതിന് ഒരു വിശദമായ ഉത്തരം നൽകാൻ ശ്രമിക്കും. അതിനാൽ, ഞാൻ സംശയം പരിഹരിക്കുന്നതിന് ഒരു വിശദമായ ഉത്തരം നൽകാൻ ശ്രമിക്കും. അതിനാൽ, ഞാൻ സംശയം പരിഹരിക്കുന്നതിന് ഒരു വിശദമായ ഉത്തരം നൽകാൻ ശ്രമിക്കും. അതിനാൽ, ഞാൻ സംശയം പരിഹരിക്കുന്നതിന് ഒരു വിശദമായ ഉത്തരം നൽകാൻ ശ്രമിക്കും. അതിനാൽ, ഞാൻ സംശയം പരിഹരിക്കുന്നതിന് ഒരു വിശദമായ ഉത്തരം നൽകാൻ ശ്രമിക്കും. അതിനാൽ, ഞാൻ സംശയം പരിഹരിക്കുന്നതിന് ഒരു വിശദമായ ഉത്തരം നൽകാൻ ശ്രമിക്കും. അതിനാൽ, ഞാൻ സംശയം പരിഹരിക്കുന്നതിന് ഒരു വിശദമായ ഉത്തരം നൽകാൻ ശ്രമിക്കും. അതിനാൽ, ഞാൻ സംശയം പരിഹരിക്കുന്നതിന് ഒരു വിശദമായ ഉത്തരം നൽകാൻ ശ്രമിക്കും. അതിനാൽ, ഞാൻ സംശയം പരിഹരിക്കുന്നതിന് ഒരു വിശദമായ ഉത്തരം നൽകാൻ ശ്രമിക്കും. അതിനാൽ, ഞാൻ സംശയം പരിഹരിക്കുന്നതിന് ഒരു വിശദമായ ഉത്തരം നൽകാൻ ശ്രമിക്കും. അതിനാൽ, ഞാൻ സംശയം പരിഹരിക്കുന്നതിന് ഒരു വിശദമായ ഉത്തരം നൽകാൻ ശ്രമിക്കും. അതിനാൽ, ഞാൻ സംശയം പരിഹരിക്കുന്നതിന് ഒരു വിശദമായ ഉത്തരം നൽകാൻ ശ്രമിക്കും. അതിനാൽ, ഞാൻ സംശയം പരിഹരിക്കുന്നതിന് ഒരു വിശദമായ ഉത്തരം നൽകാൻ ശ്രമിക്കും. അതിനാൽ, ഞാൻ സംശയം പരിഹരിക്കുന്നതിന് ഒരു വിശദമായ ഉത്തരം നൽകാൻ ശ്രമിക്കും. അതിനാൽ, ഞാൻ സംശയം പരിഹരിക്കുന്നതിന് ഒരു വിശദമായ ഉത്തരം നൽകാൻ ശ്രമിക്കും. അതിനാൽ, ഞാൻ സംശയം പരിഹരിക്കുന്നതിന് ഒരു വിശദമായ ഉത്തരം നൽകാൻ ശ്രമിക്കും. അതിനാൽ, ഞാൻ സംശയം പരിഹരിക്കുന്നതിന് ഒരു വിശദമായ ഉത്തരം നൽകാൻ ശ്രമിക്കും. അതിനാൽ, ഞാൻ സംശയം പരിഹരിക്കുന്നതിന് ഒരു വിശദമായ ഉത്തരം നൽകാൻ ശ്രമിക്കും. അതിനാൽ, ഞാൻ സംശയം പരിഹരിക്കുന്നതിന് ഒരു വിശദമായ ഉത്തരം നൽകാൻ ശ്രമിക്കും. അതിനാൽ, ഞാൻ സംശയം പരിഹരിക്കുന്നതിന് ഒരു വിശദമായ ഉത്തരം നൽകാൻ ശ്രമിക്കും. അതിനാൽ, ഞാൻ സംശയം പരിഹരിക്കുന്നതിന് ഒരു വിശദമായ ഉത്തരം നൽകാൻ ശ്രമിക്കും. അതിനാൽ, ഞാൻ സംശയം പരിഹരിക്കുന്നതിന് ഒരു വിശദമായ ഉത്തരം നൽകാൻ ശ്രമിക്കും. അതിനാൽ, ഞാൻ സംശയം പരിഹരിക്കുന്നതിന് ഒരു വിശദമായ ഉത്�്തരം നൽകാൻ ശ്രമിക്കും. അതിനാൽ, ഞാൻ സംശയം പരിഹരിക്കുന്നതിന് ഒരു വിശദമായ ഉത്തരം നൽകാൻ ശ്രമിക്കും. അതിനാൽ, ഞാൻ സംശയം പരിഹരിക്കുന്നതിന് ഒരു വിശദമായ ഉത്തരം നൽകാൻ ശ്രമിക്കും. അതിനാൽ, ഞാൻ സംശയം പരിഹരിക്കുന്നതിന് ഒരു വിശദമായ ഉത്തരം നൽകാൻ ശ്രമിക്കും. അതിനാൽ, ഞാൻ സംശയം പരിഹരിക്കുന്നതിന് ഒരു വിശദമായ ഉത്തരം നൽകാൻ ശ്രമിക്കും. അതിനാൽ, ഞാൻ സംശയം പരിഹരിക്കുന്നതിന് ഒരു വിശദമായ ഉത്തരം നൽകാൻ ശ്രമിക്കും. അതിനാൽ, ഞാൻ സംശയം പരിഹരിക്കുന്നതിന് ഒരു വിശദമായ ഉത്തരം നൽകാൻ ശ്രമിക്കും. അതിനാൽ, ഞാൻ സംശയം പരിഹരിക്കുന്നതിന് ഒരു വിശദമായ ഉത്തരം നൽകാൻ ശ്രമിക്കും. അതിനാൽ, ഞാൻ സംശയം പരിഹരിക്കുന്നതിന് ഒരു വിശദമായ ഉത്തരം നൽകാൻ ശ്രമിക്കും. അതിനാൽ, ഞാൻ സംശയം പരിഹരിക്കുന്നതിന് ഒരു വിശദമായ ഉത്�്തരം നൽകാൻ ശ്രമിക്കും. അതിനാൽ, ഞാൻ സംശയം പരിഹരിക്കുന്നതിന് ഒരു വിശദമായ ഉത്തരം നൽകാൻ ശ്രമിക്കും. അതിനാൽ, ഞാൻ സംശയം പരിഹരിക്കുന്നതിന് ഒരു വിശദമായ ഉത്തരം നൽകാൻ ശ്രമിക്കും. അതിനാൽ, ഞാൻ സംശയം പരിഹരിക്കുന്നതിന് ഒരു വിശദമായ ഉത്�്തരം നൽകാൻ ശ്രമിക്കും. അതിനാൽ, ഞാൻ സംശയം പരിഹരിക്കുന്നതിന് ഒരു വിശദമായ ഉത്തരം നൽകാൻ ശ്രമിക്കും. അതിനാൽ, ഞാൻ സംശയം പരിഹരിക്കുന്നതിന് ഒരു വിശദമായ ഉത്തരം നൽകാൻ ശ്രമിക്കും. അതിനാൽ, ഞാൻ സംശയം പരിഹരിക്കുന്നതിന് ഒരു വിശദമായ ഉത്തരം നൽകാൻ ശ്രമിക്കും. അതിനാൽ, ഞാൻ സംശയം പരിഹരിക്കുന്നതിന് ഒരു വിശദമായ ഉത്തരം നൽകാൻ ശ്രമിക്കും. അതിനാൽ, ഞാൻ സംശയം പരിഹരിക്കുന്നതിന് ഒരു വിശദമായ ഉത്തരം നൽകാൻ ശ്രമിക്കും. അതിനാൽ, ഞാൻ സംശയം പരിഹരിക്കുന്നതിന് ഒരു വിശദമായ ഉത്തരം നൽകാൻ ശ്രമിക്കും. അതിനാൽ, ഞാൻ സംശയം പരിഹരിക്കുന്നതിന് ഒരു വിശദമായ ഉത്തരം നൽകാൻ ശ്രമിക്കും. അതിനാൽ, ഞാൻ സംശയം പരിഹരിക്കുന്നതിന് ഒരു വിശദമായ ഉത്തരം നൽകാൻ ശ്രമിക്കും. അതിനാൽ, ഞാൻ സംശയം പരിഹരിക്കുന്നതിന് ഒരു വിശദമായ ഉത്തരം നൽകാൻ ശ്രമിക്കും. അതിനാൽ, ഞാൻ സംശയം പരിഹരിക്കുന്നതിന് ഒരു വിശദമായ ഉത്�്തരം നൽകാൻ ശ്രമിക്കും. അതിനാൽ, ഞാൻ സംശയം പരിഹരിക്കുന്നതിന് ഒരു വിശദമായ ഉത്തരം നൽകാൻ ശ്രമിക്കും. അതിനാൽ, ഞാൻ സംശയം പരിഹരിക്കുന്നതിന് ഒരു വിശദമായ ഉത്തരം നൽകാൻ ശ്രമിക്കും. അതിനാൽ, ഞാൻ സംശയം പരിഹരിക്കുന്നതിന് ഒരു വിശദമായ ഉത്തരം നൽകാൻ ശ്രമിക്കും. അതിനാൽ, ഞാൻ സംശയം പരിഹരിക്കുന്നതിന് ഒരു വിശദമായ ഉത്തരം നൽകാൻ ശ്രമിക്കും. അതിനാൽ, ഞാൻ സംശയം പരിഹരിക്കുന്നതിന് ഒരു വിശദമായ ഉത്തരം നൽകാൻ ശ്രമിക്കും. അതിനാൽ, ഞാൻ സംശയം പരിഹരിക്കുന്നതിന് ഒരു വിശദമായ ഉത്തരം നൽകാൻ ശ്രമിക്കും. അതിനാൽ, ഞാൻ സംശയം പരിഹരിക്കുന്നതിന് ഒരു വിശദമായ ഉത്തരം നൽകാൻ ശ്രമിക്കും. അതിനാൽ, ഞാൻ സംശയം പരിഹരിക്കുന്നതിന് ഒരു വിശദമായ ഉത്തരം നൽകാൻ ശ്രമിക്കും. അതിനാൽ, ഞാൻ സംശയം പരിഹരിക്കുന്നതിന് ഒരു വിശദമായ ഉത്തരം നൽകാൻ ശ്രമിക്കും. അതിനാൽ, ഞാൻ സംശയം പരിഹരിക്കുന്നതിന് ഒരു വിശദമായ ഉത്തരം നൽകാൻ ശ്രമിക്കും. അതിനാൽ, ഞാൻ സംശയം പരിഹരിക്കുന്നതിന് ഒരു വിശദമായ ഉത്തരം നൽകാൻ ശ്രമിക്കും. അതിനാൽ, ഞാൻ സംശയം പരിഹരിക്കുന്നതിന് ഒരു വിശദമായ ഉത്തരം നൽകാൻ ശ്രമിക്കും. അതിനാൽ, ഞാൻ സംശയം പരിഹരിക്കുന്നതിന് ഒരു വിശദമായ ഉത്തരം നൽകാൻ ശ്രമിക്കും. അതിനാൽ, ഞാൻ സംശയം പരിഹരിക്കുന്നതിന് ഒരു വിശദമായ ഉത്തരം നൽകാൻ ശ്രമിക്കും. അതിനാൽ, ഞാൻ സംശയം പരിഹരിക്കുന്നതിന് ഒരു വിശദമായ ഉത്തരം നൽകാൻ ശ്രമിക്കും. അതിനാൽ, ഞാൻ സംശയം പരിഹരിക്കുന്നതിന് ഒരു വിശദമായ ഉത്തരം നൽകാൻ ശ്രമിക്കും. അതിനാൽ, ഞാൻ സംശയം പരിഹരിക്കുന്നതിന് ഒരു വിശദമായ ഉത്തരം നൽകാൻ ശ്രമിക്കും. അതിനാൽ, ഞാൻ സംശയം പരിഹരിക്കുന്നതിന് ഒരു വിശദമായ ഉത്തരം നൽകാൻ ശ്രമിക്കും. അതിനാൽ, ഞാൻ സംശയം പരിഹരിക്കുന്നതിന് ഒരു വിശദമായ ഉത്തരം നൽകാൻ ശ്രമിക്കും. അതിനാൽ, ഞാൻ സംശയം പരിഹരിക്കുന്നതിന് ഒരു വിശദമായ ഉത്തരം നൽകാൻ ശ്രമിക്കും. അതിനാൽ, ഞാൻ സംശയം പരിഹരിക്കുന്നത"
+IQ3_M,ml-heights,Malayalam,True,True,3.82,55.94,92.83,301,246,0,0.135,"'top' എന്ന പദം ഉപയോഗിച്ച് സമാധാനം കാണാം.
+
+രവി > അനു
+അനു > മീര
+മീര > ജോസഫ്
+
+രവി > അനു > മീര > ജോസഫ്
+
+അതിനാൽ, ഏറ്റവും ഉയരം കുറഞ്ഞത് ജോസഫാണ്. ഏറ്റവും ഉയരം കൂടിയത് രവിയാണ്.
+</think>
+
+ഏറ്റവും ഉയരം കുറഞ്ഞത് **ജോസഫ്** ആണ്.  
+ഏറ്റവും ഉയരം കൂടിയത് **രവി** ആണ്."
+IQ3_M,ml-weekday,Malayalam,True,True,15.16,41.15,91.19,1372,142,2109,0.347,"ഇന്ന് ബുധനാഴ്ചയാണെങ്കിൽ, 100 ദിവസം കഴിഞ്ഞാൽ ഏത് ദിവസമായിരിക്കും എന്ന് കണക്കാക്കാം:
+
+1. **ആഴ്ചയുടെ ദിവസങ്ങൾ**: ഒരു ആഴ്ചയിൽ 7 ദിവസങ്ങൾ ഉണ്ട്.  
+2. **100 ദിവസം വിഭജിക്കുക**:  
+   $ 100 \div 7 = 14 $ ആഴ്ചകൾ കഴിഞ്ഞ് $ 2 $ ദിവസം ബാക്കി അടിക്കും (കാരണം $ 14 \times 7 = 98 $, $ 100 - 98 = 2 $).  
+3. **ബുധനാഴ്ചയിൽ നിന്ന് 2 ദിവസം മുന്നോട്ട് കണക്കാക്കുക**:  
+   - 1 ദിവസം ശനിയാഴ്ച (Thursday)  
+   - 2 ദിവസം ശനിയാഴ്ച (Friday)  
+
+**ഫലം**: 100 ദിവസം കഴിഞ്ഞാൽ **ശനിയാഴ്ച** ആയിരിക്കും.  
+
+**വിശദീകരണം**:  
+- 7 ദിവസം കഴിഞ്ഞാൽ ആഴ്ചയുടെ തുടക്കം തന്നെ ആകും.  
+- 100 ദിവസം = 14 ആഴ്ചകൾ + 2 ദിവസം.  
+- ബുധനാഴ്ച + 2 ദിവസം = **ശനിയാഴ്ച**."
+IQ3_M,ml-discount,Malayalam,True,True,10.99,46.66,91.68,990,197,0,0.228,"'the shirt costs 800 rupees. the shop gives a 25% discount, then adds 5% tax on the discounted price. what is the final price? explain in malayalam'
+
+Okay, let's see. The problem is about calculating the final price of a shirt after a discount and then adding tax. The original price is ₹800. First, there's a 25% discount, and then a 5% tax on the discounted price. I need to find the final price.
+
+Alright, step by step. First, calculate the discount amount. 25% of ₹800. To find 25% of 800, I can do 800 multiplied by 0.25. Let me check that. 800 * 0.25 is 200. So the discount is ₹200. That means the discounted price is original price minus discount. So 800 - 200 = ₹600. Got that part.
+
+Now, after the discount, there's a 5% tax added on the discounted price. So the tax is 5% of ₹600. Let me calculate that. 5% of 600 is 600 * 0.05. That equals 30. So the tax amount is ₹30. Then, the final price would be the discounted price plus the tax. So 600 + 30 = ₹630. 
+
+Wait, let me make sure I didn't mix up any steps. The discount is applied first, reducing the price to ₹600, then tax is calculated on that reduced amount. Yes, that's correct. Sometimes people might mistakenly calculate tax on the original price, but the problem says it's on the discounted price. So 5% of 600 is indeed 30. Adding that gives 630. 
+
+Hmm, another way to check: 25% discount means the customer pays 75% of the original price. So 800 * 0.75 = 600. Then 5% tax on 600 is 30, so total is 630. Yep, same result. That seems right. I think that's the answer.
+</think>
+
+ഷർട്ടിന്റെ വില ₹800 ആണ്. കട 25% കിഴിവ് നൽകുന്നതിനാൽ, കിഴിവ് കണക്കാക്കുക:
+
+**കിഴിവ് കണക്ക്:**
+25% കിഴിവ് = 800 × (25/100) = ₹200  
+കിഴിവ് ശേഷം ഷർട്ടിന്റെ വില = 800 - 200 = ₹600
+
+ശേഷം, കിഴിവ് ചെയ്ത വിലയിൽ 5% നികുതി ചേർക്കുന്നു:
+
+**നികുതി കണക്ക്:**
+5% നികുതി = 600 × (5/100) = ₹30  
+അവസാന വില = 600 + 30 = ₹630
+
+**പരിശോധന:**
+- 25% കിഴിവ് ശേഷം ഷർട്ടിന്റെ വില 75% ആണ് (800 × 0.75 = ₹600).  
+- 5% നികുതി ചേർക്കുമ്പോൾ, 600 × 1.05 = ₹630.
+
+**അവസാന വില: ₹630**"
+IQ3_M,ml-translate,Malayalam,False,True,0.3,43.01,97.53,16,171,0,1.0,"""The train to Kochi was delayed by two hours due to heavy rain."""
+IQ3_M,hi-coconuts,Hindi,True,True,10.11,44.49,91.5,918,180,0,0.14,"'t
+Okay, let's see. The problem is about a farmer who has 3 fields. Each field has 24 coconut trees. Each tree gives 15 coconuts per month. He sells each coconut for ₹12. We need to find out his total earnings in a month.
+
+First, I need to figure out how many coconuts he gets in total. Since there are 3 fields, each with 24 trees, I should multiply the number of fields by the number of trees per field. That would give the total number of trees. Then, each tree gives 15 coconuts, so multiply the total trees by 15 to get the total coconuts per month.
+
+Once I have the total coconuts, I can multiply that by the selling price per coconut, which is ₹12, to get the total earnings. Let me check if I'm missing anything here. The problem says ""एक महीने में उसकी कितनी कमाई होगी?"" which translates to total earnings in a month. So yes, that's the plan.
+
+Wait, let me break it down step by step. First, total trees: 3 fields * 24 trees/field = 72 trees. Then, total coconuts: 72 trees * 15 coconuts/tree = 1080 coconuts. Then, total earnings: 1080 coconuts * ₹12/coconut = ₹12,960. That seems straightforward. But let me make sure I didn't skip any steps or make a multiplication error.
+
+Alternatively, maybe I can calculate per field first. Each field has 24 trees, each tree gives 15 coconuts. So per field, 24*15 = 360 coconuts. Then, 3 fields would be 3*360 = 1080 coconuts. Then same as before. So that's consistent. Then 1080 * 12 = 12,960. Yeah, that seems right. I think that's the answer.
+</think>
+
+एक महीने में किसान की कमाई निम्नलिखित चरणों में निकाली जा सकती है:
+
+1. **खेतों में नारियल के पेड़ों की कुल संख्या ज्ञात करें:**  
+   - हर खेत में 24 पेड़ हैं।  
+   - कुल 3 खेत हैं।  
+   - **कुल पेड़ = 3 खेत × 24 पेड़ = 72 पेड़**  
+
+2. **एक महीने में कुल नारियलों की संख्या ज्ञात करें:**  
+   - हर पेड़ से 15 नारियल मिलते हैं।  
+   - **कुल नारियल = 72 पेड़ × 15 नारियल = 1,080 नारियल**  
+
+3. **एक महीने में कमाई की गणना करें:**  
+   - हर नारियल का बिक्री मूल्य ₹12 है।  
+   - **कुल कमाई = 1,080 नारियल × ₹12 = ₹12,960**  
+
+**उत्तर:** एक महीने में किसान ₹12,960 कमाएगा।"
+IQ3_M,hi-heights,Hindi,True,True,1.02,32.88,96.84,87,118,0,0.181,"'top' के बारे में एक बात है जिसे आपको जानना चाहिए।
+</think>
+
+सबसे छोटा जोसेफ है।  
+सबसे लंबा रवि है।"
+IQ3_M,hi-weekday,Hindi,True,True,11.83,29.38,91.76,1080,72,2032,0.305,"अगर आज बुधवार है, तो 100 दिन बाद कौन सा दिन होगा? इसके लिए हम इस तरह गणना कर सकते हैं:
+
+1. **हफ्ते के दिनों की गणना**:  
+   एक हफ्ता 7 दिन होता है। इसलिए, हम 100 को 7 से विभाजित करते हैं:  
+   $ 100 ÷ 7 = 14 $ बार और शेष $ 2 $ दिन।  
+   इसका मतलब है कि 100 दिन = 14 हफ्ते (98 दिन) + 2 दिन।
+
+2. **दिन की गणना**:  
+   - अगर आज बुधवार है, तो 14 हफ्ते (98 दिन) बाद भी दिन बुधवार ही रहेगा (क्योंकि हफ्ता दोहराता रहता है)।  
+   - अब शेष 2 दिन जोड़ें:  
+     - 1 दिन बाद: **गुरुवार**  
+     - 2 दिन बाद: **शुक्रवार**  
+
+**उत्तर**: 100 दिन बाद दिन **शुक्रवार** होगा।"
+IQ3_M,hi-discount,Hindi,True,True,8.26,32.95,91.96,747,127,0,0.299,"'t
+Okay, let's see. The problem is about calculating the final price of a shirt after a discount and then adding tax. The original price is ₹800. The shop gives a 25% discount first, and then on the discounted price, they add 5% tax. I need to find the final price.
+
+First, I should figure out how much the discount is. If the original price is ₹800 and there's a 25% discount, that means the discount amount is 25% of ₹800. To calculate that, I can do 800 multiplied by 25% or 0.25. Let me compute that: 800 * 0.25 = 200. So the discount is ₹200.
+
+Subtracting that discount from the original price gives the discounted price. So, ₹800 - ₹200 = ₹600. That's the price after the discount.
+
+Now, the shop adds 5% tax on this discounted price. So I need to calculate 5% of ₹600 and add it to ₹600. Let me calculate 5% of 600: 600 * 0.05 = 30. So the tax is ₹30.
+
+Adding that tax to the discounted price: ₹600 + ₹30 = ₹630. Therefore, the final price should be ₹630.
+
+Wait, let me double-check. Sometimes, people get confused whether the tax is applied before or after the discount. But the problem says the discount is given first, then tax is added on the discounted price. So yes, the process is correct. First subtract 25%, then add 5% tax on the new amount. So the steps are right.
+
+Another way to think about it: The final price is original price minus 25% of original price, then plus 5% of that discounted price. Which is exactly what I did. So I think that's correct. So the answer should be ₹630.
+</think>
+
+एक शर्ट की मूल कीमत ₹800 है। दुकान पर 25% की छूट दी जाती है, फिर छूट वाली कीमत पर 5% टैक्स जोड़ा जाता है। अंतिम कीमत की गणना इस प्रकार करें:
+
+1. **छूट की गणना**:  
+   25% छूट = ₹800 × 25% = ₹200  
+   छूट वाली कीमत = ₹800 - ₹200 = **₹600**
+
+2. **टैक्स की गणना**:  
+   5% टैक्स = ₹600 × 5% = ₹30  
+   अंतिम कीमत = ₹600 + ₹30 = **₹630**
+
+**उत्तर**: अंतिम कीमत ₹630 है।"
+IQ3_M,hi-translate,Hindi,False,True,0.29,34.09,97.48,16,116,0,0.984,"""The train to Kochi was delayed by two hours due to heavy rain."""

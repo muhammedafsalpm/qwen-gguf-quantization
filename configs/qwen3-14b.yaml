@@ -98,10 +98,38 @@ eval:
   server_ctx: 16384
 
 card:
-  tags: [gguf, qwen3, quantized, imatrix, thinking, llama.cpp, ollama]
-  context_gb: 1.5                  # GPU memory for ~8K tokens of context (standard attention)
+  tags: [gguf, qwen3, qwen, quantized, imatrix, thinking, reasoning, tool-calling, multilingual, llama.cpp, conversational]
+  language: [en, zh, hi, ml, ta, te, bn, ar, fr, de, es, pt, ru, ja, ko, vi, id, th, tr]  # Qwen3 supports 100+ languages
+  quick_start: true                # one-line run command at the top of the card
+  highlights:                      # "Why these quants" (measured facts only)
+    - "**Importance matrix from the original BF16 model**, computed on 164K tokens of chat, code, math, reasoning traces (thinking mode) and multilingual text, rendered with Qwen3's own chat template."
+    - "**Every file measured against BF16:** KL divergence, perplexity and same-top-token rate, so you can choose a size by measured quality."
+    - "**I-quants included** (IQ4_XS, IQ3_M) for 8–10 GB GPUs, next to the standard K-quants."
+    - "**Functionally tested:** thinking on, thinking off and tool calling on every file, plus 43 graded questions per file (reasoning, math, code, SQL, Malayalam and Hindi)."
+    - "**Measured per language:** accuracy against BF16 on Malayalam, Hindi and Python code, not only English."
+  context_gb: 1.7                  # 8K context: 1.34 GB KV cache (40 layers x 8 KV heads x 128) + compute buffers
   language_results: true           # include results/Qwen3-14B/kld_by_language.json if present
   ollama: false                    # set to the tested Ollama version after the Ollama test
+  test_summary: |                  # verified by reading the answers (results/Qwen3-14B/compare/)
+    Every quant answered the same questions at temperature 0 with
+    [`compare_quants.py`](https://github.com/muhammedafsalpm/qwen-gguf-quantization/blob/main/tools/compare_quants.py).
+    Automatic checks were confirmed by reading the answers.
+
+    | Quant | Basic (12) | Extended (17) | English / Malayalam / Hindi (14) |
+    |---|---|---|---|
+    | Q8_0 | 12 | 17 | 14 |
+    | Q6_K | 12 | 17 | 14 |
+    | Q5_K_M | 12 | 17 | 14 |
+    | Q4_K_M | 12 | 17 | 14 |
+    | IQ4_XS | 11 | 17 | 14 |
+    | Q3_K_M | 11 | 17 | 14 |
+    | IQ3_M | 11 | 17 | 13 |
+
+    - Every quant answered all 17 extended questions correctly (reasoning, math, code, SQL, data analysis,
+      hallucination checks and agentic planning, including asking for approval before sending an email).
+    - Malayalam: IQ4_XS, Q3_K_M and IQ3_M misspelled "Delhi"; IQ3_M also repeated itself on one Malayalam
+      word problem until the token limit. Q4_K_M and above made no Malayalam or Hindi errors.
+    - These are small samples (one run per question); differences of one answer are within normal variation.
   notes:
     Q8_0: "Near-lossless. Best accuracy"
     Q6_K: "Excellent quality"
@@ -110,7 +138,12 @@ card:
     IQ4_XS: "Smallest 4-bit"
     Q3_K_M: "Noticeable quality loss"
     IQ3_M: "Smallest file; noticeable quality loss"
-  gpu_guide: []                    # filled in from the measured file sizes after step 05
+  gpu_guide:                       # from the measured file sizes + ~1.7 GB for 8K context
+    - "- **24 GB GPU:** Q8_0 (practically identical to the original), with room for long context"
+    - "- **16 GB:** Q6_K"
+    - "- **12 GB (RTX 3060 12 GB / 4070):** Q4_K_M (the usual default), or Q5_K_M with a shorter context"
+    - "- **10 GB:** IQ4_XS or Q3_K_M"
+    - "- **8 GB:** IQ3_M with a short context (about 4K)"
 
 hf:
   username: muhammed-afsal-p-m
