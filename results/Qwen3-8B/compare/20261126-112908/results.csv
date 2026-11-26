@@ -1,0 +1,865 @@
+quant,prompt,category,thinking,correct,wall_s,prefill_ms,tok_s,gen_tokens,prompt_tokens,reasoning_chars,similarity_to_q8_0,answer
+Q8_0,bat-ball,Logic,True,True,23.77,28.7,86.5,2040,39,4746,,"To solve the problem, we begin by defining the variables:
+
+Let the cost of the **ball** be $ x $ dollars.  
+Then, the cost of the **bat** is $ x + 1.00 $ dollars, since the bat costs $1.00 more than the ball.
+
+We are told that the **total cost** of the bat and the ball is $1.10. So we can write the equation:
+
+$$
+x + (x + 1.00) = 1.10
+$$
+
+Simplify the left-hand side:
+
+$$
+2x + 1.00 = 1.10
+$$
+
+Now, subtract 1.00 from both sides:
+
+$$
+2x = 0.10
+$$
+
+Divide both sides by 2:
+
+$$
+x = 0.05
+$$
+
+---
+
+### Interpretation:
+
+This means the **ball costs $0.05**, or **5 cents**.  
+Then the **bat costs** $ 0.05 + 1.00 = 1.05 $, or **$1.05**.
+
+Adding them together:
+
+$$
+0.05 + 1.05 = 1.10
+$$
+
+This confirms the total is correct.
+
+---
+
+### Final Answer:
+
+$$
+\boxed{0.05}
+$$"
+Q8_0,multiply,Math,False,True,0.14,16.17,82.48,4,26,0,,391
+Q8_0,word-problem,Math,True,True,18.7,22.47,84.75,1577,55,4148,,"To determine how much money Riya has left after her purchases, we'll follow the sequence of transactions step by step.
+
+---
+
+### Step 1: Cost of the Pens
+
+Riya buys **7 pens**, each costing **12 rupees**.
+
+$$
+\text{Total cost of pens} = 7 \times 12 = 84 \text{ rupees}
+$$
+
+---
+
+### Step 2: Payment and Change
+
+She pays with a **100 rupee note**. The change she receives is:
+
+$$
+\text{Change} = 100 - 84 = 16 \text{ rupees}
+$$
+
+---
+
+### Step 3: Spending Half of the Change on a Notebook
+
+She spends **half of her change** on a notebook:
+
+$$
+\text{Amount spent on notebook} = \frac{1}{2} \times 16 = 8 \text{ rupees}
+$$
+
+---
+
+### Step 4: Remaining Money
+
+After spending 8 rupees on the notebook, the amount of money she has left is:
+
+$$
+\text{Remaining money} = 16 - 8 = 8 \text{ rupees}
+$$
+
+---
+
+### Final Answer
+
+$$
+\boxed{8}
+$$"
+Q8_0,sheep,Reasoning,True,True,6.5,27.88,84.69,535.5,33,1617,,"The farmer initially has 17 sheep. The phrase ""all but 9 run away"" means that 9 sheep remain. Therefore, the number of sheep left is **9**.
+
+**Answer:** 9"
+Q8_0,palindrome-code,Code,False,True,0.71,17.5,84.71,54,47,0,,"```python
+import re
+
+def is_palindrome(s):
+    # Remove non-alphanumeric characters and convert to lowercase
+    cleaned = re.sub(r'[^a-zA-Z0-9]', '', s).lower()
+    return cleaned == cleaned[::-1]
+```"
+Q8_0,capital,Knowledge,False,True,0.07,21.63,77.96,3,22,0,,Canberra
+Q8_0,three-bullets,Instruction following,False,True,0.52,20.9,84.12,40,33,0,,"- Reduces model size, enabling efficient deployment on resource-constrained devices  
+- Lowers computational requirements, improving inference speed and energy efficiency  
+- Facilitates model compression without significant loss of accuracy"
+Q8_0,malayalam,Multilingual,False,False,0.61,28.79,83.66,48,82,0,,ഇന്ത്യയുടെ തലസ്ഥാനം ന്യൂഡെഹലിയാണ്.
+Q8_0,hindi,Multilingual,False,True,0.38,24.2,84.78,29,54,0,,भारत की राजधानी नई दिल्ली है।
+Q8_0,summary,Summarization,False,,0.9,23.13,85.11,73,111,0,,"Quantization reduces the number of bits used to store neural network weights, such as from 16 to 4 bits, making the model smaller and faster to run with less memory. While this leads to a slight loss in accuracy, 8-bit versions retain most of the original performance, whereas lower-bit versions like 3-bit experience more significant accuracy drops."
+Q8_0,needle,Long context,False,True,0.67,540.92,71.14,5,6495,0,,7341
+Q8_0,weather-tool,Tool calling,False,True,0.69,25.87,83.81,20,160,0,,
+Q6_K,bat-ball,Logic,True,True,19.56,27.4,102.46,1991.5,39,5693,0.638,"To solve the problem, we begin by defining the variables:
+
+- Let the cost of the **ball** be $ x $ dollars.
+- Then, the cost of the **bat** is $ x + 1.00 $, since the bat costs $1.00 more than the ball.
+
+We are told that the **total cost** of the bat and the ball is $1.10. So, we can write the equation:
+
+$$
+x + (x + 1.00) = 1.10
+$$
+
+Simplify the left-hand side:
+
+$$
+2x + 1.00 = 1.10
+$$
+
+Now, subtract 1.00 from both sides:
+
+$$
+2x = 0.10
+$$
+
+Divide both sides by 2:
+
+$$
+x = 0.05
+$$
+
+---
+
+### Final Answer:
+
+The ball costs **$0.05**.
+
+---
+
+### Verification:
+
+- Ball: $0.05
+- Bat: $0.05 + $1.00 = $1.05
+- Total: $0.05 + $1.05 = $1.10 ✅
+
+This confirms the solution is correct. The key was recognizing that the bat is $1.00 more than the ball, not that the bat is $1.00 and the ball is $0.10. The difference is crucial to the correct interpretation."
+Q6_K,multiply,Math,False,True,0.13,21.47,97.11,4,26,0,1.0,391
+Q6_K,word-problem,Math,True,True,11.6,28.82,102.13,1175.5,55,2960,0.462,"To determine how much money Riya has left after her purchases, we follow these steps:
+
+---
+
+### Step 1: Calculate the total cost of the pens
+
+Each pen costs **12 rupees**, and Riya buys **7 pens**.
+
+$$
+\text{Total cost of pens} = 12 \times 7 = 84 \text{ rupees}
+$$
+
+---
+
+### Step 2: Determine the change from the 100 rupee note
+
+Riya pays with a **100 rupee note**, so the change she receives is:
+
+$$
+\text{Change} = 100 - 84 = 16 \text{ rupees}
+$$
+
+---
+
+### Step 3: Calculate the amount spent on the notebook
+
+She spends **half** of her change on a notebook:
+
+$$
+\text{Amount spent on notebook} = \frac{1}{2} \times 16 = 8 \text{ rupees}
+$$
+
+---
+
+### Step 4: Find the remaining amount of money
+
+After spending 8 rupees on the notebook, the remaining amount is:
+
+$$
+\text{Remaining money} = 16 - 8 = 8 \text{ rupees}
+$$
+
+---
+
+### Final Answer
+
+$$
+\boxed{8}
+$$"
+Q6_K,sheep,Reasoning,True,True,6.73,29.31,103.41,683.5,33,1472,1.0,"The farmer initially has 17 sheep. The phrase ""all but 9 run away"" means that 9 sheep remain. Therefore, the number of sheep left is **9**.
+
+**Answer:** 9"
+Q6_K,palindrome-code,Code,False,True,0.6,17.23,102.68,54,47,0,1.0,"```python
+import re
+
+def is_palindrome(s):
+    # Remove non-alphanumeric characters and convert to lowercase
+    cleaned = re.sub(r'[^a-zA-Z0-9]', '', s).lower()
+    return cleaned == cleaned[::-1]
+```"
+Q6_K,capital,Knowledge,False,True,0.06,21.9,85.25,3,22,0,1.0,Canberra
+Q6_K,three-bullets,Instruction following,False,True,0.4,18.86,103.95,38,33,0,0.174,"- Reduces model size, enabling deployment on devices with limited memory  
+- Lowers computational requirements, improving inference speed  
+- Decreases energy consumption, enhancing efficiency in resource-constrained environments"
+Q6_K,malayalam,Multilingual,False,False,0.51,22.18,103.71,48,82,0,0.971,ഇന്ത്യയുടെ തലസ്ഥാനം ന്യൂഡെൽഹിയാണ്.
+Q6_K,hindi,Multilingual,False,True,0.32,18.95,102.78,29,54,0,1.0,भारत की राजधानी नई दिल्ली है।
+Q6_K,summary,Summarization,False,,0.75,28.11,105.92,73.5,111,0,1.0,"Quantization reduces the number of bits used to store neural network weights, such as from 16 to 4 bits, making the model smaller and faster to run with less memory. While this leads to a slight loss in accuracy, 8-bit versions retain most of the original performance, whereas lower-bit versions like 3-bit experience more significant accuracy drops."
+Q6_K,needle,Long context,False,True,0.73,627.37,80.9,5,6495,0,1.0,7341
+Q6_K,weather-tool,Tool calling,False,True,0.41,25.28,97.53,20,160,0,1.0,
+Q5_K_M,bat-ball,Logic,True,True,19.57,32.85,112.55,2187.5,39,5322,0.513,"To solve the problem, we begin by defining the cost of the ball as a variable. Let:
+
+- $ x $ = the cost of the ball (in dollars)
+- Then, the cost of the bat is $ x + 1.00 $, since the bat costs $1.00 more than the ball.
+
+We are told that the total cost of the bat and the ball is $1.10. Therefore, we can write the equation:
+
+$$
+x + (x + 1.00) = 1.10
+$$
+
+Simplify the left-hand side:
+
+$$
+2x + 1.00 = 1.10
+$$
+
+Subtract 1.00 from both sides:
+
+$$
+2x = 0.10
+$$
+
+Now divide both sides by 2:
+
+$$
+x = 0.05
+$$
+
+---
+
+### Final Answer:
+
+The ball costs **$0.05**, or **5 cents**.
+
+---
+
+### Verification:
+
+- Ball: $0.05
+- Bat: $0.05 + $1.00 = $1.05
+- Total: $0.05 + $1.05 = $1.10 ✅
+
+This confirms the solution is correct. The key was recognizing that the bat is $1.00 more than the ball, not that the bat is $1.00 in total. This distinction is crucial to avoid the common mistake of assuming the ball costs $0.10."
+Q5_K_M,multiply,Math,False,True,0.16,22.31,100.09,4,26,0,1.0,391
+Q5_K_M,word-problem,Math,True,True,15.24,29.36,111.03,1682.5,55,5385,0.905,"To determine how much money Riya has left after her purchases, we follow a step-by-step breakdown of her transactions:
+
+---
+
+### **Step 1: Cost of Pens**
+Riya buys **7 pens**, each costing **12 rupees**.
+
+$$
+\text{Total cost of pens} = 7 \times 12 = 84 \text{ rupees}
+$$
+
+---
+
+### **Step 2: Payment and Change**
+She pays with a **100 rupee note**. The change she receives is:
+
+$$
+\text{Change} = 100 - 84 = 16 \text{ rupees}
+$$
+
+---
+
+### **Step 3: Spending Half of the Change**
+She spends **half of her change** on a notebook:
+
+$$
+\text{Amount spent on notebook} = \frac{1}{2} \times 16 = 8 \text{ rupees}
+$$
+
+---
+
+### **Step 4: Remaining Money**
+After spending 8 rupees on the notebook, the amount of money she has left is:
+
+$$
+\text{Remaining money} = 16 - 8 = 8 \text{ rupees}
+$$
+
+---
+
+### **Final Answer**
+$$
+\boxed{8}
+$$"
+Q5_K_M,sheep,Reasoning,True,True,6.84,18.15,113.02,760.5,33,2449,0.743,"The farmer initially has 17 sheep. The phrase ""all but 9 run away"" means that 9 sheep remain. This is because ""all but"" indicates that everything except for the specified number (9) is gone. Therefore, the number of sheep left is 9.
+
+**Answer:** 9"
+Q5_K_M,palindrome-code,Code,False,True,0.54,20.91,114.49,54,47,0,1.0,"```python
+import re
+
+def is_palindrome(s):
+    # Remove non-alphanumeric characters and convert to lowercase
+    cleaned = re.sub(r'[^a-zA-Z0-9]', '', s).lower()
+    return cleaned == cleaned[::-1]
+```"
+Q5_K_M,capital,Knowledge,False,True,0.07,23.43,91.61,3,22,0,1.0,Canberra
+Q5_K_M,three-bullets,Instruction following,False,True,0.37,22.97,112.6,38,33,0,0.174,"- Reduces model size, enabling deployment on devices with limited memory  
+- Lowers computational requirements, improving inference speed  
+- Decreases energy consumption, enhancing efficiency in resource-constrained environments"
+Q5_K_M,malayalam,Multilingual,False,False,0.45,24.35,114.18,48,82,0,0.971,ഇന്ത്യയുടെ തലസ്ഥാനം ന്യൂഡെൽഹിയാണ്.
+Q5_K_M,hindi,Multilingual,False,True,0.28,15.37,115.66,29,54,0,1.0,भारत की राजधानी नई दिल्ली है।
+Q5_K_M,summary,Summarization,False,,0.61,23.21,113.45,66,111,0,0.563,"Quantization reduces the number of bits used to store neural network weights, such as from 16 to 4 bits, making the model smaller and faster to run while using less memory. This technique slightly decreases accuracy, with greater loss observed as the bit depth decreases, though 8-bit versions maintain near-original performance."
+Q5_K_M,needle,Long context,False,True,0.7,602.9,85.04,5,6495,0,1.0,7341
+Q5_K_M,weather-tool,Tool calling,False,True,0.46,21.14,111.95,20,160,0,1.0,
+Q4_K_M,bat-ball,Logic,True,True,10.29,34.28,124.66,1270.5,39,2884,0.123,"To solve the problem, we begin by defining the cost of the ball as a variable. Let:
+
+- $ x $ = the cost of the ball in dollars.
+
+Then, the bat costs $1.00 more than the ball, so the bat's cost is:
+
+- $ x + 1.00 $
+
+The total cost of the bat and the ball is given as $1.10. Therefore, we can write the equation:
+
+$$
+x + (x + 1.00) = 1.10
+$$
+
+Simplify the left-hand side:
+
+$$
+2x + 1.00 = 1.10
+$$
+
+Subtract 1.00 from both sides:
+
+$$
+2x = 0.10
+$$
+
+Now divide both sides by 2:
+
+$$
+x = 0.05
+$$
+
+So, the ball costs **$0.05**.
+
+To verify:
+
+- Ball: $0.05
+- Bat: $0.05 + $1.00 = $1.05
+- Total: $0.05 + $1.05 = $1.10
+
+This confirms the solution is correct.
+
+---
+
+**Final Answer:**  
+The ball costs \boxed{0.05} dollars."
+Q4_K_M,multiply,Math,False,True,0.09,14.57,113.67,4,26,0,1.0,391
+Q4_K_M,word-problem,Math,True,True,11.08,22.96,123.47,1357,55,3439,0.482,"To determine how much money Riya has left after her purchases, let's break the problem into clear steps:
+
+---
+
+### **Step 1: Calculate the cost of the pens**
+
+Each pen costs **12 rupees**, and Riya buys **7 pens**.
+
+$$
+\text{Total cost of pens} = 12 \times 7 = 84 \text{ rupees}
+$$
+
+---
+
+### **Step 2: Determine the change from the 100 rupee note**
+
+Riya pays with a **100 rupee note**, so the change she receives is:
+
+$$
+\text{Change} = 100 - 84 = 16 \text{ rupees}
+$$
+
+---
+
+### **Step 3: Calculate the amount spent on the notebook**
+
+She spends **half of her change** on a notebook:
+
+$$
+\text{Amount spent on notebook} = \frac{1}{2} \times 16 = 8 \text{ rupees}
+$$
+
+---
+
+### **Step 4: Find the remaining money**
+
+After spending 8 rupees on the notebook, the remaining amount from her change is:
+
+$$
+\text{Remaining money} = 16 - 8 = 8 \text{ rupees}
+$$
+
+---
+
+### **Final Answer**
+
+$$
+\boxed{8}
+$$"
+Q4_K_M,sheep,Reasoning,True,True,4.3,18.14,126.35,536,33,1732,0.897,"The farmer initially has 17 sheep. The phrase ""all but 9 run away"" means that 9 sheep did not run away. Therefore, the number of sheep remaining is 9.
+
+**Answer:** 9"
+Q4_K_M,palindrome-code,Code,False,True,0.42,23.72,125.18,44,47,0,0.738,"```python
+import re
+
+def is_palindrome(s):
+    cleaned = re.sub(r'[^a-zA-Z0-9]', '', s)
+    return cleaned.lower() == cleaned.lower()[::-1]
+```"
+Q4_K_M,capital,Knowledge,False,True,0.05,17.95,111.38,3,22,0,1.0,Canberra
+Q4_K_M,three-bullets,Instruction following,False,True,0.39,15.21,126.44,46,33,0,0.556,"- Reduces model size, enabling deployment on devices with limited memory and storage  
+- Lowers computational requirements, improving inference speed and energy efficiency  
+- Facilitates efficient model updates and real-time processing in resource-constrained environments"
+Q4_K_M,malayalam,Multilingual,False,False,0.43,18.13,124.5,49,82,0,0.957,ഇന്ത്യയുടെ തലസ്ഥാനം ന്യൂഡെല്ഹിയാണ്.
+Q4_K_M,hindi,Multilingual,False,True,0.27,19.29,123.85,29,54,0,1.0,भारत की राजधानी नई दिल्ली है।
+Q4_K_M,summary,Summarization,False,,0.56,18.16,124.01,67,111,0,0.731,"Quantization reduces the number of bits used to store neural network weights, such as from 16 to 4 bits, making the model smaller and faster to run with less memory. While this leads to a slight loss in accuracy, especially with fewer bits, 8-bit versions maintain nearly the same performance as the original model."
+Q4_K_M,needle,Long context,False,True,0.65,575.77,95.21,5,6495,0,1.0,7341
+Q4_K_M,weather-tool,Tool calling,False,True,0.39,21.94,123.29,20,160,0,1.0,
+IQ4_XS,bat-ball,Logic,True,True,12.28,34.95,134.79,1640,39,3602,0.462,"To solve the problem, we are given two key pieces of information:
+
+1. The total cost of the bat and the ball is **$1.10**.
+2. The **bat costs $1.00 more** than the ball.
+
+---
+
+### Step 1: Define Variables
+
+Let the cost of the **ball** be $ x $ dollars.
+
+Then, the cost of the **bat** is $ x + 1.00 $ dollars.
+
+---
+
+### Step 2: Set Up the Equation
+
+The total cost of the bat and the ball is:
+
+$$
+x + (x + 1.00) = 1.10
+$$
+
+Simplify the left-hand side:
+
+$$
+2x + 1.00 = 1.10
+$$
+
+---
+
+### Step 3: Solve for $ x $
+
+Subtract 1.00 from both sides:
+
+$$
+2x = 1.10 - 1.00 = 0.10
+$$
+
+Now divide both sides by 2:
+
+$$
+x = \frac{0.10}{2} = 0.05
+$$
+
+---
+
+### Step 4: Interpret the Result
+
+So, the **ball costs $0.05**, or **5 cents**.
+
+To verify:
+
+- Ball = $0.05
+- Bat = $0.05 + $1.00 = $1.05
+- Total = $0.05 + $1.05 = $1.10 ✅
+
+---
+
+### Final Answer
+
+$$
+\boxed{0.05}
+$$"
+IQ4_XS,multiply,Math,False,True,0.11,12.87,125.61,4,26,0,1.0,391
+IQ4_XS,word-problem,Math,True,True,10.4,19.6,133.32,1375,55,4115,0.8,"To determine how much money Riya has left after her purchases, we follow a step-by-step breakdown of the transactions:
+
+---
+
+### **Step 1: Calculate the cost of the pens**
+
+Riya buys **7 pens**, each costing **12 rupees**.
+
+$$
+\text{Total cost of pens} = 7 \times 12 = 84 \text{ rupees}
+$$
+
+---
+
+### **Step 2: Determine the change received**
+
+She pays with a **100 rupee note**. The change she receives is:
+
+$$
+\text{Change} = 100 - 84 = 16 \text{ rupees}
+$$
+
+---
+
+### **Step 3: Calculate the amount spent on the notebook**
+
+She spends **half of her change** on a notebook:
+
+$$
+\text{Amount spent on notebook} = \frac{1}{2} \times 16 = 8 \text{ rupees}
+$$
+
+---
+
+### **Step 4: Find the remaining money**
+
+After spending 8 rupees on the notebook, the remaining amount is:
+
+$$
+\text{Remaining money} = 16 - 8 = 8 \text{ rupees}
+$$
+
+---
+
+### **Final Answer**
+
+$$
+\boxed{8}
+$$"
+IQ4_XS,sheep,Reasoning,True,True,4.12,14.17,142.71,576,33,1561,1.0,"The farmer initially has 17 sheep. The phrase ""all but 9 run away"" means that 9 sheep remain. Therefore, the number of sheep left is **9**.
+
+**Answer:** 9"
+IQ4_XS,palindrome-code,Code,False,True,0.38,12.11,135.02,44,47,0,0.738,"```python
+import re
+
+def is_palindrome(s):
+    cleaned = re.sub(r'[^a-zA-Z0-9]', '', s)
+    return cleaned.lower() == cleaned[::-1].lower()
+```"
+IQ4_XS,capital,Knowledge,False,True,0.05,11.87,113.37,3,22,0,1.0,Canberra
+IQ4_XS,three-bullets,Instruction following,False,True,0.31,15.31,131.12,36,33,0,0.534,"- Reduces model size for efficient deployment on resource-constrained devices  
+- Lowers computational requirements and energy consumption during inference  
+- Enables faster model execution without significant loss in accuracy"
+IQ4_XS,malayalam,Multilingual,False,True,0.37,18.02,138.11,46,82,0,0.955,ഇന്ത്യയുടെ തലസ്ഥാനം ന്യൂഡൽഹിയാണ്.
+IQ4_XS,hindi,Multilingual,False,True,0.24,16.91,136.79,29,54,0,1.0,भारत की राजधानी नई दिल्ली है।
+IQ4_XS,summary,Summarization,False,,0.53,14.89,139.81,70.5,111,0,0.726,"Quantization reduces the number of bits used to store a neural network's weights, such as from 16 to 4 bits, making the model smaller and faster to run with less memory. While this leads to a slight loss in accuracy, especially with fewer bits, 8-bit versions maintain nearly the same performance as the original model."
+IQ4_XS,needle,Long context,False,True,0.58,506.54,108.75,5,6495,0,1.0,7341
+IQ4_XS,weather-tool,Tool calling,False,True,0.33,17.07,126.09,20,160,0,1.0,
+Q3_K_M,bat-ball,Logic,True,True,22.07,37.18,138.76,3041,39,7822,0.262,"To solve the problem, we are given two pieces of information:
+
+1. The total cost of a bat and a ball is **$1.10**.
+2. The bat costs **$1.00 more** than the ball.
+
+---
+
+### Step 1: Define Variables
+
+Let the cost of the ball be $ x $ dollars.  
+Then, the cost of the bat is $ x + 1.00 $ dollars.
+
+---
+
+### Step 2: Set Up the Equation
+
+The total cost of the bat and the ball is:
+
+$$
+x + (x + 1.00) = 1.10
+$$
+
+Simplify the equation:
+
+$$
+2x + 1.00 = 1.10
+$$
+
+---
+
+### Step 3: Solve for $ x $
+
+Subtract 1.00 from both sides:
+
+$$
+2x = 0.10
+$$
+
+Divide both sides by 2:
+
+$$
+x = 0.05
+$$
+
+---
+
+### Step 4: Interpret the Result
+
+So, the ball costs **$0.05**, and the bat costs:
+
+$$
+x + 1.00 = 0.05 + 1.00 = 1.05
+$$
+
+Check the total:
+
+$$
+0.05 + 1.05 = 1.10
+$$
+
+This confirms the solution is correct.
+
+---
+
+### Final Answer
+
+$$
+\boxed{0.05}
+$$"
+Q3_K_M,multiply,Math,False,True,0.16,14.23,123.88,4,26,0,1.0,391
+Q3_K_M,word-problem,Math,True,True,12.47,18.6,140.65,1735,55,5551,0.596,"To determine how many rupees Riya has left after her purchases, we can break the problem into clear steps:
+
+---
+
+### **Step 1: Calculate the cost of the pens**
+
+Riya buys **7 pens**, each costing **12 rupees**.
+
+$$
+\text{Total cost of pens} = 7 \times 12 = 84 \text{ rupees}
+$$
+
+---
+
+### **Step 2: Determine the change from the 100 rupee note**
+
+She pays with a **100 rupee note**, so the change she receives is:
+
+$$
+\text{Change} = 100 - 84 = 16 \text{ rupees}
+$$
+
+---
+
+### **Step 3: Calculate the amount spent on the notebook**
+
+She spends **half of her change** on a notebook:
+
+$$
+\text{Amount spent on notebook} = \frac{1}{2} \times 16 = 8 \text{ rupees}
+$$
+
+---
+
+### **Step 4: Determine the remaining amount**
+
+After spending 8 rupees on the notebook, the amount she has left is:
+
+$$
+\text{Remaining money} = 16 - 8 = 8 \text{ rupees}
+$$
+
+---
+
+### **Final Answer**
+
+$$
+\boxed{8}
+$$"
+Q3_K_M,sheep,Reasoning,True,True,13.7,24.58,141.7,1913.5,33,4185,0.899,"The farmer initially has 17 sheep. The phrase ""all but 9 run away"" means that 9 sheep did **not** run away. Therefore, the number of sheep remaining is **9**.
+
+**Answer:** 9"
+Q3_K_M,palindrome-code,Code,False,True,0.4,22.23,143.19,42,47,0,0.804,"```python
+import re
+
+def is_palindrome(s):
+    cleaned = re.sub(r'[^a-zA-Z0-9]', '', s).lower()
+    return cleaned == cleaned[::-1]
+```"
+Q3_K_M,capital,Knowledge,False,True,0.06,20.2,116.82,3,22,0,1.0,Canberra
+Q3_K_M,three-bullets,Instruction following,False,True,0.31,13.64,142.54,38.5,33,0,0.338,"- Reduces the memory footprint of the model, enabling deployment on resource-constrained devices  
+- Decreases computational requirements, leading to faster inference times  
+- Lowers energy consumption and operational costs for model execution"
+Q3_K_M,malayalam,Multilingual,False,False,0.37,20.13,143.9,48,82,0,1.0,ഇന്ത്യയുടെ തലസ്ഥാനം ന്യൂഡെഹലിയാണ്.
+Q3_K_M,hindi,Multilingual,False,True,0.25,17.66,140.02,29,54,0,1.0,भारत की राजधानी नई दिल्ली है।
+Q3_K_M,summary,Summarization,False,,0.47,18.82,145.95,64.5,111,0,0.678,"Quantization reduces the number of bits used to store neural network weights, such as from 16 to 4 bits, making the model smaller and faster to run with less memory. This slight loss in accuracy increases as the bit depth decreases, with 8-bit versions maintaining near-original performance while 3-bit versions show more significant degradation."
+Q3_K_M,needle,Long context,False,True,0.65,553.69,102.0,5,6495,0,1.0,7341
+Q3_K_M,weather-tool,Tool calling,False,True,0.54,24.59,140.47,20,160,0,1.0,
+IQ3_M,bat-ball,Logic,True,True,26.5,27.87,140.05,3687.5,39,11249,0.459,"To solve the problem, we are given two key pieces of information:
+
+1. The **total cost** of the bat and the ball is **$1.10**.
+2. The **bat costs $1.00 more** than the ball.
+
+---
+
+### Step 1: Define Variables
+
+Let the cost of the **ball** be $ x $ dollars.  
+Then, the cost of the **bat** is $ x + 1.00 $ dollars (since it's $1.00 more than the ball).
+
+---
+
+### Step 2: Set Up the Equation
+
+The total cost of the bat and the ball is:
+
+$$
+x + (x + 1.00) = 1.10
+$$
+
+Simplify the equation:
+
+$$
+2x + 1.00 = 1.10
+$$
+
+---
+
+### Step 3: Solve for $ x $
+
+Subtract 1.00 from both sides:
+
+$$
+2x = 0.10
+$$
+
+Divide both sides by 2:
+
+$$
+x = 0.05
+$$
+
+---
+
+### Step 4: Interpret the Result
+
+So, the **ball costs $0.05**, and the **bat costs $1.05** (since it's $1.00 more than the ball). Adding them together:
+
+$$
+0.05 + 1.05 = 1.10
+$$
+
+This confirms the total is correct.
+
+---
+
+### Final Answer
+
+$$
+\boxed{0.05}
+$$"
+IQ3_M,multiply,Math,False,True,0.17,26.33,122.3,4,26,0,1.0,391
+IQ3_M,word-problem,Math,True,True,16.75,25.3,142.62,2363,55,4050,0.594,"To determine how much money Riya has left after her purchases, we'll break the problem into clear, logical steps.
+
+---
+
+### Step 1: Calculate the total cost of the pens
+
+Riya buys **7 pens**, and each pen costs **12 rupees**.
+
+$$
+\text{Total cost} = 7 \times 12 = 84 \text{ rupees}
+$$
+
+---
+
+### Step 2: Determine the change she receives
+
+She pays with a **100 rupee note**, so the change she gets back is:
+
+$$
+\text{Change} = 100 - 84 = 16 \text{ rupees}
+$$
+
+---
+
+### Step 3: Calculate how much she spends on the notebook
+
+She spends **half of her change** on a notebook:
+
+$$
+\text{Amount spent on notebook} = \frac{16}{2} = 8 \text{ rupees}
+$$
+
+---
+
+### Step 4: Determine how much money she has left
+
+After spending 8 rupees on the notebook, the remaining amount is:
+
+$$
+\text{Remaining money} = 16 - 8 = 8 \text{ rupees}
+$$
+
+---
+
+### Final Answer
+
+$$
+\boxed{8}
+$$"
+IQ3_M,sheep,Reasoning,True,True,5.83,17.16,144.92,822.5,33,2716,0.797,"The farmer starts with 17 sheep. The phrase ""all but 9 run away"" means that 9 sheep are left, and the rest (17 - 9 = 8) ran away. Therefore, the number of sheep remaining is **9**.
+
+**Answer:** 9"
+IQ3_M,palindrome-code,Code,False,True,0.51,13.31,153.3,67,47,0,0.874,"```python
+import re
+
+def is_palindrome(s):
+    # Remove non-alphanumeric characters and convert to lowercase
+    cleaned = re.sub(r'[^a-zA-Z0-9]', '', s).lower()
+    # Check if the cleaned string is equal to its reverse
+    return cleaned == cleaned[::-1]
+```"
+IQ3_M,capital,Knowledge,False,True,0.06,14.92,135.82,3,22,0,1.0,Canberra
+IQ3_M,three-bullets,Instruction following,False,True,0.31,21.02,148.23,42,33,0,0.449,"- Reduces the memory footprint of models, allowing deployment on devices with limited resources  
+- Lowers computational requirements, improving inference speed and energy efficiency  
+- Enables efficient model deployment on edge devices and mobile platforms"
+IQ3_M,malayalam,Multilingual,False,False,0.37,23.96,145.05,49,82,0,0.957,ഇന്ത്യയുടെ തലസ്ഥാനം ന്യൂഡെല്ഹിയാണ്.
+IQ3_M,hindi,Multilingual,False,True,0.23,16.16,148.02,29,54,0,1.0,भारत की राजधानी नई दिल्ली है।
+IQ3_M,summary,Summarization,False,,0.56,21.16,151.67,80,111,0,0.731,"Quantization reduces the number of bits used to store a neural network's weights, such as from 16 bits to 4 bits, making the model smaller and faster to run while using less memory. This slight decrease in accuracy becomes more noticeable as the bit depth decreases, with 8-bit models retaining most of the original performance, while lower-bit versions like 3-bit experience more loss."
+IQ3_M,needle,Long context,False,True,0.62,521.3,107.09,5,6495,0,1.0,7341
+IQ3_M,weather-tool,Tool calling,False,True,0.38,19.48,147.7,20,160,0,1.0,

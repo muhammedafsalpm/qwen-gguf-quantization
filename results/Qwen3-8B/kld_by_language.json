@@ -1,0 +1,226 @@
+{
+  "settings": {
+    "ctx": 512,
+    "chunks": 80,
+    "reference": "BF16",
+    "llama_cpp": "b12345"
+  },
+  "langs": {
+    "ml": {
+      "name": "Malayalam",
+      "base": {
+        "ppl": 2.2151,
+        "ppl_err": 0.02754
+      },
+      "quants": {
+        "Q8_0": {
+          "ppl": 2.217203,
+          "ppl_err": 0.027576,
+          "kld_mean": 0.001054,
+          "kld_mean_err": 3.2e-05,
+          "kld_p999": 0.061116,
+          "same_top": 98.966,
+          "same_top_err": 0.071
+        },
+        "Q6_K": {
+          "ppl": 2.214076,
+          "ppl_err": 0.027375,
+          "kld_mean": 0.003325,
+          "kld_mean_err": 0.000103,
+          "kld_p999": 0.154909,
+          "same_top": 98.157,
+          "same_top_err": 0.094
+        },
+        "Q5_K_M": {
+          "ppl": 2.215551,
+          "ppl_err": 0.027307,
+          "kld_mean": 0.007181,
+          "kld_mean_err": 0.000236,
+          "kld_p999": 0.404027,
+          "same_top": 97.358,
+          "same_top_err": 0.112
+        },
+        "Q4_K_M": {
+          "ppl": 2.231774,
+          "ppl_err": 0.027631,
+          "kld_mean": 0.022172,
+          "kld_mean_err": 0.000662,
+          "kld_p999": 1.111181,
+          "same_top": 95.505,
+          "same_top_err": 0.145
+        },
+        "IQ4_XS": {
+          "ppl": 2.230071,
+          "ppl_err": 0.027651,
+          "kld_mean": 0.030115,
+          "kld_mean_err": 0.000878,
+          "kld_p999": 1.327407,
+          "same_top": 94.701,
+          "same_top_err": 0.157
+        },
+        "Q3_K_M": {
+          "ppl": 2.300802,
+          "ppl_err": 0.028734,
+          "kld_mean": 0.083966,
+          "kld_mean_err": 0.002155,
+          "kld_p999": 3.491822,
+          "same_top": 91.265,
+          "same_top_err": 0.198
+        },
+        "IQ3_M": {
+          "ppl": 2.293426,
+          "ppl_err": 0.027751,
+          "kld_mean": 0.09776,
+          "kld_mean_err": 0.002455,
+          "kld_p999": 3.74185,
+          "same_top": 90.402,
+          "same_top_err": 0.206
+        }
+      }
+    },
+    "hi": {
+      "name": "Hindi",
+      "base": {
+        "ppl": 3.0127,
+        "ppl_err": 0.04464
+      },
+      "quants": {
+        "Q8_0": {
+          "ppl": 3.012618,
+          "ppl_err": 0.044592,
+          "kld_mean": 0.001031,
+          "kld_mean_err": 3e-05,
+          "kld_p999": 0.061229,
+          "same_top": 99.093,
+          "same_top_err": 0.066
+        },
+        "Q6_K": {
+          "ppl": 3.009908,
+          "ppl_err": 0.044452,
+          "kld_mean": 0.003559,
+          "kld_mean_err": 0.000108,
+          "kld_p999": 0.200025,
+          "same_top": 98.201,
+          "same_top_err": 0.093
+        },
+        "Q5_K_M": {
+          "ppl": 3.004667,
+          "ppl_err": 0.044095,
+          "kld_mean": 0.007001,
+          "kld_mean_err": 0.000206,
+          "kld_p999": 0.323126,
+          "same_top": 97.431,
+          "same_top_err": 0.111
+        },
+        "Q4_K_M": {
+          "ppl": 3.018895,
+          "ppl_err": 0.044243,
+          "kld_mean": 0.022032,
+          "kld_mean_err": 0.000628,
+          "kld_p999": 1.164187,
+          "same_top": 95.676,
+          "same_top_err": 0.142
+        },
+        "IQ4_XS": {
+          "ppl": 3.036304,
+          "ppl_err": 0.044745,
+          "kld_mean": 0.029428,
+          "kld_mean_err": 0.000825,
+          "kld_p999": 1.612942,
+          "same_top": 94.961,
+          "same_top_err": 0.153
+        },
+        "Q3_K_M": {
+          "ppl": 3.069707,
+          "ppl_err": 0.044617,
+          "kld_mean": 0.079045,
+          "kld_mean_err": 0.002124,
+          "kld_p999": 3.575403,
+          "same_top": 91.681,
+          "same_top_err": 0.193
+        },
+        "IQ3_M": {
+          "ppl": 3.037568,
+          "ppl_err": 0.042482,
+          "kld_mean": 0.101154,
+          "kld_mean_err": 0.002398,
+          "kld_p999": 4.072783,
+          "same_top": 90.275,
+          "same_top_err": 0.207
+        }
+      }
+    },
+    "code": {
+      "name": "Python code",
+      "base": {
+        "ppl": 2.7723,
+        "ppl_err": 0.04924
+      },
+      "quants": {
+        "Q8_0": {
+          "ppl": 2.774583,
+          "ppl_err": 0.049303,
+          "kld_mean": 0.001113,
+          "kld_mean_err": 0.000132,
+          "kld_p999": 0.123577,
+          "same_top": 99.363,
+          "same_top_err": 0.056
+        },
+        "Q6_K": {
+          "ppl": 2.771516,
+          "ppl_err": 0.049167,
+          "kld_mean": 0.002887,
+          "kld_mean_err": 0.000329,
+          "kld_p999": 0.207926,
+          "same_top": 98.76,
+          "same_top_err": 0.077
+        },
+        "Q5_K_M": {
+          "ppl": 2.783216,
+          "ppl_err": 0.049572,
+          "kld_mean": 0.005299,
+          "kld_mean_err": 0.000318,
+          "kld_p999": 0.400304,
+          "same_top": 98.407,
+          "same_top_err": 0.088
+        },
+        "Q4_K_M": {
+          "ppl": 2.790042,
+          "ppl_err": 0.049725,
+          "kld_mean": 0.013716,
+          "kld_mean_err": 0.000534,
+          "kld_p999": 0.918868,
+          "same_top": 97.417,
+          "same_top_err": 0.111
+        },
+        "IQ4_XS": {
+          "ppl": 2.777911,
+          "ppl_err": 0.04912,
+          "kld_mean": 0.01848,
+          "kld_mean_err": 0.000637,
+          "kld_p999": 1.258755,
+          "same_top": 96.907,
+          "same_top_err": 0.121
+        },
+        "Q3_K_M": {
+          "ppl": 2.858705,
+          "ppl_err": 0.051377,
+          "kld_mean": 0.052527,
+          "kld_mean_err": 0.002082,
+          "kld_p999": 4.169736,
+          "same_top": 95.25,
+          "same_top_err": 0.149
+        },
+        "IQ3_M": {
+          "ppl": 2.887799,
+          "ppl_err": 0.05182,
+          "kld_mean": 0.061707,
+          "kld_mean_err": 0.002116,
+          "kld_p999": 4.285698,
+          "same_top": 94.721,
+          "same_top_err": 0.157
+        }
+      }
+    }
+  }
+}

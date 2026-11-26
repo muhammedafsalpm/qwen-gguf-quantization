@@ -98,10 +98,40 @@ eval:
   server_ctx: 16384
 
 card:
-  tags: [gguf, qwen3, quantized, imatrix, thinking, llama.cpp, ollama]
+  tags: [gguf, qwen3, qwen, quantized, imatrix, thinking, reasoning, tool-calling, multilingual, llama.cpp, conversational]
+  language: [en, zh, hi, ml, ta, te, bn, ar, fr, de, es, pt, ru, ja, ko, vi, id, th, tr]  # Qwen3 supports 100+ languages
+  quick_start: true                # one-line run command at the top of the card
+  highlights:                      # "Why these quants" (measured facts only)
+    - "**Importance matrix from the original BF16 model**, computed on 164K tokens of chat, code, math, reasoning traces (thinking mode) and multilingual text, rendered with Qwen3's own chat template."
+    - "**Every file measured against BF16:** KL divergence, perplexity and same-top-token rate, so you can choose a size by measured quality."
+    - "**I-quants included** (IQ4_XS, IQ3_M) for 6–8 GB GPUs, next to the standard K-quants."
+    - "**Functionally tested:** thinking on, thinking off and tool calling on every file, plus 43 graded questions per file (reasoning, math, code, SQL, Malayalam and Hindi)."
+    - "**Measured per language:** accuracy against BF16 on Malayalam, Hindi and Python code, not only English."
+    - "**Standard Qwen3 GGUF:** tested in llama.cpp and Ollama; LM Studio and other llama.cpp apps load it too."
   context_gb: 1.5                  # GPU memory for ~8K tokens of context (standard attention)
   language_results: true           # include results/Qwen3-8B/kld_by_language.json if present
-  ollama: false                    # set to the tested Ollama version after the Ollama test
+  ollama: "0.40.18"                # tested: Q4_K_M loads and answers correctly in Ollama 0.40.18
+  test_summary: |                  # verified by reading the answers (results/Qwen3-8B/compare/)
+    Every quant answered the same questions at temperature 0 with
+    [`compare_quants.py`](https://github.com/muhammedafsalpm/qwen-gguf-quantization/blob/main/tools/compare_quants.py).
+    Automatic checks were confirmed by reading the answers.
+
+    | Quant | Basic (12) | Extended (17) | English / Malayalam / Hindi (14) |
+    |---|---|---|---|
+    | Q8_0 | 11 | 15 | 14 |
+    | Q6_K | 12 | 16 | 14 |
+    | Q5_K_M | 12 | 16 | 14 |
+    | Q4_K_M | 12 | 17 | 13 |
+    | IQ4_XS | 12 | 16 | 14 |
+    | Q3_K_M | 11 | 16 | 14 |
+    | IQ3_M | 12 | 17 | 12 |
+
+    - Extended: Q8_0, IQ4_XS and Q3_K_M each reached the 8,192-token thinking limit on one question before answering.
+      Q8_0, Q6_K and Q5_K_M did not insist on approval before sending an email in the agentic planning question.
+    - Malayalam: the 8B model often uses non-standard or misspelled Malayalam words, even at Q8_0 (for example
+      a non-standard word for Friday, or a misspelled "Delhi"). Q4_K_M and IQ3_M gave a wrong weekday in Malayalam;
+      IQ3_M also made an arithmetic error in Hindi.
+    - These are small samples (one run per question); differences of one answer are within normal variation.
   notes:
     Q8_0: "Near-lossless. Best accuracy"
     Q6_K: "Excellent quality"
