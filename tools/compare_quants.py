@@ -8,6 +8,8 @@ compared with the Q8_0 answer (the reference, practically identical to BF16).
     python tools/compare_quants.py                         # all quants, all prompts
     python tools/compare_quants.py --only Q4_K_M IQ3_M     # some quants
     python tools/compare_quants.py --prompts-only bat-ball multiply --repeats 1
+    python tools/compare_quants.py --prompts tools/prompts_extended.yaml --regrade results/<model>/compare/<run>
+                                                           # re-apply the checks to saved answers (no model run)
 
 Output: results/compare/<date-time>/report.md, results.csv, results.json
 """
@@ -39,6 +41,7 @@ ap.add_argument("--prompts-only", nargs="*", help="prompt ids to run (default: a
 ap.add_argument("--repeats", type=int, help="timing runs per prompt (default: from prompts.yaml)")
 ap.add_argument("--prompts", type=Path, default=PROMPTS_FILE, help="prompt file to use")
 ap.add_argument("--port", type=int, default=8090)
+ap.add_argument("--regrade", type=Path, help="earlier run folder: re-grade its saved answers and rebuild the report")
 args = ap.parse_args()
 
 import yaml  # noqa: E402
@@ -54,14 +57,18 @@ if not VISION:  # text-only model: image prompts cannot be answered
     if skipped:
         log(f"text-only model: skipping image prompts {', '.join(skipped)}")
 types = args.only or CFG["quantize"]["types"]
+if args.regrade:  # only the quants that are in the saved run
+    saved = json.loads((args.regrade / "results.json").read_text(encoding="utf-8"))
+    types = [t for t in types if t in saved["quants"]]
 if not prompts:
     sys.exit("No prompts selected.")
-for t in types:
-    require(gguf(t), "Build the quants first (run_all.py).")
-if VISION:
-    require(MMPROJ, "The vision projector is missing (run step 02).")
+if not args.regrade:
+    for t in types:
+        require(gguf(t), "Build the quants first (run_all.py).")
+    if VISION:
+        require(MMPROJ, "The vision projector is missing (run step 02).")
 
-OUT_DIR = RESULTS / "compare" / time.strftime("%Y%m%d-%H%M%S")
+OUT_DIR = args.regrade or RESULTS / "compare" / time.strftime("%Y%m%d-%H%M%S")
 OUT_DIR.mkdir(parents=True, exist_ok=True)
 
 
@@ -143,8 +150,9 @@ def run_python(answer: str, tests: str) -> bool:
 
 
 def norm(s: str) -> str:
-    """Lower case without thousands separators or markdown emphasis, so '₹11,280' and '**11280**' match."""
-    return s.lower().replace(",", "").replace("*", "")
+    """Lower case without thousands separators, markdown emphasis or LaTeX escapes,
+    so '₹11,280', '**11280**' and '40\\%' match '11280' and '40%'."""
+    return s.lower().replace(",", "").replace("*", "").replace("\\%", "%").replace("\\$", "$")
 
 
 def grade(p: dict, content: str, calls: list):
@@ -240,6 +248,16 @@ results = {"settings": {"repeats": repeats, "ctx": ctx, "seed": seed, "temperatu
                         "llama_cpp": CFG["llama_cpp"]["build"], "prompts_file": str(args.prompts)},
            "quants": {}}
 order = sorted(types, key=lambda t: t != REFERENCE)  # reference first, so similarity can be computed as we go
+if args.regrade:
+    results, order = saved, []
+    for t in types:
+        for pid, a in results["quants"][t]["answers"].items():
+            p = next((x for x in prompts if x["id"] == pid), None)
+            if p is not None:
+                a["correct"] = grade(p, a["content"], a["calls"])
+    (OUT_DIR / "results.json").write_text(json.dumps(results, indent=2, ensure_ascii=False),
+                                          encoding="utf-8", newline="\n")
+    log(f"re-graded {len(types)} quants in {OUT_DIR}")
 for t in order:
     log(f"=== {t}: loading")
     proc, log_f, load_s = start_server(t)
