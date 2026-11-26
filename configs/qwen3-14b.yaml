@@ -1,0 +1,120 @@
+# Qwen3-14B: settings for the quantization pipeline (text-only Qwen3 model).
+#     python run_all.py --config configs/qwen3-14b.yaml
+# Every script in pipeline/ and tools/ accepts --config configs/qwen3-14b.yaml.
+
+model:
+  repo_id: Qwen/Qwen3-14B             # official BF16 weights on Hugging Face
+  revision: main                   # step 01 records the exact commit SHA used
+  local_dir: models/Qwen3-14B
+  name: Qwen3-14B                     # used in output file names
+  license: apache-2.0
+  vision: false                    # text only: no vision projector
+  reasoning_effort: false          # Qwen3 thinking is on/off only (enable_thinking)
+
+llama_cpp:
+  src: tools/llama.cpp
+  bin: tools/llama-bin
+  build: b12345
+
+paths:                             # one folder per model, so models never overwrite each other
+  out: out/Qwen3-14B
+  data: data/Qwen3-14B
+  logs: logs/Qwen3-14B
+  results: results/Qwen3-14B
+  release: release/Qwen3-14B
+
+convert:
+  outtype: bf16
+  mmproj_outtype: f16              # unused (no vision)
+
+quantize:
+  reference: Q8_0
+  types: [Q8_0, Q6_K, Q5_K_M, Q4_K_M, IQ4_XS, Q3_K_M, IQ3_M]
+  no_imatrix: [Q8_0]
+
+calibration:
+  seed: 42
+  target_tokens: 160000            # ~312 chunks of 512 tokens
+  max_chars_per_sample: 8000       # stop one long sample from dominating
+  # share = fraction of target_tokens drawn from each source
+  sources:
+    - name: general
+      repo: Salesforce/wikitext
+      file: wikitext-2-raw-v1/train-00000-of-00001.parquet
+      kind: plain
+      text: text
+      share: 0.20
+    - name: chat
+      repo: HuggingFaceH4/ultrachat_200k
+      file: data/test_sft-00000-of-00001-f7dfac4afe5b93f4.parquet
+      kind: messages
+      messages: messages
+      share: 0.20
+    - name: math
+      repo: openai/gsm8k
+      file: main/train-00000-of-00001.parquet
+      kind: qa
+      prompt: question
+      response: answer
+      share: 0.15
+    - name: code
+      repo: iamtarun/python_code_instructions_18k_alpaca
+      file: data/train-00000-of-00001-8b6e212f3e1ece96.parquet
+      kind: qa
+      prompt: instruction
+      response: output
+      share: 0.15
+    - name: reasoning                # contains <think> traces -> protects thinking mode
+      repo: nvidia/OpenCodeReasoning
+      file: split_0/train-00000-of-00030.parquet
+      kind: qa
+      prompt: input
+      response: output
+      max_chars: 6000                # shorter clips -> more distinct problems
+      share: 0.20
+    - name: multilingual
+      repo: CohereLabs/aya_dataset
+      file: data/train-00000-of-00001.parquet
+      kind: qa
+      prompt: inputs
+      response: targets
+      share: 0.10
+
+imatrix:
+  source: bf16                       # BF16 fits fully in 48 GB VRAM, so use the exact original
+  ctx: 512
+  ngl: 99
+  chunks: -1
+
+eval:
+  # Held-out text: wikitext-2 TEST split (calibration uses the TRAIN split)
+  repo: Salesforce/wikitext
+  file: wikitext-2-raw-v1/test-00000-of-00001.parquet
+  ctx: 512
+  chunks: 150
+  base_ngl: 99                     # BF16 fits fully in VRAM
+  ngl: 99
+  server_port: 8089
+  server_ctx: 16384
+
+card:
+  tags: [gguf, qwen3, quantized, imatrix, thinking, llama.cpp, ollama]
+  context_gb: 1.5                  # GPU memory for ~8K tokens of context (standard attention)
+  language_results: true           # include results/Qwen3-14B/kld_by_language.json if present
+  ollama: false                    # set to the tested Ollama version after the Ollama test
+  notes:
+    Q8_0: "Near-lossless. Best accuracy"
+    Q6_K: "Excellent quality"
+    Q5_K_M: "Very high quality"
+    Q4_K_M: "**Recommended default.** Best balance"
+    IQ4_XS: "Smallest 4-bit"
+    Q3_K_M: "Noticeable quality loss"
+    IQ3_M: "Smallest file; noticeable quality loss"
+  gpu_guide: []                    # filled in from the measured file sizes after step 05
+
+hf:
+  username: muhammed-afsal-p-m
+  repo_id: muhammed-afsal-p-m/Qwen3-14B-GGUF
+  private: false
+  collection_title: Qwen3 Quants
+  github_url: https://github.com/muhammedafsalpm/qwen-gguf-quantization  # linked from the model card

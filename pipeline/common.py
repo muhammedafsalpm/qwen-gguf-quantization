@@ -14,10 +14,26 @@ import yaml
 ROOT = Path(__file__).resolve().parent.parent
 os.environ.setdefault("HF_HUB_DISABLE_SYMLINKS_WARNING", "1")
 
-with open(ROOT / "config.yaml", encoding="utf-8") as _f:
+# Which model to work on: config.yaml (Qwen3.8-27B) unless `--config configs/<model>.yaml` is
+# given on the command line or QUANT_CONFIG is set. The choice is passed on to child processes.
+CONFIG_FILE = os.environ.get("QUANT_CONFIG", "config.yaml")
+if "--config" in sys.argv:
+    _i = sys.argv.index("--config")
+    if _i + 1 >= len(sys.argv):
+        sys.exit("--config needs a file, e.g. --config configs/qwen3-8b.yaml")
+    CONFIG_FILE = sys.argv[_i + 1]
+    del sys.argv[_i:_i + 2]  # so each script's own argument parser never sees it
+_cfg_path = Path(CONFIG_FILE) if Path(CONFIG_FILE).is_absolute() else ROOT / CONFIG_FILE
+if not _cfg_path.exists():
+    sys.exit(f"Config file not found: {_cfg_path}")
+os.environ["QUANT_CONFIG"] = str(_cfg_path)
+with open(_cfg_path, encoding="utf-8") as _f:
     CFG: dict = yaml.safe_load(_f)
 
 NAME: str = CFG["model"]["name"]
+# Model features (defaults match Qwen3.8-27B, so config.yaml needs no changes)
+VISION: bool = CFG["model"].get("vision", True)  # has a vision projector (mmproj)
+REASONING_EFFORT: list = CFG["model"].get("reasoning_effort", ["xhigh", "medium", "low"]) or []
 
 
 def path(rel: str) -> Path:
@@ -32,6 +48,7 @@ RESULTS = path(CFG["paths"]["results"])
 RELEASE = path(CFG["paths"]["release"])
 for _d in (OUT, DATA, LOGS, RESULTS):
     _d.mkdir(parents=True, exist_ok=True)
+SHARED_DATA = ROOT / "data"  # inputs shared by every model (e.g. data/lang/ test texts)
 
 LLAMA_SRC = path(CFG["llama_cpp"]["src"])
 LLAMA_BIN = path(CFG["llama_cpp"]["bin"])
@@ -42,7 +59,7 @@ def gguf(quant: str) -> Path:
 
 
 BF16 = gguf(CFG["convert"]["outtype"].upper())
-MMPROJ = OUT / f"mmproj-{NAME}-{CFG['convert']['mmproj_outtype'].upper()}.gguf"
+MMPROJ = OUT / f"mmproj-{NAME}-{CFG['convert']['mmproj_outtype'].upper()}.gguf" if VISION else None
 IMATRIX = OUT / f"{NAME}.imatrix.gguf"
 CALIB = DATA / "calibration.txt"
 EVAL_TEXT = DATA / "wiki.test.raw"

@@ -15,7 +15,7 @@ import pyarrow.parquet as pq
 from huggingface_hub import hf_hub_download
 from transformers import AutoTokenizer
 
-from common import CALIB, CFG, DATA, EVAL_TEXT, MODEL_DIR, RESULTS, log, save_json
+from common import CALIB, CFG, DATA, EVAL_TEXT, MODEL_DIR, REASONING_EFFORT, RESULTS, log, save_json
 
 ap = argparse.ArgumentParser()
 ap.add_argument("--force", action="store_true")
@@ -45,10 +45,11 @@ def clip(s: str, limit: int = max_chars) -> str:
 
 def chat(messages: list[dict], thinking: bool) -> str:
     # Match real usage: samples with reasoning traces use thinking mode (with a random
-    # reasoning-effort level, as users would set it); plain answers use thinking off.
+    # reasoning-effort level, as users would set it, for models that support levels);
+    # plain answers use thinking off.
     kwargs = {"enable_thinking": thinking}
-    if thinking:
-        kwargs["reasoning_effort"] = rng.choice(["xhigh", "medium", "low"])
+    if thinking and REASONING_EFFORT:
+        kwargs["reasoning_effort"] = rng.choice(REASONING_EFFORT)
     return tok.apply_chat_template(messages, tokenize=False, **kwargs)
 
 

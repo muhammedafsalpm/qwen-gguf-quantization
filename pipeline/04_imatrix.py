@@ -1,7 +1,8 @@
 """Step 04: make the Q8_0 reference quant, then compute the importance matrix.
 
-The imatrix is computed on Q8_0 (~29 GB, fits fully in 48 GB VRAM and is practically
-identical to BF16) using the chat-formatted calibration text from step 03.
+The imatrix is computed on Q8_0 by default (practically identical to BF16, and it fits in
+48 GB VRAM where BF16 of a 27B model does not), or on BF16 itself when `imatrix.source: bf16`
+is set for a model small enough to fit. It uses the chat-formatted calibration text from step 03.
 
     python pipeline/04_imatrix.py [--force]
 """
@@ -30,8 +31,10 @@ if IMATRIX.exists() and not args.force:
     log(f"skip: {IMATRIX.name} exists")
 else:
     ic = CFG["imatrix"]
+    source = BF16 if ic.get("source", "reference") == "bf16" else ref
+    log(f"importance matrix computed on {source.name}")
     tmp = IMATRIX.with_suffix(".partial.gguf")
-    run([tool("llama-imatrix"), "-m", ref, "-f", CALIB, "-o", tmp,
+    run([tool("llama-imatrix"), "-m", source, "-f", CALIB, "-o", tmp,
          "-c", ic["ctx"], "-ngl", ic["ngl"], "--chunks", ic["chunks"],
          "--parse-special"],  # chat-template tokens in the calibration text are real special tokens
         "04_imatrix")

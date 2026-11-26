@@ -28,7 +28,7 @@ import zlib
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "pipeline"))
-from common import CFG, EVAL_TEXT, LOGS, MMPROJ, RESULTS, gguf, log, require, tool  # noqa: E402
+from common import CFG, EVAL_TEXT, LOGS, MMPROJ, RESULTS, VISION, gguf, log, require, tool  # noqa: E402
 
 PROMPTS_FILE = Path(__file__).resolve().parent / "prompts.yaml"
 REFERENCE = CFG["quantize"]["reference"]  # Q8_0
@@ -48,12 +48,18 @@ settings = spec.get("settings", {})
 repeats = args.repeats or settings.get("repeats", 2)
 ctx, seed = settings.get("ctx", 16384), settings.get("seed", 42)
 prompts = [p for p in spec["prompts"] if not args.prompts_only or p["id"] in args.prompts_only]
+if not VISION:  # text-only model: image prompts cannot be answered
+    skipped = [p["id"] for p in prompts if p.get("image")]
+    prompts = [p for p in prompts if not p.get("image")]
+    if skipped:
+        log(f"text-only model: skipping image prompts {', '.join(skipped)}")
 types = args.only or CFG["quantize"]["types"]
 if not prompts:
     sys.exit("No prompts selected.")
 for t in types:
     require(gguf(t), "Build the quants first (run_all.py).")
-require(MMPROJ, "The vision projector is missing (run step 02).")
+if VISION:
+    require(MMPROJ, "The vision projector is missing (run step 02).")
 
 OUT_DIR = RESULTS / "compare" / time.strftime("%Y%m%d-%H%M%S")
 OUT_DIR.mkdir(parents=True, exist_ok=True)
@@ -183,7 +189,8 @@ def start_server(t: str):
     if port_in_use(args.port):
         sys.exit(f"Port {args.port} is already in use. Stop the other server or pass --port.")
     log_f = open(LOGS / f"compare_server_{t}.log", "w", encoding="utf-8", errors="replace")
-    proc = subprocess.Popen([tool("llama-server"), "-m", str(gguf(t)), "--mmproj", str(MMPROJ),
+    vision_args = ["--mmproj", str(MMPROJ)] if VISION else []
+    proc = subprocess.Popen([tool("llama-server"), "-m", str(gguf(t)), *vision_args,
                              "-ngl", "99", "-c", str(ctx), "-np", "1", "--host", "127.0.0.1",
                              "--port", str(args.port), "--jinja"], stdout=log_f, stderr=subprocess.STDOUT)
     t0 = time.time()

@@ -18,8 +18,8 @@ import time
 import urllib.request
 import zlib
 
-from common import (BF16, CFG, DATA, EVAL_TEXT, KLD_BASE, LOGS, MMPROJ, RESULTS, file_id, gguf,
-                    load_json, log, require, run, save_json, tool)
+from common import (BF16, CFG, DATA, EVAL_TEXT, KLD_BASE, LOGS, MMPROJ, RESULTS, VISION, file_id,
+                    gguf, load_json, log, require, run, save_json, tool)
 
 ap = argparse.ArgumentParser()
 ap.add_argument("--only", nargs="*")
@@ -163,7 +163,8 @@ def functional(t: str) -> dict:
         make_png(img)
     data_url = "data:image/png;base64," + base64.b64encode(img.read_bytes()).decode()
     log_f = open(LOGS / f"06_server_{t}.log", "w", encoding="utf-8", errors="replace")
-    proc = subprocess.Popen([tool("llama-server"), "-m", str(gguf(t)), "--mmproj", str(MMPROJ),
+    vision_args = ["--mmproj", str(MMPROJ)] if VISION else []
+    proc = subprocess.Popen([tool("llama-server"), "-m", str(gguf(t)), *vision_args,
                              "-ngl", str(ev["ngl"]), "-c", str(ev["server_ctx"]), "-np", "1",
                              "--host", "127.0.0.1", "--port", str(port), "--jinja"],
                             stdout=log_f, stderr=subprocess.STDOUT)
@@ -200,13 +201,14 @@ def functional(t: str) -> dict:
                  for c in calls)
         results["tool_call"] = {"pass": ok, "calls": [c["function"] for c in calls]}
 
-        # Vision
-        m = msg_of(post(port, {**base, "chat_template_kwargs": {"enable_thinking": False}, "messages": [{
-            "role": "user", "content": [
-                {"type": "text", "text": "What color is the square in this image? Answer with one word."},
-                {"type": "image_url", "image_url": {"url": data_url}}]}]}))
-        content = m.get("content") or ""
-        results["vision"] = {"pass": "red" in content.lower(), "answer": content[:200]}
+        # Vision (models with a vision projector only)
+        if VISION:
+            m = msg_of(post(port, {**base, "chat_template_kwargs": {"enable_thinking": False}, "messages": [{
+                "role": "user", "content": [
+                    {"type": "text", "text": "What color is the square in this image? Answer with one word."},
+                    {"type": "image_url", "image_url": {"url": data_url}}]}]}))
+            content = m.get("content") or ""
+            results["vision"] = {"pass": "red" in content.lower(), "answer": content[:200]}
     except Exception as e:  # record the failure instead of crashing the whole run
         results["error"] = str(e)
     finally:
@@ -220,7 +222,8 @@ def functional(t: str) -> dict:
 
 
 if not args.skip_functional:
-    require(MMPROJ, "Run step 02 first.")
+    if VISION:
+        require(MMPROJ, "Run step 02 first.")
     for t in types:
         q = res["quants"].setdefault(t, {})
         fn = q.get("functional")

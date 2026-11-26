@@ -32,7 +32,7 @@ for t in types:
 
 # Checksums for everything that will be published (cached by size + mtime)
 cache = load_json(RESULTS / "checksums.json", {})
-files = [gguf(t) for t in qc["types"]] + [MMPROJ, IMATRIX]
+files = [gguf(t) for t in qc["types"]] + ([MMPROJ] if MMPROJ else []) + [IMATRIX]
 result = {}
 for f in files:
     if not f.exists():

@@ -20,11 +20,11 @@ import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "pipeline"))
-from common import BF16, CFG, DATA, RESULTS, gguf, load_json, log, require, run, save_json, tool  # noqa: E402
+from common import BF16, CFG, DATA, RESULTS, SHARED_DATA, gguf, load_json, log, require, run, save_json, tool  # noqa: E402
 
-TEXTS = {"ml": ("Malayalam", DATA / "lang" / "ml.txt"),
-         "hi": ("Hindi", DATA / "lang" / "hi.txt"),
-         "code": ("Python code", DATA / "lang" / "code.txt")}
+TEXTS = {"ml": ("Malayalam", SHARED_DATA / "lang" / "ml.txt"),  # shared by every model
+         "hi": ("Hindi", SHARED_DATA / "lang" / "hi.txt"),
+         "code": ("Python code", SHARED_DATA / "lang" / "code.txt")}
 
 ap = argparse.ArgumentParser()
 ap.add_argument("--langs", nargs="*", default=list(TEXTS))
@@ -73,7 +73,7 @@ for lang in args.langs:
     if not todo:
         log(f"skip {name}: all quants measured")
         continue
-    base = DATA / "lang" / f"kld_base_{lang}.bin"
+    base = DATA / f"kld_base_{lang}.bin"  # this model's BF16 reference logits (temporary)
     if not base.exists():
         require(BF16, "The BF16 GGUF is needed as the reference (step 02).")
         log(f"=== {name}: BF16 reference logits ({args.chunks} chunks, partly on CPU)")

@@ -9,7 +9,7 @@ Produces:
 import argparse
 import sys
 
-from common import BF16, CFG, LLAMA_SRC, MMPROJ, MODEL_DIR, OUT, gb, log, require, run
+from common import BF16, CFG, LLAMA_SRC, MMPROJ, MODEL_DIR, OUT, VISION, gb, log, require, run
 
 ap = argparse.ArgumentParser()
 ap.add_argument("--force", action="store_true", help="re-create files that already exist")
@@ -41,4 +41,7 @@ def convert_to(target, outtype, extra, log_name):
 
 
 convert_to(BF16, CFG["convert"]["outtype"], [], "02_convert_text")
-convert_to(MMPROJ, CFG["convert"]["mmproj_outtype"], ["--mmproj"], "02_convert_mmproj")
+if VISION:
+    convert_to(MMPROJ, CFG["convert"]["mmproj_outtype"], ["--mmproj"], "02_convert_mmproj")
+else:
+    log("text-only model: no vision projector to convert")
