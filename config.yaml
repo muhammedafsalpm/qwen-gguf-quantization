@@ -98,4 +98,4 @@ hf:
   repo_id: muhammed-afsal-p-m/Qwen3.8-27B-GGUF
   private: false
   collection_title: Qwen3.8 Quants
-  github_url: https://github.com/muhammedafsalpm/qwen3.8-27b-gguf-quantization  # linked from the model card
+  github_url: https://github.com/muhammedafsalpm/qwen-gguf-quantization  # linked from the model card

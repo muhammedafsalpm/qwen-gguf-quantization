@@ -1,15 +1,24 @@
-# Qwen3.8-27B GGUF Quantization
+# Qwen GGUF Quantization
 
-A reproducible pipeline that converts [Qwen/Qwen3.8-27B](https://huggingface.co/Qwen/Qwen3.8-27B) into
-importance-matrix (imatrix) GGUF quantizations, measures every quant against the original BF16 model,
-tests thinking, tool calling and vision, and publishes the results to Hugging Face.
+A reproducible pipeline that converts official Qwen models into importance-matrix (imatrix) GGUF
+quantizations, measures every quant against the original BF16 model, tests thinking, tool calling and
+(for vision models) image input, and publishes the results to Hugging Face.
 
-**Quantized model:** [muhammed-afsal-p-m/Qwen3.8-27B-GGUF](https://huggingface.co/muhammed-afsal-p-m/Qwen3.8-27B-GGUF)
+## Models
+
+| Model | Original | Config | Input | Quantized model |
+|---|---|---|---|---|
+| Qwen3.8-27B | [Qwen/Qwen3.8-27B](https://huggingface.co/Qwen/Qwen3.8-27B) | [`config.yaml`](config.yaml) | Text + images | [muhammed-afsal-p-m/Qwen3.8-27B-GGUF](https://huggingface.co/muhammed-afsal-p-m/Qwen3.8-27B-GGUF) |
+| Qwen3-8B | [Qwen/Qwen3-8B](https://huggingface.co/Qwen/Qwen3-8B) | [`configs/qwen3-8b.yaml`](configs/qwen3-8b.yaml) | Text | Quantized and measured; upload pending |
+| Qwen3-14B | [Qwen/Qwen3-14B](https://huggingface.co/Qwen/Qwen3-14B) | [`configs/qwen3-14b.yaml`](configs/qwen3-14b.yaml) | Text | Planned |
+
+Each model has its own configuration file and its own output folders, so models never overwrite each other.
 
 ---
 
 ## Contents
 
+- [Models](#models)
 - [Features](#features)
 - [Quantization explained](#quantization-explained)
 - [Quantization types](#quantization-types)
@@ -33,10 +42,11 @@ tests thinking, tool calling and vision, and publishes the results to Hugging Fa
   multi-turn chat, math, code, `<think>` reasoning traces and multilingual data), rendered with the model's
   own chat template so both thinking and non-thinking modes are represented.
 - **Measured accuracy:** perplexity and KL divergence of every quant against BF16 logits, on held-out text.
-- **Functional tests:** thinking on, thinking off, tool calling and image input, run through `llama-server`.
-- **Vision support:** the multimodal projector (`mmproj`) is exported alongside the text model.
+- **Functional tests:** thinking on, thinking off, tool calling and (for vision models) image input, run through `llama-server`.
+- **Vision support:** for vision models, the multimodal projector (`mmproj`) is exported alongside the text model.
 - **Resumable:** every step skips work that is already complete, so an interrupted run continues where it stopped.
-- **Single configuration file:** all settings live in [`config.yaml`](config.yaml).
+- **One configuration file per model:** [`config.yaml`](config.yaml) for Qwen3.8-27B and
+  [`configs/`](configs/) for the other models; all settings live there, not in code.
 
 ## Quantization explained
 
@@ -244,6 +254,8 @@ Ollama 0.40.16 (the latest release when tested) fails with `tensor 'blk.0.ssm_be
 
 ## Results
 
+Results for Qwen3.8-27B. Qwen3-8B results are in [Qwen3-8B results](#qwen3-8b-results) below.
+
 Measured with llama.cpp `b12345` on an NVIDIA RTX 6000 Ada. Accuracy is compared with the original BF16
 model (perplexity **6.4334 ± 0.08**) on the held-out wikitext-2 test split (150 chunks × 512 tokens).
 Full data: [`results/eval.json`](results/eval.json).
@@ -326,6 +338,28 @@ every type. The generation numbers agree with the functional-test speeds above t
 
 [`models.ini`](models.ini) is a `llama-server` preset that lists all seven types with the vision projector
 (`ngl = 99`, 8K context), so one server can switch between them.
+
+### Qwen3-8B results
+
+Same method as above (wikitext-2 test, 150 chunks × 512 tokens, against BF16 logits). The BF16 model
+fits in GPU memory, so the importance matrix was computed on BF16 directly. Original perplexity **9.5927 ± 0.15**.
+Full data: [`results/Qwen3-8B/eval.json`](results/Qwen3-8B/eval.json).
+
+| Type | Size | Bits/weight | Perplexity ↓ | Mean KLD ↓ | Same top token ↑ | Speed (tok/s) |
+|---|---|---|---|---|---|---|
+| Q8_0 | 8.7 GB | 8.50 | 9.6168 | 0.0015 | 98.14% | 89.2 |
+| Q6_K | 6.7 GB | 6.57 | 9.6072 | 0.0049 | 96.84% | 107.5 |
+| Q5_K_M | 5.8 GB | 5.71 | 9.6407 | 0.0092 | 95.75% | 123.8 |
+| Q4_K_M | 5.0 GB | 4.91 | 9.6697 | 0.0262 | 93.18% | 140.3 |
+| IQ4_XS | 4.6 GB | 4.45 | 9.8062 | 0.0353 | 92.45% | 152.1 |
+| Q3_K_M | 4.1 GB | 4.03 | 10.0569 | 0.0920 | 87.75% | 155.3 |
+| IQ3_M | 3.9 GB | 3.80 | 9.9729 | 0.1175 | 86.44% | 148.4 |
+
+**All seven types passed the functional tests** (thinking on, thinking off and tool calling).
+
+The 8B model loses about twice as much as the 27B model at every level (mean KLD 0.0262 vs 0.0121 at
+Q4_K_M): a smaller model has less spare capacity, so rounding the weights costs more. For quality-sensitive
+use, Q5_K_M or higher is the better choice for 8B.
 
 ## Pipeline
 
@@ -424,6 +458,16 @@ python pipeline/08_upload.py         # dry run: lists files and destination
 python pipeline/08_upload.py --yes   # upload (resumable)
 ```
 
+**Other models:** add `--config` to any command. Each model writes to its own folders
+(`out/<model>/`, `results/<model>/`, `release/<model>/`, `logs/<model>/`, `data/<model>/`):
+
+```bash
+hf download Qwen/Qwen3-8B --local-dir models/Qwen3-8B
+python run_all.py --config configs/qwen3-8b.yaml
+python tools/compare_quants.py --config configs/qwen3-8b.yaml
+python pipeline/08_upload.py --config configs/qwen3-8b.yaml
+```
+
 Monitor a running model download:
 
 ```bash
@@ -447,15 +491,18 @@ answer. Add your own questions to `prompts.yaml`. The report is written to
 
 ## Configuration
 
-All settings are in [`config.yaml`](config.yaml):
+All settings are in [`config.yaml`](config.yaml) (Qwen3.8-27B) and in one file per model in
+[`configs/`](configs/). To add a model, copy a file from `configs/` and change the `model`, `paths` and `hf` sections.
 
 | Section | Controls |
 |---|---|
-| `model` | Source repository, revision, local folder, output name |
+| `model` | Source repository, revision, local folder, output name; `vision` (has an mmproj) and `reasoning_effort` (thinking levels, or `false` for on/off only) |
+| `paths` | Output folders (one set per model) |
 | `quantize` | Quant types to build, reference type, types built without an imatrix |
 | `calibration` | Token budget, random seed, data sources and their share |
-| `imatrix` | Context size, GPU layers, number of chunks |
+| `imatrix` | Context size, GPU layers, number of chunks; `source: bf16` computes it on BF16 when it fits in GPU memory |
 | `eval` | Evaluation text, chunks, GPU layers, server settings |
+| `card` | Optional model card text: tags, notes, GPU guide, tested Ollama version, language results |
 | `hf` | Destination repository and collection |
 
 ## Methodology
@@ -495,8 +542,11 @@ perplexity, mean / 99.9th percentile / maximum KL divergence, RMS Δp and same-t
 
 ```
 .
-├── config.yaml              Pipeline settings
-├── run_all.py               Runs steps 01–07
+├── config.yaml              Pipeline settings for Qwen3.8-27B
+├── configs/
+│   ├── qwen3-8b.yaml        Pipeline settings for Qwen3-8B
+│   └── qwen3-14b.yaml       Pipeline settings for Qwen3-14B
+├── run_all.py               Runs steps 01–07 (--config selects the model)
 ├── requirements.txt
 ├── pipeline/
 │   ├── common.py            Shared paths and helpers
@@ -509,10 +559,15 @@ perplexity, mean / 99.9th percentile / maximum KL divergence, RMS Δp and same-t
 │   ├── 07_model_card.py
 │   └── 08_upload.py
 ├── tools/
-│   ├── progress.py          Download progress bar
-│   ├── compare_quants.py    Same questions to every quant: answers, accuracy, latency
-│   └── prompts.yaml         The questions used by compare_quants.py (editable)
-└── results/                 Calibration statistics, source manifest, evaluation results
+│   ├── progress.py              Download progress bar
+│   ├── compare_quants.py        Same questions to every quant: answers, accuracy, latency
+│   ├── prompts.yaml             13 basic questions (editable)
+│   ├── prompts_extended.yaml    22 harder questions, including invoice and chart images
+│   ├── prompts_multilingual.yaml The same problems in English, Malayalam and Hindi
+│   ├── test_images/             Generated test images with known answers
+│   ├── kld_by_language.py       Accuracy drop per language (Malayalam, Hindi, code)
+│   └── concurrency_bench.py     Throughput and latency with 1 to 16 simultaneous users
+└── results/                 Qwen3.8-27B results; results/<model>/ for the other models
 ```
 
 Model weights, GGUF files, datasets, logs and third-party tools are excluded by `.gitignore`.
@@ -550,8 +605,10 @@ the BF16 GGUF stay local.
 ## FAQ
 
 **Why is the importance matrix computed on Q8_0 and not on BF16?**
-The BF16 file (~54 GB) does not fit in a 48 GB GPU. Q8_0 (~29 GB) fits entirely and is practically
-identical to BF16, so the importance matrix is just as accurate and much faster to compute.
+For Qwen3.8-27B, the BF16 file (~54 GB) does not fit in a 48 GB GPU. Q8_0 (~29 GB) fits entirely and is
+practically identical to BF16, so the importance matrix is just as accurate and much faster to compute.
+For Qwen3-8B and Qwen3-14B the BF16 file fits, so their importance matrix is computed on BF16 directly
+(`imatrix.source: bf16`).
 
 **What are the "model has unused tensor blk.64 ..." warnings during the imatrix step?**
 Layer 64 is an extra next-token-prediction layer (`nextn`) used only for speculative decoding.

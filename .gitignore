@@ -14,7 +14,7 @@ tools/dl/
 
 # Logs and secrets
 logs/
-results/*.stderr.txt
+results/**/*.stderr.txt
 results/Qwen3.8-27B-Q8_0.txt
 .env
 *.token
