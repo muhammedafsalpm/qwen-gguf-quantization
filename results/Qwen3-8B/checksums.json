@@ -1,0 +1,42 @@
+{
+  "Qwen3-8B-Q8_0.gguf": {
+    "size": 8709518816,
+    "mtime": 1795671382,
+    "sha256": "1355c68d0dc2eadc5dd634244657abf4a106c2f5a2841815d05dd35f758699ff"
+  },
+  "Qwen3-8B-Q6_K.gguf": {
+    "size": 6725899936,
+    "mtime": 1795671665,
+    "sha256": "2195fe22090d2589d82e9c9b4cfed18e400a27a69cff3420fa0546770dc74392"
+  },
+  "Qwen3-8B-Q5_K_M.gguf": {
+    "size": 5851113120,
+    "mtime": 1795671738,
+    "sha256": "59d29114c857ce09e5d5fdc6cb4f38021aa64b010e2fb6f9e701f80198905fb7"
+  },
+  "Qwen3-8B-Q4_K_M.gguf": {
+    "size": 5027784352,
+    "mtime": 1795671810,
+    "sha256": "8d186b26fa1cd4c4e6889373be947d3a4fb7b1b4d0c1449bd9f8096a3f07753d"
+  },
+  "Qwen3-8B-IQ4_XS.gguf": {
+    "size": 4561839776,
+    "mtime": 1795671854,
+    "sha256": "293f616edd10d4882abd7e91de33fad0c2187b936a9316abded6cd867ccaa900"
+  },
+  "Qwen3-8B-Q3_K_M.gguf": {
+    "size": 4124161696,
+    "mtime": 1795671909,
+    "sha256": "44fbed1d59de735066be0c40c21db06e787d18392b83485a5b6a3bcc24f94009"
+  },
+  "Qwen3-8B-IQ3_M.gguf": {
+    "size": 3896620704,
+    "mtime": 1795672034,
+    "sha256": "9268a9971fd0d1ead14cac45d79caf76d3c47de0c357a004e94e46a66b37899c"
+  },
+  "Qwen3-8B.imatrix.gguf": {
+    "size": 10702016,
+    "mtime": 1795671626,
+    "sha256": "23bbdb00196ccadf45780da4c0b05087c5649fa83afb670f9fc35a623546497f"
+  }
+}

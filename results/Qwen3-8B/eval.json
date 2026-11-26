@@ -1,0 +1,307 @@
+{
+  "base": {
+    "type": "BF16",
+    "ppl": 9.5927,
+    "ppl_err": 0.15017,
+    "file": {
+      "size": 16388044256,
+      "mtime": 1795671281
+    }
+  },
+  "quants": {
+    "Q8_0": {
+      "file": {
+        "size": 8709518816,
+        "mtime": 1795671382
+      },
+      "ppl": 9.616759,
+      "ppl_err": 0.150739,
+      "kld_mean": 0.001518,
+      "kld_mean_err": 2.9e-05,
+      "kld_max": 0.513806,
+      "kld_p999": 0.05832,
+      "kld_p99": 0.012837,
+      "rms_dp": 1.282,
+      "rms_dp_err": 0.038,
+      "same_top": 98.136,
+      "same_top_err": 0.069,
+      "functional": {
+        "thinking_on": {
+          "pass": true,
+          "reasoning_chars": 4889,
+          "answer": "l, not $1.00 more. That would result in a total of $1.10, but the bat would not be $1.00 more than the ball. Therefore, this is an incorrect interpretation.\n\n---\n\n### Final Answer:\n\n$$\n\\boxed{0.05}\n$$"
+        },
+        "tokens_per_sec": 89.2,
+        "thinking_off": {
+          "pass": true,
+          "answer": "391"
+        },
+        "tool_call": {
+          "pass": true,
+          "calls": [
+            {
+              "name": "get_weather",
+              "arguments": "{\"city\": \"Paris\"}"
+            }
+          ]
+        },
+        "file": {
+          "size": 8709518816,
+          "mtime": 1795671382
+        }
+      }
+    },
+    "Q6_K": {
+      "file": {
+        "size": 6725899936,
+        "mtime": 1795671665
+      },
+      "ppl": 9.607201,
+      "ppl_err": 0.150222,
+      "kld_mean": 0.004867,
+      "kld_mean_err": 9.4e-05,
+      "kld_max": 2.328139,
+      "kld_p999": 0.174777,
+      "kld_p99": 0.04381,
+      "rms_dp": 2.211,
+      "rms_dp_err": 0.064,
+      "same_top": 96.844,
+      "same_top_err": 0.089,
+      "functional": {
+        "thinking_on": {
+          "pass": true,
+          "reasoning_chars": 4393,
+          "answer": "nd the ball costs $0.10, but this would make the bat only $0.90 more than the ball, not $1.00 more. That's why the correct answer is not $0.10 for the ball.\n\n---\n\n### Final Answer:\n\n$$\n\\boxed{0.05}\n$$"
+        },
+        "tokens_per_sec": 107.5,
+        "thinking_off": {
+          "pass": true,
+          "answer": "391"
+        },
+        "tool_call": {
+          "pass": true,
+          "calls": [
+            {
+              "name": "get_weather",
+              "arguments": "{\"city\": \"Paris\"}"
+            }
+          ]
+        },
+        "file": {
+          "size": 6725899936,
+          "mtime": 1795671665
+        }
+      }
+    },
+    "Q5_K_M": {
+      "file": {
+        "size": 5851113120,
+        "mtime": 1795671738
+      },
+      "ppl": 9.640681,
+      "ppl_err": 0.15073,
+      "kld_mean": 0.009237,
+      "kld_mean_err": 0.000185,
+      "kld_max": 3.458235,
+      "kld_p999": 0.3664,
+      "kld_p99": 0.091406,
+      "rms_dp": 3.081,
+      "rms_dp_err": 0.065,
+      "same_top": 95.746,
+      "same_top_err": 0.103,
+      "functional": {
+        "thinking_on": {
+          "pass": true,
+          "reasoning_chars": 4743,
+          "answer": "the left-hand side:\n\n$$\n2x + 1.00 = 1.10\n$$\n\nNow, subtract 1.00 from both sides:\n\n$$\n2x = 0.10\n$$\n\nDivide both sides by 2:\n\n$$\nx = 0.05\n$$\n\n---\n\n### Final Answer:\n\nThe ball costs \\boxed{0.05} dollars."
+        },
+        "tokens_per_sec": 123.8,
+        "thinking_off": {
+          "pass": true,
+          "answer": "391"
+        },
+        "tool_call": {
+          "pass": true,
+          "calls": [
+            {
+              "name": "get_weather",
+              "arguments": "{\"city\": \"Paris\"}"
+            }
+          ]
+        },
+        "file": {
+          "size": 5851113120,
+          "mtime": 1795671738
+        }
+      }
+    },
+    "Q4_K_M": {
+      "file": {
+        "size": 5027784352,
+        "mtime": 1795671810
+      },
+      "ppl": 9.669651,
+      "ppl_err": 0.150759,
+      "kld_mean": 0.026162,
+      "kld_mean_err": 0.00045,
+      "kld_max": 5.804201,
+      "kld_p999": 0.972006,
+      "kld_p99": 0.28402,
+      "rms_dp": 5.168,
+      "rms_dp_err": 0.092,
+      "same_top": 93.182,
+      "same_top_err": 0.129,
+      "functional": {
+        "thinking_on": {
+          "pass": true,
+          "reasoning_chars": 4597,
+          "answer": "cation:**\n\n- Ball: $0.05  \n- Bat: $0.05 + $1.00 = $1.05  \n- Total: $0.05 + $1.05 = $1.10\n\nThis matches the given total, confirming the solution is correct.\n\n---\n\n**Final Answer:**  \n$$\n\\boxed{0.05}\n$$"
+        },
+        "tokens_per_sec": 140.3,
+        "thinking_off": {
+          "pass": true,
+          "answer": "391"
+        },
+        "tool_call": {
+          "pass": true,
+          "calls": [
+            {
+              "name": "get_weather",
+              "arguments": "{\"city\": \"Paris\"}"
+            }
+          ]
+        },
+        "file": {
+          "size": 5027784352,
+          "mtime": 1795671810
+        }
+      }
+    },
+    "IQ4_XS": {
+      "file": {
+        "size": 4561839776,
+        "mtime": 1795671854
+      },
+      "ppl": 9.806161,
+      "ppl_err": 0.154378,
+      "kld_mean": 0.035313,
+      "kld_mean_err": 0.000636,
+      "kld_max": 7.452643,
+      "kld_p999": 1.441327,
+      "kld_p99": 0.388131,
+      "rms_dp": 5.838,
+      "rms_dp_err": 0.103,
+      "same_top": 92.452,
+      "same_top_err": 0.135,
+      "functional": {
+        "thinking_on": {
+          "pass": true,
+          "reasoning_chars": 3968,
+          "answer": "terpret the Result\n\nSo, the **ball costs $0.05**, or **5 cents**.\n\nTo verify:\n\n- Ball = $0.05\n- Bat = $0.05 + $1.00 = $1.05\n- Total = $0.05 + $1.05 = $1.10 ✅\n\n---\n\n### Final Answer\n\n$$\n\\boxed{0.05}\n$$"
+        },
+        "tokens_per_sec": 152.1,
+        "thinking_off": {
+          "pass": true,
+          "answer": "391"
+        },
+        "tool_call": {
+          "pass": true,
+          "calls": [
+            {
+              "name": "get_weather",
+              "arguments": "{\"city\": \"Paris\"}"
+            }
+          ]
+        },
+        "file": {
+          "size": 4561839776,
+          "mtime": 1795671854
+        }
+      }
+    },
+    "Q3_K_M": {
+      "file": {
+        "size": 4124161696,
+        "mtime": 1795671909
+      },
+      "ppl": 10.056944,
+      "ppl_err": 0.157944,
+      "kld_mean": 0.092022,
+      "kld_mean_err": 0.001427,
+      "kld_max": 12.294562,
+      "kld_p999": 3.924933,
+      "kld_p99": 1.013034,
+      "rms_dp": 9.36,
+      "rms_dp_err": 0.126,
+      "same_top": 87.752,
+      "same_top_err": 0.168,
+      "functional": {
+        "thinking_on": {
+          "pass": true,
+          "reasoning_chars": 8017,
+          "answer": "e bat would cost $ 0.05 + 1.00 = 1.05 $, and the total would be:\n\n$$\n0.05 + 1.05 = 1.10\n$$\n\nThis matches the given total, confirming the solution is correct.\n\n---\n\n### Final Answer\n\n$$\n\\boxed{0.05}\n$$"
+        },
+        "tokens_per_sec": 155.3,
+        "thinking_off": {
+          "pass": true,
+          "answer": "391"
+        },
+        "tool_call": {
+          "pass": true,
+          "calls": [
+            {
+              "name": "get_weather",
+              "arguments": "{\"city\": \"Paris\"}"
+            }
+          ]
+        },
+        "file": {
+          "size": 4124161696,
+          "mtime": 1795671909
+        }
+      }
+    },
+    "IQ3_M": {
+      "file": {
+        "size": 3896620704,
+        "mtime": 1795672034
+      },
+      "ppl": 9.972887,
+      "ppl_err": 0.152269,
+      "kld_mean": 0.117546,
+      "kld_mean_err": 0.00166,
+      "kld_max": 18.086061,
+      "kld_p999": 3.992802,
+      "kld_p99": 1.240453,
+      "rms_dp": 10.497,
+      "rms_dp_err": 0.124,
+      "same_top": 86.442,
+      "same_top_err": 0.175,
+      "functional": {
+        "thinking_on": {
+          "pass": true,
+          "reasoning_chars": 8741,
+          "answer": "**$0.05**.\n\nThen, the **bat** costs $ x + 1.00 = 0.05 + 1.00 = 1.05 $.\n\nChecking the total:\n\n$$\n0.05 + 1.05 = 1.10\n$$\n\nThis confirms the solution is correct.\n\n---\n\n### Final Answer\n\n$$\n\\boxed{0.05}\n$$"
+        },
+        "tokens_per_sec": 148.4,
+        "thinking_off": {
+          "pass": true,
+          "answer": "391"
+        },
+        "tool_call": {
+          "pass": true,
+          "calls": [
+            {
+              "name": "get_weather",
+              "arguments": "{\"city\": \"Paris\"}"
+            }
+          ]
+        },
+        "file": {
+          "size": 3896620704,
+          "mtime": 1795672034
+        }
+      }
+    }
+  }
+}
