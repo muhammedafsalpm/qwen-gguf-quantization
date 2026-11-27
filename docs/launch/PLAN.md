@@ -46,12 +46,22 @@ everything public goes out Tuesday to Thursday at about 7–8 PM IST (8:30–9:3
   discussions. Kaggle removes such votes and can penalise the account.
 - Don't: open a public tunnel or chat server from the notebook. Everything stays on 127.0.0.1.
 
-## Not verified yet (needs a real Kaggle run)
+## Verified on Kaggle (27 Nov 2026, private notebook, GPU T4 x2)
 
-- The llama.cpp build cell on Kaggle's image (CUDA, T4) and how long it takes
-- 27B on GPU T4 x2 (memory split across both GPUs)
+- llama.cpp b12345 builds on Kaggle after two fixes found in this run: CMake is pointed at the GPU's CUDA
+  driver (`/usr/local/nvidia/lib64/libcuda.so.1`) and the web chat UI download is switched off. The build
+  takes about 25 minutes (4 CPU cores), so the notebook text says so.
+- Qwen3-14B Q4_K_M: downloaded from Hugging Face at ~270 MB/s, loaded on the T4s, about 25 tokens/s.
+  Thinking on (correct, $0.05), thinking off (391), tool call (get_weather Paris), Malayalam and Hindi
+  (New Delhi) all correct.
+- Qwen3.8-27B Q4_K_M + vision file: split across both T4s, about 13 tokens/s. All of the above correct, and
+  the invoice image read correctly (total 48,380.00 INR, tax 7,380.00 INR).
+- Results table and chart load from GitHub and match the measured numbers.
+- Total GPU time used for the test: about 52 minutes of the 30 h weekly quota. Session stopped afterwards.
 
-Checked from the development PC (27 Nov 2026):
+Still to check when publishing: `publish-kaggle-models.ipynb` (needs your Kaggle API key in Kaggle Secrets).
+
+Checked from the development PC before the Kaggle run:
 - Notebook cells for chat, thinking on/off, tool call, Malayalam/Hindi, loading the results from GitHub and
   the chart: run against Qwen3-8B Q4_K_M, all working
 - llama.cpp tag `b12345` exists on GitHub

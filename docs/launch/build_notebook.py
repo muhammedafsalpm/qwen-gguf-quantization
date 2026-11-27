@@ -25,14 +25,14 @@ I quantized three Qwen models to GGUF with an importance matrix and measured eve
 original BF16 weights. This notebook loads one of them on Kaggle's free T4 GPU, runs a few real prompts
 (thinking on and off, tool calling, Malayalam and Hindi) and plots the measurements for all three models.
 
-| Model | Fits on | Suggested file | Size |
-|---|---|---|---|
-| Qwen3-8B | GPU T4 x1 | Q8_0 (near-lossless) or Q4_K_M | 8.7 GB / 5.0 GB |
-| Qwen3-14B | GPU T4 x1 | Q4_K_M | 9.0 GB |
-| Qwen3.8-27B (text + images) | GPU T4 x2 (split across both) | Q4_K_M or IQ3_M | 17.0 / 13.0 GB + 0.9 GB vision file |
+| Model | GPU memory used | Suggested file | Size | Speed on Kaggle T4 x2 |
+|---|---|---|---|---|
+| Qwen3-8B | fits on one of the two T4s | Q8_0 (near-lossless) or Q4_K_M | 8.7 GB / 5.0 GB | not measured |
+| Qwen3-14B | fits on one of the two T4s | Q4_K_M | 9.0 GB | about 25 tokens/s |
+| Qwen3.8-27B (text + images) | split across both T4s | Q4_K_M or IQ3_M | 17.0 / 13.0 GB + 0.9 GB vision file | about 13 tokens/s (Q4_K_M) |
 
-**Before you run:** Settings → Accelerator → **GPU T4 x2** (needed for 27B; fine for the others) and
-Settings → Internet → **On**. Building llama.cpp takes about 6–8 minutes; the rest runs in a few minutes.
+**Before you run:** Settings → Accelerator → **GPU T4 x2** and Settings → Internet → **On**. Building llama.cpp takes about 25 minutes the first time in a session (Kaggle has 4 CPU cores);
+after that, switching models takes a few minutes.
 
 Everything runs inside this notebook. The model server listens on `127.0.0.1` only, nothing is exposed.
 
@@ -65,14 +65,23 @@ T4's compute capability (7.5), to keep the build short.
 code('''
 %%bash
 set -e
+export PATH=/usr/local/cuda/bin:$PATH
+# CMake needs the CUDA driver library: CUDA's stub if present, otherwise the GPU machine's own driver
+DRV=$(find /usr/local/cuda*/ -name libcuda.so -path '*stubs*' 2>/dev/null | head -1)
+[ -n "$DRV" ] || DRV=$(ldconfig -p | awk '/libcuda[.]so/ {print $NF; exit}')
+for d in ${LD_LIBRARY_PATH//:/ } /usr/local/nvidia/lib64 /usr/lib64-nvidia /usr/lib/x86_64-linux-gnu; do
+  [ -n "$DRV" ] || { [ -e "$d/libcuda.so.1" ] && DRV="$d/libcuda.so.1"; }
+done
+[ -n "$DRV" ] || DRV=$(find / \( -path /proc -o -path /sys -o -path /kaggle \) -prune -o \( -name libcuda.so -o -name 'libcuda.so.1' \) -print 2>/dev/null | head -1)
+echo "CUDA driver library: $DRV"
 if [ ! -x /kaggle/working/llama.cpp/build/bin/llama-server ]; then
   cd /kaggle/working
-  git clone --depth 1 --branch b12345 https://github.com/ggml-org/llama.cpp > /dev/null 2>&1
-  cd llama.cpp
-  cmake -B build -DGGML_CUDA=ON -DCMAKE_CUDA_ARCHITECTURES=75 -DLLAMA_CURL=OFF > /dev/null
-  cmake --build build --target llama-server -j "$(nproc)" > build.log 2>&1 || (tail -30 build.log; exit 1)
+  [ -d llama.cpp ] || git clone --depth 1 --branch b12345 https://github.com/ggml-org/llama.cpp > /dev/null 2>&1
+  cd llama.cpp && rm -rf build
+  cmake -B build -DGGML_CUDA=ON -DCMAKE_CUDA_ARCHITECTURES=75 -DLLAMA_CURL=OFF -DLLAMA_USE_PREBUILT_UI=OFF -DCUDA_cuda_driver_LIBRARY="$DRV" > cmake.log 2>&1 || (tail -40 cmake.log; exit 1)
+  cmake --build build --target llama-server -j "$(nproc)" > build.log 2>&1 || (tail -40 build.log; exit 1)
 fi
-/kaggle/working/llama.cpp/build/bin/llama-server --version
+/kaggle/working/llama.cpp/build/bin/llama-server --version 2>&1 | tail -3
 ''')
 
 md("## 3. Download the GGUF from Hugging Face")
@@ -177,7 +186,7 @@ for name, url in SOURCES.items():
                      "tok_s (RTX 6000 Ada)": q.get("functional", {}).get("tokens_per_sec")})
 df = pd.DataFrame(rows)
 df.pivot(index="quant", columns="model", values="mean_kld").loc[
-    ["Q8_0", "Q6_K", "Q5_K_M", "Q4_K_M", "IQ4_XS", "Q3_K_M", "IQ3_M"]].round(4)
+    ["Q8_0", "Q6_K", "Q5_K_M", "Q4_K_M", "IQ4_XS", "Q3_K_M", "IQ3_M"], list(SOURCES)].round(4)
 ''')
 code('''
 fig, ax = plt.subplots(figsize=(8, 5))
