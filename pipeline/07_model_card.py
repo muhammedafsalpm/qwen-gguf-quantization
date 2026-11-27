@@ -211,7 +211,8 @@ language_yaml = "".join(f"- {code}\n" for code in cc.get("language", []))
 language_yaml = f"language:\n{language_yaml}" if language_yaml else ""
 top_block = ""
 if cc.get("quick_start"):
-    quick = (f"ollama run hf.co/{repo}:Q4_K_M" if cc.get("ollama")
+    quick = (cc["quick_start"] if isinstance(cc["quick_start"], str)  # a tested command given in the config
+             else f"ollama run hf.co/{repo}:Q4_K_M" if cc.get("ollama")
              else f"llama-server -hf {repo}:Q4_K_M -ngl 99 -c 16384 --jinja")
     top_block += f"## Quick start\n\n```bash\n{quick}\n```\n\n"
 if cc.get("highlights"):
@@ -219,8 +220,8 @@ if cc.get("highlights"):
 
 tests_block = f"\n## Question tests\n\n{cc['test_summary'].strip()}\n" if cc.get("test_summary") else ""
 if lang_block:  # other languages and code are measured below, so do not call them unmeasured
-    not_measured = ("math and long context are not separately measured (accuracy on Malayalam, Hindi and\n"
-                    "code is in the next section).")
+    not_measured = (("math, long context and image quality" if VISION else "math and long context")
+                    + " are not separately measured (accuracy on Malayalam, Hindi and\ncode is in the next section).")
 
 card = f"""---
 base_model: {mc['repo_id']}
