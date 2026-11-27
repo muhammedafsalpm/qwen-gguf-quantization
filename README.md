@@ -10,7 +10,7 @@ quantizations, measures every quant against the original BF16 model, tests think
 |---|---|---|---|---|
 | Qwen3.8-27B | [Qwen/Qwen3.8-27B](https://huggingface.co/Qwen/Qwen3.8-27B) | [`config.yaml`](config.yaml) | Text + images | [muhammed-afsal-p-m/Qwen3.8-27B-GGUF](https://huggingface.co/muhammed-afsal-p-m/Qwen3.8-27B-GGUF) |
 | Qwen3-8B | [Qwen/Qwen3-8B](https://huggingface.co/Qwen/Qwen3-8B) | [`configs/qwen3-8b.yaml`](configs/qwen3-8b.yaml) | Text | [muhammed-afsal-p-m/Qwen3-8B-GGUF](https://huggingface.co/muhammed-afsal-p-m/Qwen3-8B-GGUF) |
-| Qwen3-14B | [Qwen/Qwen3-14B](https://huggingface.co/Qwen/Qwen3-14B) | [`configs/qwen3-14b.yaml`](configs/qwen3-14b.yaml) | Text | In progress |
+| Qwen3-14B | [Qwen/Qwen3-14B](https://huggingface.co/Qwen/Qwen3-14B) | [`configs/qwen3-14b.yaml`](configs/qwen3-14b.yaml) | Text | [muhammed-afsal-p-m/Qwen3-14B-GGUF](https://huggingface.co/muhammed-afsal-p-m/Qwen3-14B-GGUF) |
 
 Each model has its own configuration file and its own output folders, so models never overwrite each other.
 
@@ -254,7 +254,8 @@ Ollama 0.40.16 (the latest release when tested) fails with `tensor 'blk.0.ssm_be
 
 ## Results
 
-Results for Qwen3.8-27B. Qwen3-8B results are in [Qwen3-8B results](#qwen3-8b-results) below.
+Results for Qwen3.8-27B. [Qwen3-8B results](#qwen3-8b-results), [Qwen3-14B results](#qwen3-14b-results) and a
+[comparison of the three models](#comparing-the-three-models) follow below.
 
 Measured with llama.cpp `b12345` on an NVIDIA RTX 6000 Ada. Accuracy is compared with the original BF16
 model (perplexity **6.4334 ± 0.08**) on the held-out wikitext-2 test split (150 chunks × 512 tokens).
@@ -361,6 +362,43 @@ Download: [muhammed-afsal-p-m/Qwen3-8B-GGUF](https://huggingface.co/muhammed-afs
 The 8B model loses about twice as much as the 27B model at every level (mean KLD 0.0262 vs 0.0121 at
 Q4_K_M): a smaller model has less spare capacity, so rounding the weights costs more. For quality-sensitive
 use, Q5_K_M or higher is the better choice for 8B.
+
+### Qwen3-14B results
+
+Same method as above (wikitext-2 test, 150 chunks × 512 tokens, against BF16 logits); the importance matrix
+was computed on BF16 directly. Original perplexity **8.5685 ± 0.13**.
+Full data: [`results/Qwen3-14B/eval.json`](results/Qwen3-14B/eval.json).
+Download: [muhammed-afsal-p-m/Qwen3-14B-GGUF](https://huggingface.co/muhammed-afsal-p-m/Qwen3-14B-GGUF).
+
+| Type | Size | Bits/weight | Perplexity ↓ | Mean KLD ↓ | Same top token ↑ | Speed (tok/s) |
+|---|---|---|---|---|---|---|
+| Q8_0 | 15.7 GB | 8.50 | 8.5871 | 0.0010 | 98.63% | 51.4 |
+| Q6_K | 12.1 GB | 6.56 | 8.6077 | 0.0034 | 97.66% | 64.3 |
+| Q5_K_M | 10.5 GB | 5.69 | 8.6217 | 0.0059 | 96.75% | 71.7 |
+| Q4_K_M | 9.0 GB | 4.88 | 8.6734 | 0.0188 | 94.25% | 80.9 |
+| IQ4_XS | 8.1 GB | 4.39 | 8.6165 | 0.0257 | 93.59% | 88.6 |
+| Q3_K_M | 7.3 GB | 3.97 | 8.8382 | 0.0614 | 90.14% | 92.7 |
+| IQ3_M | 6.9 GB | 3.73 | 8.8144 | 0.0716 | 89.31% | 91.9 |
+
+**All seven types passed the functional tests** (thinking on, thinking off and tool calling), and every type
+answered all 17 graded extended questions correctly
+([`results/Qwen3-14B/compare/`](results/Qwen3-14B/compare/)). Accuracy on Malayalam, Hindi and Python code is in
+[`results/Qwen3-14B/kld_by_language.md`](results/Qwen3-14B/kld_by_language.md).
+
+### Comparing the three models
+
+At the recommended Q4_K_M level (same calibration data, same evaluation text, llama.cpp `b12345`,
+RTX 6000 Ada):
+
+| Model | Q4_K_M size | Mean KLD ↓ | Same top token ↑ | Malayalam KLD ↓ | Hindi KLD ↓ | Speed (tok/s) |
+|---|---|---|---|---|---|---|
+| Qwen3.8-27B | 17.0 GB | 0.0121 | 95.09% | 0.0153 | 0.0115 | 43.7 |
+| Qwen3-14B | 9.0 GB | 0.0188 | 94.25% | 0.0142 | 0.0150 | 80.9 |
+| Qwen3-8B | 5.0 GB | 0.0262 | 93.18% | 0.0222 | 0.0220 | 140.3 |
+
+Larger models lose less to quantization: the 27B model drifts least from its original, the 8B model most.
+The 14B model at Q4_K_M fits a 12 GB GPU and stays close to its original, a good middle ground between quality and
+hardware.
 
 ## Pipeline
 
