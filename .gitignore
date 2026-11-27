@@ -3,6 +3,7 @@ models/
 out/
 release/
 data/
+!docs/launch/data/
 *.gguf
 *.safetensors
 *.bin
