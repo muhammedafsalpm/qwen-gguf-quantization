@@ -50,7 +50,12 @@ everything public goes out Tuesday to Thursday at about 7–8 PM IST (8:30–9:3
 
 - The llama.cpp build cell on Kaggle's image (CUDA, T4) and how long it takes
 - 27B on GPU T4 x2 (memory split across both GPUs)
-- Whether Kaggle accepts `gguf` as the framework name in `publish-kaggle-models.ipynb` (fallback: `other`)
 
-Everything else in the notebook (chat, thinking on/off, tool call, Malayalam/Hindi, loading the results
-from GitHub, the chart) was tested locally against Qwen3-8B Q4_K_M.
+Checked from the development PC (27 Nov 2026):
+- Notebook cells for chat, thinking on/off, tool call, Malayalam/Hindi, loading the results from GitHub and
+  the chart: run against Qwen3-8B Q4_K_M, all working
+- llama.cpp tag `b12345` exists on GitHub
+- Every file and link the notebooks download (Hugging Face GGUF files, mmproj, checksums, invoice image,
+  results JSON, collection page) returns HTTP 200
+- `kagglehub.model_upload(handle, local_model_dir, license_name, version_notes)` matches kagglehub 1.0.3,
+  and GGUF is one of Kaggle's supported model frameworks
